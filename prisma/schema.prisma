@@ -1,0 +1,37 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model users {
+  name      String           @id @db.VarChar(50)
+  password  String           @db.VarChar(100)
+  role      enum_Users_role?
+  createdAt DateTime?        @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime?        @updatedAt @db.Timestamptz(6)
+}
+
+model targets {
+  name           String           @id @db.VarChar(50)
+  IP             String
+  createdAt      DateTime?        @default(now()) @db.Timestamptz(6)
+  updatedAt      DateTime?        @updatedAt @db.Timestamptz(6)
+  targetContacts targetContacts[]
+}
+
+model targetContacts {
+  id          Int    @id @default(autoincrement())
+  target_name String @db.VarChar(50)
+  username    String @db.VarChar(50)
+
+  target targets @relation(fields: [target_name], references: [name], onDelete: NoAction, onUpdate: NoAction)
+}
+
+enum enum_Users_role {
+  ADMIN
+  REPORTER
+}
