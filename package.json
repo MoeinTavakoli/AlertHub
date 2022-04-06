@@ -15,6 +15,9 @@
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "kavenegar": "^1.1.4",
+    "loadash": "^1.0.0",
+    "lodash": "^4.17.21",
+    "moment-jalaali": "^0.9.4",
     "node-cron": "^3.0.0",
     "pg": "^8.7.3"
   },

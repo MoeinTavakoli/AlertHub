@@ -1,5 +1,5 @@
 const axios = require('axios');
-// const sms = require('../utils/sms');
+const sms = require('../utils/sms');
 
 /**
  * get alerts and send to contacts
@@ -16,8 +16,8 @@ async function alertingService() {
      value :  ${parseInt(packet.value)}
      alert startedAt  ${packet.activeAt}
      `;
-      console.log(message);
-      // sms.send(message, '09111111111');
+      // console.log(message);
+      sms.send(message, '09111111111');
     }
   }
   catch (err) {

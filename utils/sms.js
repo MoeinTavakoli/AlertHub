@@ -8,6 +8,7 @@ const sender = config.sms.number;
 const api = KavenegarApi({ apiKey });
 
 const rocketchat = require('../utils/rocketchat');
+const isHoliday = require('./holiday');
 
 class sms {
   /**
@@ -16,23 +17,30 @@ class sms {
      * @param {array<string>} receptors
      */
   send(message, receptors) {
-    api.Send(
-      {
-        message,
-        sender,
-        receptor: receptors.toString(),
-      },
-      (response, status) => {
-        if (status != 200) {
-          rocketchat.sendError((`failed to send sms \n
-                 status kavenegar : ${status}\n
-                message : ${message} `));
-        }
-      },
-    );
+    if (isHoliday()) {
+      api.Send(
+        {
+          message,
+          sender,
+          receptor: receptors.toString(),
+        },
+        (response, status) => {
+          if (status != 200) {
+            console.log(response);
+            rocketchat.sendError((`failed to send sms \n
+                   status kavenegar : ${status}\n
+                   message : ${message} `));
+          }
+        },
+      );
+    }
+    else {
+      rocketchat.sendError((`
+     message : ${message} `));
+    }
   }
-
 }
+
 
 
 module.exports = new sms();
