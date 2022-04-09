@@ -3,7 +3,7 @@ const app = express();
 
 
 // midlleware
-const { verifyToken } = require('../utils/jwt');
+const verifyToken  = require('../middleware/auth');
 const IsAdmin = require('../middleware/checkAdmin');
 // 
 
@@ -13,7 +13,7 @@ const controller = require('../controller/admin');
 // 
 
 app.post('/login', controller.login);
-app.put('/update/phone/:username', /*verifyToken , IsAdmin ,  */ controller.updatePhoneUsers);
+app.put('/update/phone/:username', verifyToken , IsAdmin ,   controller.updatePhoneUsers);
 
 
 module.exports = app;
