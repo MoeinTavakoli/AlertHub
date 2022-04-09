@@ -40,15 +40,30 @@ async function login(req, res) {
     res.send(generateToken(result));
   }
   catch (error) {
-    console.log(error);
     res.send(error);
   }
 }
 
 
 
+/**
+ * 
+ * @param {import('express').Request} req 
+ * @param {import('express').Response} res 
+ */
+async function changePhoneNumber(req, res) {
+  const phoneNumber = req.body.phoneNumber;
+  const username = req.info.username;
+  const result = await db.changePhoneNumber(username, phoneNumber);
+  if (!result) return res.send('error eccoured !');
+  res.send('phone number changed successfuly ...');
+
+}
+
+
+
 module.exports = {
   signup,
-  login
-
+  login,
+  changePhoneNumber
 };

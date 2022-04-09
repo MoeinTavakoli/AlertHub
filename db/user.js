@@ -47,8 +47,35 @@ async function login(username, password) {
 }
 
 
+/**
+ * 
+ * @param {String} username is uniq coloumn for find user
+ * @param {String} newPhone
+ * @returns 
+ */
+async function changePhoneNumber(username, newPhone) {
+  try {
+    return await prisma.users.update({
+      where: {
+        username
+      },
+      data: {
+        phoneNumber: newPhone
+      }
+    });
+  }
+  catch (error) {
+    console.log(error);
+    return error;
+  }
+}
+
+
+
+
 
 module.exports = {
   signup,
-  login
+  login,
+  changePhoneNumber
 };
