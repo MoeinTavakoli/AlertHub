@@ -9,14 +9,15 @@ const prisma = new PrismaClient();
 async function insertAlerts(alerts) {
   for (const alert of alerts) {
     try {
+
       await prisma.alertLogs.create({
         data: {
           nodeName: alert.labels.job,
           targetName: alert.labels.instance,
           sendBy: 'notYetSend',
-          isSend: false,
           activeAt: alert.activeAt,
-          value: parseInt(alert.value)
+          value: parseInt(alert.value),
+          method: alert.labels.job.indexOf('http') > -1 ? 'http_request' : 'ping'
         }
       });
     }

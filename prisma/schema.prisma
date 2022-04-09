@@ -32,16 +32,15 @@ model targetContacts {
 }
 
 model alertLogs {
-  id         Int         @id @default(autoincrement())
-  nodeName   String      @db.VarChar(50)
-  targetName String      @db.VarChar(50)
+  id         Int          @id @default(autoincrement())
+  nodeName   String       @db.VarChar(50)
+  targetName String       @db.VarChar(50)
   method     enum_method?
   value      Int
-  isSend     Boolean
   sendBy     enum_sendBy
   activeAt   DateTime
-  createdAt  DateTime?   @default(now()) @db.Timestamptz(6)
-  updatedAt  DateTime?   @updatedAt @db.Timestamptz(6)
+  createdAt  DateTime?    @default(now()) @db.Timestamptz(6)
+  updatedAt  DateTime?    @updatedAt @db.Timestamptz(6)
 
 }
 
