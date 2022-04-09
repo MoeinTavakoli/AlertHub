@@ -16,7 +16,9 @@ app.get('/ping', (req, res) => {
 
 app.use('/api', require('../router'));
 
-app.use('/user' , require("../router/user"))
+app.use('/user', require("../router/user"));
+
+app.use('/admin', require('../router/admin'));
 
 // app.use((err, req, res, next) => {
 //     console.log(err.message);
@@ -24,7 +26,7 @@ app.use('/user' , require("../router/user"))
 // });
 
 module.exports = () => {
-  app.listen( httpServer.port, () => {
+  app.listen(httpServer.port, () => {
     return console.log(`server running on http://127.0.0.1:${httpServer.port}`);
   });
 };

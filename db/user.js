@@ -31,13 +31,12 @@ async function signup(username, password, phoneNumber) {
  * @param {String} username 
  * @param {String} password 
  */
-async function login(username, password, role = 'REPORTER') {
+async function login(username, password, ) {
   try {
     return await prisma.users.findFirst({
       where: {
         username,
         password,
-        role
       }
     });
   }
