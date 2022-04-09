@@ -16,9 +16,11 @@ app.get('/ping', (req, res) => {
 
 app.use('/api', require('../router'));
 
-app.use('/user', require("../router/user"));
+app.use('/user', require('../router/user'));
 
 app.use('/admin', require('../router/admin'));
+
+app.use('/target', require('../router/target'));
 
 // app.use((err, req, res, next) => {
 //     console.log(err.message);
