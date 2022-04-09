@@ -31,6 +31,31 @@ model targetContacts {
   target targets @relation(fields: [target_name], references: [name], onDelete: NoAction, onUpdate: NoAction)
 }
 
+model alertLogs {
+  id         Int         @id @default(autoincrement())
+  nodeName   String      @db.VarChar(50)
+  targetName String      @db.VarChar(50)
+  method     enum_method?
+  value      Int
+  isSend     Boolean
+  sendBy     enum_sendBy
+  activeAt   DateTime
+  createdAt  DateTime?   @default(now()) @db.Timestamptz(6)
+  updatedAt  DateTime?   @updatedAt @db.Timestamptz(6)
+
+}
+
+enum enum_method {
+  ping
+  http_request
+}
+
+enum enum_sendBy {
+  rocketChat
+  sms
+  notYetSend
+}
+
 enum enum_Users_role {
   ADMIN
   REPORTER

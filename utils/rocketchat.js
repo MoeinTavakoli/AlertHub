@@ -13,6 +13,7 @@ class rocketchat {
   async sendError(text) {
     await axios.post(`${url}/hooks/${errorBot}`, { text });
   }
+  
   async sendAlert(text) {
     await axios.post(`${url}/hooks/${alertBot}`, { text });
   }

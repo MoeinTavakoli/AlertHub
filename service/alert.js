@@ -1,6 +1,8 @@
 const axios = require('axios');
 const sms = require('../utils/sms');
 
+const insertAlerts = require('../db/alertLogs');
+
 /**
  * get alerts and send to contacts
  */
@@ -10,6 +12,11 @@ async function alertingService() {
     const result = response.data;
     const alerts = result.status == 'success' ? result.data.alerts : false;
 
+    // TODO: add function to insert to database 
+
+    await insertAlerts(alerts);
+
+    // TODO: change this lines to function
     for (const packet of alerts) {
       const message = `${packet.annotations.title}
        ${packet.annotations.description}
@@ -24,5 +31,10 @@ async function alertingService() {
     console.log(err);
   }
 }
+
+
+alertingService();
+
+
 
 module.exports = alertingService;

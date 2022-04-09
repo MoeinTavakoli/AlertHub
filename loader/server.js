@@ -21,10 +21,8 @@ app.use('/api', require('../router'));
 //     res.send('eror');
 // });
 
-
-
 module.exports = () => {
-  app.listen(httpServer.port, () => {
+  app.listen( httpServer.port, () => {
     return console.log(`server running on http://127.0.0.1:${httpServer.port}`);
   });
 };
