@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const config = {
   httpServer: {
-    port : process.env.PORT || 3002
+    port: process.env.PORT || 3002
   },
   databse: {
     host: process.env.HOST,
@@ -19,6 +19,9 @@ const config = {
     url: process.env.ROCKETCHAT_URL,
     alertBot: process.env.ROCKETCHAT_GP_ALERT_TOKEN,
     errorBot: process.env.ROCKETCHAT_GP_ERROR_TOKEN
+  },
+  JWT: {
+    secretKey : process.env.JWT_SECRET
   }
 };
 

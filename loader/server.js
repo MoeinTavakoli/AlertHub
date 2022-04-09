@@ -16,6 +16,8 @@ app.get('/ping', (req, res) => {
 
 app.use('/api', require('../router'));
 
+app.use('/user' , require("../router/user"))
+
 // app.use((err, req, res, next) => {
 //     console.log(err.message);
 //     res.send('eror');

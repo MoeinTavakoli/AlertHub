@@ -9,7 +9,6 @@ const prisma = new PrismaClient();
 async function insertAlerts(alerts) {
   for (const alert of alerts) {
     try {
-
       await prisma.alertLogs.create({
         data: {
           nodeName: alert.labels.job,
