@@ -8,27 +8,20 @@ datasource db {
 }
 
 model users {
-  name      String           @id @db.VarChar(50)
-  password  String           @db.VarChar(100)
-  role      enum_Users_role?
-  createdAt DateTime?        @default(now()) @db.Timestamptz(6)
-  updatedAt DateTime?        @updatedAt @db.Timestamptz(6)
-}
-
-model targets {
   name           String           @id @db.VarChar(50)
-  IP             String
+  password       String           @db.VarChar(100)
+  role           enum_Users_role?
   createdAt      DateTime?        @default(now()) @db.Timestamptz(6)
   updatedAt      DateTime?        @updatedAt @db.Timestamptz(6)
   targetContacts targetContacts[]
 }
 
-model targetContacts {
-  id          Int    @id @default(autoincrement())
-  target_name String @db.VarChar(50)
-  username    String @db.VarChar(50)
-
-  target targets @relation(fields: [target_name], references: [name], onDelete: NoAction, onUpdate: NoAction)
+model targets {
+  name           String           @id @db.VarChar(50)
+  address        String
+  createdAt      DateTime?        @default(now()) @db.Timestamptz(6)
+  updatedAt      DateTime?        @updatedAt @db.Timestamptz(6)
+  targetContacts targetContacts[]
 }
 
 model alertLogs {
@@ -42,6 +35,14 @@ model alertLogs {
   createdAt  DateTime?    @default(now()) @db.Timestamptz(6)
   updatedAt  DateTime?    @updatedAt @db.Timestamptz(6)
 
+}
+
+model targetContacts {
+  id          Int     @id @default(autoincrement())
+  targetName  String
+  username    String  @db.VarChar(50)
+  target      targets @relation(fields: [targetName], references: [name])
+  userContact users   @relation(fields: [username], references: [name])
 }
 
 enum enum_method {
