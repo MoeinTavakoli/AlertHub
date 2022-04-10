@@ -1,6 +1,8 @@
 const axios = require('axios');
 const sms = require('../utils/sms');
 
+const { getContact } = require('../db/targetContact')
+
 const insertAlerts = require('../db/alertLogs');
 
 /**
@@ -23,8 +25,8 @@ async function alertingService() {
      value :  ${parseInt(packet.value)}
      alert startedAt  ${packet.activeAt}
      `;
-      // console.log(message);
-      sms.send(message, '09111111111');
+      const phoneNumbers = await getContact(packet.labels.job);
+      // sms.send(message, phoneNumbers);
     }
   }
   catch (err) {
