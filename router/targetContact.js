@@ -12,8 +12,8 @@ const controller = require('../controller/targetContact');
 // 
 
 
-app.post('/', verifyToken, controller.assignUserToTarget);
-app.delete('/', isAdmin, controller.deleteUserToTarget);
+app.post('/', verifyToken, isAdmin, controller.assignUserToTarget);
+app.delete('/', verifyToken, isAdmin, controller.deleteUserToTarget);
 
 
 module.exports = app;

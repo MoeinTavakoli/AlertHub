@@ -25,12 +25,13 @@ async function addUserToTarget(username, targetName) {
  * @param {String} targetName 
  * @returns 
  */
-async function removeUserToTarget(targetID) {
+async function removeUserToTarget(username , targetName) {
   // eslint-disable-next-line no-useless-catch
   try {
-    return await prisma.targetContacts.delete({
+    return await prisma.targetContacts.deleteMany({
       where: {
-        id: targetID
+        username, 
+        targetName
       }
     });
   }
@@ -38,8 +39,6 @@ async function removeUserToTarget(targetID) {
     throw error;
   }
 }
-
-
 
 
 

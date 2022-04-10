@@ -28,10 +28,10 @@ async function assignUserToTarget(req, res) {
  */
 async function deleteUserToTarget(req, res) {
   try {
-    const targetID = req.body.targetID;
-    const result = await db.removeUserToTarget(targetID);
-
-    if (result) {
+    const username = req.body.username;
+    const targetName = req.body.targetName;
+    const result = await db.removeUserToTarget(username, targetName);
+    if (result.count > 0) {
       return res.send('delete user to target successfuly');
     }
 
