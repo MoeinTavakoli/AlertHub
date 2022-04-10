@@ -9,22 +9,45 @@ async function assignUserToTarget(req, res) {
     const username = req.body.username;
     const targetName = req.body.targetName;
     const result = await db.addUserToTarget(username, targetName);
-    console.log(`result : `);
-    console.log(`result : `);
-    console.log(`result : `);
-    console.log(result);
     if (!result) return res.send('assign user to target failed !');
     res.send('assign user to target successfuly');
+  }
+  catch (error) {
+    console.log(error);
+    res.send(error);
+  }
 }
+
+
+
+
+/**
+ * 
+ * @param {import('express').Request} req 
+ * @param {import('express').Response} res 
+ */
+async function deleteUserToTarget(req, res) {
+  try {
+    const targetID = req.body.targetID;
+    const result = await db.removeUserToTarget(targetID);
+
+    if (result) {
+      return res.send('delete user to target successfuly');
+    }
+
+    res.send('delete user to target failed !');
+
+
+  }
   catch (error) {
     res.send(error);
   }
-
 }
 
 
 
 
 module.exports = {
-  assignUserToTarget
+  assignUserToTarget,
+  deleteUserToTarget
 };

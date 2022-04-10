@@ -2,7 +2,8 @@ const express = require('express');
 const app = express();
 
 // middlware
-
+const verifyToken = require('../middleware/auth');
+const isAdmin = require('../middleware/checkAdmin');
 // 
 
 
@@ -11,7 +12,8 @@ const controller = require('../controller/targetContact');
 // 
 
 
-app.post('/' ,controller.assignUserToTarget );
+app.post('/', verifyToken, controller.assignUserToTarget);
+app.delete('/', isAdmin, controller.deleteUserToTarget);
 
 
 module.exports = app;
