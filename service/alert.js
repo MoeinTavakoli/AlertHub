@@ -48,7 +48,6 @@ async function alertingService() {
     }
 
 
-    console.log("============finish==============");
 
   }
   catch (error) {
