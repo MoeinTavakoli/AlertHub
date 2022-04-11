@@ -1,7 +1,7 @@
 const axios = require('axios');
 const sms = require('../utils/sms');
 
-const { getContact } = require('../db/targetContact')
+const { getContact } = require('../db/targetContact');
 
 const insertAlerts = require('../db/alertLogs');
 
@@ -20,10 +20,15 @@ async function alertingService() {
 
     // TODO: change this lines to function
     for (const packet of alerts) {
+      const job = packet.labels.job;
+      const target = packet.labels.instance;
+      const value = parseInt(packet.value);
+
+
       const message = `
-      title  : ${packet.labels.job}
-      target : ${packet.labels.instance}
-      value  : ${parseInt(packet.value)}
+      title  : ${job}
+      target : ${target}
+      value  : ${value}
      `;
       // const phoneNumbers = await getContact(packet.labels.job);
       // sms.send(message, phoneNumbers);
@@ -36,7 +41,13 @@ async function alertingService() {
 }
 
 
-alertingService();
+// alertingService();
+
+
+
+
+
+
 
 
 

@@ -22,6 +22,9 @@ const config = {
   },
   JWT: {
     secretKey : process.env.JWT_SECRET
+  },
+  prometheus : {
+    ip: process.env.PROMETHEUS_IP 
   }
 };
 

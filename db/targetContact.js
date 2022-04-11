@@ -7,11 +7,12 @@ const prisma = require('../loader/prisma');
  * @param {String} targetName 
  * @returns 
  */
-async function addUserToTarget(username, targetName) {
+async function addUserToTarget(username, targetAddress) {
   try {
     return await prisma.targetContacts.create({
       data: {
-        username, targetName
+        username,
+        targetAddress
       }
     });
   }
@@ -26,13 +27,13 @@ async function addUserToTarget(username, targetName) {
  * @param {String} targetName 
  * @returns 
  */
-async function removeUserToTarget(username, targetName) {
+async function removeUserToTarget(username, targetAddress) {
   // eslint-disable-next-line no-useless-catch
   try {
     return await prisma.targetContacts.deleteMany({
       where: {
         username,
-        targetName
+        targetAddress
       }
     });
   }
@@ -46,12 +47,12 @@ async function removeUserToTarget(username, targetName) {
  * @param {*} targetName 
  * @returns 
  */
-async function getContact(targetName) {
+async function getContact(targetAddress) {
   // eslint-disable-next-line no-useless-catch
   try {
     const users = await prisma.targetContacts.findMany({
       where: {
-        targetName
+        targetAddress
       },
       include: {
         userContact: true,
@@ -61,7 +62,6 @@ async function getContact(targetName) {
     const phones = users.map(item => {
       return item.userContact.phoneNumber;
     });
-    console.log(phones);
     return phones;
   }
   catch (error) {

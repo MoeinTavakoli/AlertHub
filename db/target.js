@@ -1,20 +1,6 @@
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
-/**
- * 
- * @param {String} name 
- * @param {String} address 
- * @returns 
- */
-async function addTarget(name, address) {
-  return await prisma.targets.create({
-    data: {
-      name,
-      address
-    }
-  });
-}
 
 /**
  * 
@@ -31,11 +17,29 @@ async function removeTarget(name) {
 }
 
 
-
+/**
+ * 
+ * @param {String} address 
+ * @returns 
+ */
+async function addTarget(address) {
+  // eslint-disable-next-line no-useless-catch
+  try {
+    return await prisma.targets.create({
+      data: {
+        address
+      }
+    });
+  }
+  catch (error) {
+    return error;
+  }
+}
 
 
 
 module.exports = {
   addTarget,
   removeTarget
+
 };

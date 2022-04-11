@@ -18,8 +18,7 @@ model users {
 }
 
 model targets {
-  name           String           @id @db.VarChar(50)
-  address        String
+  address        String           @id @unique
   createdAt      DateTime?        @default(now()) @db.Timestamptz(6)
   updatedAt      DateTime?        @updatedAt @db.Timestamptz(6)
   targetContacts targetContacts[]
@@ -39,11 +38,11 @@ model alertLogs {
 }
 
 model targetContacts {
-  id          Int     @id @default(autoincrement())
-  targetName  String
-  username    String  @db.VarChar(50)
-  target      targets @relation(fields: [targetName], references: [name])
-  userContact users   @relation(fields: [username], references: [username])
+  id            Int     @id @default(autoincrement())
+  targetAddress String
+  username      String  @db.VarChar(50)
+  target        targets @relation(fields: [targetAddress], references: [address])
+  userContact   users   @relation(fields: [username], references: [username])
 }
 
 enum enum_method {

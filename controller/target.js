@@ -10,8 +10,7 @@ async function createTarget(req, res) {
   try {
 
     const address = req.body.address;
-    const name = req.body.name;
-    const result = await addTarget(name, address);
+    const result = await addTarget( address);
     if (!result) return res.send('create target failed ');
     res.send('target created ...');
   }
@@ -30,8 +29,8 @@ async function createTarget(req, res) {
 async function deleteTarget(req, res) {
 
   try {
-    const name = req.body.name;
-    const result = await removeTarget(name);
+    const address = req.body.address;
+    const result = await removeTarget(address);
     if (!result) return res.send('delete target failed ');
     res.send('target deleted ...');
   }
