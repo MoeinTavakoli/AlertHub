@@ -52,7 +52,6 @@ async function createUser(req, res) {
     const { username, password, phoneNumber } = req.body;
 
     const result = await db.createUser(username, password, phoneNumber);
-    console.log(result);
     if (!result) return res.send('create user failed !!!');
     res.send('user created');
 

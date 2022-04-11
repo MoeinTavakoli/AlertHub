@@ -36,7 +36,7 @@ class sms {
     }
     else {
       rocketchat.sendError((`
-     message : ${message} `));
+      ${message} `));
     }
   }
 }

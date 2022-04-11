@@ -20,13 +20,14 @@ async function alertingService() {
 
     // TODO: change this lines to function
     for (const packet of alerts) {
-      const message = `${packet.annotations.title}
-       ${packet.annotations.description}
-     value :  ${parseInt(packet.value)}
-     alert startedAt  ${packet.activeAt}
+      const message = `
+      title  : ${packet.labels.job}
+      target : ${packet.labels.instance}
+      value  : ${parseInt(packet.value)}
      `;
-      const phoneNumbers = await getContact(packet.labels.job);
+      // const phoneNumbers = await getContact(packet.labels.job);
       // sms.send(message, phoneNumbers);
+      // console.log(message);
     }
   }
   catch (err) {
