@@ -40,9 +40,33 @@ async function updatePhoneUsers(username, newPhone) {
   }
 }
 
+/**
+ * 
+ * @param {String} username 
+ * @param {String} password 
+ * @param {String} phoneNumber 
+ */
+async function createUser(username, password, phoneNumber) {
+  try {
+    return await prisma.users.create({
+      data: {
+        username,
+        password,
+        phoneNumber,
+        role: 'REPORTER'
+      }
+    });
+  }
+  catch (error) {
+    throw error;
+  }
+}
+
+
 
 
 module.exports = {
   login,
-  updatePhoneUsers
+  updatePhoneUsers,
+  createUser
 };

@@ -42,7 +42,30 @@ async function updatePhoneUsers(req, res) {
 }
 
 
+/**
+ * 
+ * @param {import('express').Request} req 
+ * @param {import('express').Response} res 
+ */
+async function createUser(req, res) {
+  try {
+    const { username, password, phoneNumber } = req.body;
+
+    const result = await db.createUser(username, password, phoneNumber);
+    console.log(result);
+    if (!result) return res.send('create user failed !!!');
+    res.send('user created');
+
+  }
+  catch (error) {
+    res.send(error);
+  }
+}
+
+
+
 module.exports = {
   login,
-  updatePhoneUsers
+  updatePhoneUsers,
+  createUser
 };
