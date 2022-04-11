@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-catch */
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
@@ -35,8 +36,7 @@ async function updatePhoneUsers(username, newPhone) {
     });
   }
   catch (error) {
-    console.log(error);
-    return error;
+    throw error;
   }
 }
 

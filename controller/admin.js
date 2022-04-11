@@ -27,12 +27,18 @@ async function login(req, res) {
  * @param {*} res 
  */
 async function updatePhoneUsers(req, res) {
-  const username = req.params.username;
-  const phoneNumber = req.body.phoneNumber;
+  try {
+    const username = req.params.username;
+    const phoneNumber = req.body.phoneNumber;
 
-  const result = await db.updatePhoneUsers(username, phoneNumber);
-  if (!result) return res.send('faild to update phone number ...');
-  res.send('update successfuly ...'); 
+    const result = await db.updatePhoneUsers(username, phoneNumber);
+    if (!result) return res.send('faild to update phone number ...');
+    res.send('update successfuly ...');
+
+  }
+  catch (error) {
+    res.send(error);
+  }
 }
 
 
