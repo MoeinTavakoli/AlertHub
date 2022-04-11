@@ -34,8 +34,7 @@ async function alertingService() {
       const value = parseInt(alert.value);
 
       // insert to database
-      await addTarget(target);
-      await insertAlertLog(alert); 
+      Promise.allSettled([addTarget(target), insertAlertLog(alert)]);
       // fetch contact for each alert
       const contacts = await getContact(target);
 
@@ -47,6 +46,9 @@ async function alertingService() {
 
       sms.send(message, contacts);
     }
+
+
+    console.log("============finish==============");
 
   }
   catch (error) {

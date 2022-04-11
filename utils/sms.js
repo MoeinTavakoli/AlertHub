@@ -35,8 +35,9 @@ class sms {
       );
     }
     else {
-      rocketchat.sendError((`
-      ${message} `));
+      console.log(message);
+      // rocketchat.sendError((`
+      // ${message} `));
     }
   }
 }
