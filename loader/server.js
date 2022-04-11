@@ -10,10 +10,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 //
 
-app.get('/ping', (req, res) => {
-  res.send('pong');
-});
-
 app.use('/api', require('../router'));
 
 app.use('/user', require('../router/user'));
