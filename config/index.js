@@ -24,7 +24,8 @@ const config = {
     secretKey : process.env.JWT_SECRET
   },
   prometheus : {
-    ip: process.env.PROMETHEUS_IP 
+    ip: process.env.PROMETHEUS_IP ,
+    port : process.env.PROMETHEUS_PORT
   }
 };
 

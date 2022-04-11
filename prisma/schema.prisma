@@ -30,7 +30,6 @@ model alertLogs {
   targetName String       @db.VarChar(50)
   method     enum_method?
   value      Int
-  sendBy     enum_sendBy
   activeAt   DateTime
   createdAt  DateTime?    @default(now()) @db.Timestamptz(6)
   updatedAt  DateTime?    @updatedAt @db.Timestamptz(6)
@@ -50,11 +49,6 @@ enum enum_method {
   http_request
 }
 
-enum enum_sendBy {
-  rocketChat
-  sms
-  notYetSend
-}
 
 enum enum_Users_role {
   ADMIN

@@ -1,54 +1,58 @@
-const axios = require('axios');
+/* eslint-disable require-jsdoc */
 const sms = require('../utils/sms');
-
+const axios = require('axios');
+const { addTarget } = require('../db/target');
 const { getContact } = require('../db/targetContact');
+const { prometheus } = require('../config');
+const { insertAlertLog } = require('../db/alertLogs');
 
-const insertAlerts = require('../db/alertLogs');
-
-/**
- * get alerts and send to contacts
- */
-async function alertingService() {
+async function fetchAlert() {
   try {
-    const response = await axios('http://172.30.201.88:9090/api/v1/alerts');
+
+    const response = await axios(`http://${prometheus.ip}:${prometheus.port}/api/v1/alerts`);
     const result = response.data;
     const alerts = result.status == 'success' ? result.data.alerts : false;
+    return alerts;
+  }
+  catch (error) {
+    return error;
+  }
+}
 
-    // TODO: add function to insert to database 
 
-    await insertAlerts(alerts);
 
-    // TODO: change this lines to function
-    for (const packet of alerts) {
-      const job = packet.labels.job;
-      const target = packet.labels.instance;
-      const value = parseInt(packet.value);
 
+
+
+async function alertingService() {
+  try {
+    const alerts = await fetchAlert();
+
+    for (const alert of alerts) {
+      const job = alert.labels.job;
+      const target = alert.labels.instance;
+      const value = parseInt(alert.value);
+
+      // insert to database
+      await addTarget(target);
+      await insertAlertLog(alert); 
+      // fetch contact for each alert
+      const contacts = await getContact(target);
 
       const message = `
       title  : ${job}
       target : ${target}
       value  : ${value}
      `;
-      // const phoneNumbers = await getContact(packet.labels.job);
-      // sms.send(message, phoneNumbers);
-      // console.log(message);
+
+      sms.send(message, contacts);
     }
+
   }
-  catch (err) {
-    console.log(err);
+  catch (error) {
+    console.log(error);
+    return error;
   }
 }
-
-
-// alertingService();
-
-
-
-
-
-
-
-
 
 module.exports = alertingService;
