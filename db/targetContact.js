@@ -8,6 +8,7 @@ const prisma = require('../loader/prisma');
  * @returns 
  */
 async function addUserToTarget(username, targetAddress) {
+  // eslint-disable-next-line no-useless-catch
   try {
     return await prisma.targetContacts.create({
       data: {
@@ -17,7 +18,7 @@ async function addUserToTarget(username, targetAddress) {
     });
   }
   catch (error) {
-    return error;
+    throw error;
   }
 }
 

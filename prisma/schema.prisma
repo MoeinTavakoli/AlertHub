@@ -39,11 +39,12 @@ model alertLogs {
 }
 
 model targetContacts {
-  id            Int     @id @default(autoincrement())
   targetAddress String
   username      String  @db.VarChar(50)
   target        targets @relation(fields: [targetAddress], references: [address])
   userContact   users   @relation(fields: [username], references: [username])
+
+  @@id([username, targetAddress])
 }
 
 model teams {
