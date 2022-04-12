@@ -49,10 +49,7 @@ async function alertingService() {
 
       const teamUserPhoneNumber = await getAllPhoneNumberUserByTeam(target);
 
-      const phoneNumbers = userPhoneNumber.filter(value => {
-        return teamUserPhoneNumber.includes(value);
-      });
-
+      const phoneNumbers = Array.from(new Set(userPhoneNumber.concat(teamUserPhoneNumber)));
 
 
       const message = `
