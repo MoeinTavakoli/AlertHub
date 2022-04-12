@@ -8,12 +8,18 @@ const prisma = new PrismaClient();
  * @returns 
  */
 async function removeTarget(name) {
-  return await prisma.targets.delete({
-    where: {
-      name
-    }
-  });
+  // eslint-disable-next-line no-useless-catch
+  try {
+    return await prisma.targets.delete({
+      where: {
+        name
+      }
+    });
 
+  }
+ catch (error) {
+    throw error;
+  }
 }
 
 

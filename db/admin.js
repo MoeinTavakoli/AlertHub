@@ -9,13 +9,18 @@ const prisma = new PrismaClient();
  * @returns 
  */
 async function login(username, password) {
-  return await prisma.users.findFirst({
-    where: {
-      username,
-      password,
-      role: 'ADMIN'
-    }
-  });
+  try {
+    return await prisma.users.findFirst({
+      where: {
+        username,
+        password,
+        role: 'ADMIN'
+      }
+    });
+  }
+  catch (error) {
+    throw error;
+  }
 }
 
 /**

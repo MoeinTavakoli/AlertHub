@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-catch */
 const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
@@ -19,7 +20,7 @@ async function insertAlertLog(alert) {
     });
   }
   catch (error) {
-    console.log(error);
+    throw error;
   }
 }
 

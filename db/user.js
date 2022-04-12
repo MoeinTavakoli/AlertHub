@@ -9,6 +9,7 @@ const prisma = new PrismaClient();
  * @returns error or result user 
  */
 async function signup(username, password, phoneNumber) {
+  // eslint-disable-next-line no-useless-catch
   try {
     return await prisma.users.create({
       data: {
@@ -20,9 +21,7 @@ async function signup(username, password, phoneNumber) {
     });
   }
   catch (error) {
-    console.log(error);
-    return error;
-
+    throw error;
   }
 }
 
@@ -31,7 +30,8 @@ async function signup(username, password, phoneNumber) {
  * @param {String} username 
  * @param {String} password 
  */
-async function login(username, password, ) {
+async function login(username, password,) {
+  // eslint-disable-next-line no-useless-catch
   try {
     return await prisma.users.findFirst({
       where: {
@@ -41,8 +41,7 @@ async function login(username, password, ) {
     });
   }
   catch (error) {
-    console.log(error);
-    return error;
+    throw error;
   }
 }
 
@@ -54,6 +53,7 @@ async function login(username, password, ) {
  * @returns 
  */
 async function changePhoneNumber(username, newPhone) {
+  // eslint-disable-next-line no-useless-catch
   try {
     return await prisma.users.update({
       where: {
@@ -65,8 +65,7 @@ async function changePhoneNumber(username, newPhone) {
     });
   }
   catch (error) {
-    console.log(error);
-    return error;
+    throw error;
   }
 }
 

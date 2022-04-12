@@ -37,7 +37,6 @@ async function insertUserToTeam(username, teamName) {
     });
   }
   catch (error) {
-    console.log(error);
     throw error;
   }
 
