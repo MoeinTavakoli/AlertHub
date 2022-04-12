@@ -11,7 +11,6 @@ async function createTeam(teamName) {
   try {
     return await prisma.teams.create({
       data: {
-
         teamName
       }
     });

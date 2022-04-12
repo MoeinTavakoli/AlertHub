@@ -42,9 +42,51 @@ async function removeTeamFromTarget(targetAddress, teamName) {
 }
 
 
+/**
+ * @param {String} teamName
+ */
+async function getAllPhoneNumberUserByTeam(targetAddress) {
+  // eslint-disable-next-line no-useless-catch
+  try {
+    const result = await prisma.teamTarget.findMany({
+      where: {
+        targetAddress
+      },
+      select: {
+        team: {
+          select: {
+            teamUsers: {
+              select: {
+                user: {
+                  select: {
+                    phoneNumber: true
+
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+    });
+
+    const phoneNumbers = result[0].team.teamUsers.length > 0 ? result[0].team.teamUsers.map(x => {
+      console.log(x);
+      return x.user.phoneNumber;
+    }) : [];
+    return phoneNumbers;
+
+  }
+  catch (error) {
+    throw error;
+  }
+}
+
 
 
 module.exports = {
   createTeamTarget,
-  removeTeamFromTarget
+  removeTeamFromTarget,
+  getAllPhoneNumberUserByTeam
 };

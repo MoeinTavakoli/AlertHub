@@ -15,7 +15,6 @@ model users {
   createdAt      DateTime?        @default(now()) @db.Timestamptz(6)
   updatedAt      DateTime?        @updatedAt @db.Timestamptz(6)
   targetContacts targetContacts[]
-  teams          teams[]
   teamUsers      teamUsers[]
 }
 
@@ -51,8 +50,6 @@ model targetContacts {
 model teams {
   teamName      String       @id @db.VarChar(50)
   teamUsers     teamUsers[]
-  users         users?       @relation(fields: [usersUsername], references: [username])
-  usersUsername String?      @db.VarChar(50)
   teamTarget    teamTarget[]
 }
 

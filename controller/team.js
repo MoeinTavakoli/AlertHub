@@ -14,6 +14,7 @@ async function createTeam(req, res) {
     return res.send('add team successfuly');
   }
   catch (error) {
+    console.log(error);
     res.status(400).send(error);
   }
 }
@@ -27,6 +28,7 @@ async function insertUserToTeam(req, res) {
   try {
     const { username, teamName } = req.body;
     const result = await db.insertUserToTeam(username, teamName);
+    console.log(result);
     if (!result) return res.send('insert user to team failed !');
     return res.send('insert user to team successfuly');
   }
