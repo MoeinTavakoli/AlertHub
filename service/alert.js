@@ -35,10 +35,24 @@ async function alertingService() {
       const value = parseInt(alert.value);
 
       // insert to database
+      // paralel
       Promise.allSettled([addTarget(target), insertAlertLog(alert)]);
+      // 
+
+      //none paralel
+      // await addTarget(target);
+      // await insertAlertLog(alert);
+      // 
+
       // fetch contact for each alert
       const userPhoneNumber = await getPhoneNumberContacts(target);
+
       const teamUserPhoneNumber = await getAllPhoneNumberUserByTeam(target);
+
+      const phoneNumbers = userPhoneNumber.filter(value => {
+        return teamUserPhoneNumber.includes(value);
+      });
+
 
 
       const message = `
@@ -47,7 +61,7 @@ async function alertingService() {
       value  : ${value}
      `;
 
-      sms.send(message, userPhoneNumber);
+      sms.send(message, phoneNumbers);
     }
 
 
@@ -58,5 +72,12 @@ async function alertingService() {
     return error;
   }
 }
+
+
+
+alertingService();
+
+
+
 
 module.exports = alertingService;

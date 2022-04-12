@@ -32,7 +32,7 @@ async function addTarget(address) {
     });
   }
   catch (error) {
-    throw error;
+    return error;
   }
 }
 

@@ -60,7 +60,6 @@ async function getAllPhoneNumberUserByTeam(targetAddress) {
                 user: {
                   select: {
                     phoneNumber: true
-
                   }
                 }
               }
@@ -68,11 +67,8 @@ async function getAllPhoneNumberUserByTeam(targetAddress) {
           }
         }
       }
-
     });
-
-    const phoneNumbers = result[0].team.teamUsers.length > 0 ? result[0].team.teamUsers.map(x => {
-      console.log(x);
+    const phoneNumbers = result[0] !== undefined && result[0].team.teamUsers.length > 0 ? result[0].team.teamUsers.map(x => {
       return x.user.phoneNumber;
     }) : [];
     return phoneNumbers;
@@ -83,6 +79,8 @@ async function getAllPhoneNumberUserByTeam(targetAddress) {
   }
 }
 
+
+getAllPhoneNumberUserByTeam('142.251.39.110');
 
 
 module.exports = {

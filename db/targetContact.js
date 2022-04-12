@@ -65,7 +65,6 @@ async function getPhoneNumberContacts(targetAddress) {
     });
 
     const phoneNumbers = result.length > 0 ? result.map(x => x.userContact.phoneNumber) : [];
-    console.log(phoneNumbers);
     return phoneNumbers;
   }
   catch (error) {
