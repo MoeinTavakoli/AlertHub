@@ -22,6 +22,8 @@ app.use('/targetContact' , require('../router/targetContact'));
 
 app.use('/team', require('../router/team'));
 
+app.use('/target/team' , require('../router/teamTarget'));
+
 // app.use((err, req, res, next) => {
 //     console.log(err.message);
 //     res.send('eror');

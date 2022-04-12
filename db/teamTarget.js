@@ -30,7 +30,7 @@ async function removeTeamFromTarget(targetAddress, teamName) {
   // eslint-disable-next-line no-useless-catch
   try {
     return await prisma.teamTarget.deleteMany({
-      data: {
+      where: {
         targetAddress,
         teamName
       }
