@@ -48,22 +48,25 @@ async function removeUserToTarget(username, targetAddress) {
  * @param {*} targetName 
  * @returns 
  */
-async function getContact(targetAddress) {
+async function getPhoneNumberContacts(targetAddress) {
   // eslint-disable-next-line no-useless-catch
   try {
-    const users = await prisma.targetContacts.findMany({
+    const result = await prisma.targetContacts.findMany({
       where: {
         targetAddress
       },
-      include: {
-        userContact: true,
-      },
+      select: {
+        userContact: {
+          select: {
+            phoneNumber: true
+          }
+        }
+      }
+    });
 
-    });
-    const phones = users.map(item => {
-      return item.userContact.phoneNumber;
-    });
-    return phones;
+    const phoneNumbers = result.length > 0 ? result.map(x => x.userContact.phoneNumber) : [];
+    console.log(phoneNumbers);
+    return phoneNumbers;
   }
   catch (error) {
     throw error;
@@ -71,8 +74,10 @@ async function getContact(targetAddress) {
 }
 
 
+
+
 module.exports = {
   addUserToTarget,
   removeUserToTarget,
-  getContact
+  getPhoneNumberContacts
 };
