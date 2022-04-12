@@ -1,4 +1,4 @@
-const express = require("express");
+const express = require('express');
 const app = express();
 
 
@@ -13,7 +13,8 @@ const controller = require('../controller/team');
 
 
 app.post('/', verifyToken, IsAdmin, controller.createTeam);
-app.put('/user', verifyToken, IsAdmin, controller.insertUser);
+app.put('/user', verifyToken, IsAdmin, controller.insertUserToTeam);
+app.delete('/user', verifyToken, IsAdmin, controller.removeUserFromTeam);
 
 
 

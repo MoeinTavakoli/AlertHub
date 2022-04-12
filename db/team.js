@@ -44,7 +44,36 @@ async function insertUserToTeam(username, teamName) {
 
 }
 
+
+/**
+ * 
+ * @param {String} username 
+ * @param {String} teamName 
+ * @returns 
+ */
+async function removeUserFromTeam(username, teamName) {
+  // eslint-disable-next-line no-useless-catch
+  try {
+    return await prisma.teamUsers.deleteMany({
+      where: {
+        username,
+        teamName
+      }
+    });
+  }
+  catch (error) {
+    throw error;
+  }
+}
+
+
+
+
+
+
+
 module.exports = {
   createTeam,
-  insertUserToTeam
+  insertUserToTeam,
+  removeUserFromTeam
 };

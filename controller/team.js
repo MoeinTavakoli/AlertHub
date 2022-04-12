@@ -23,7 +23,7 @@ async function createTeam(req, res) {
  * @param {import('express').Request} req 
  * @param {import('express').Response} res 
  */
-async function insertUser(req, res) {
+async function insertUserToTeam(req, res) {
   try {
     const { username, teamName } = req.body;
     const result = await db.insertUserToTeam(username, teamName);
@@ -35,9 +35,30 @@ async function insertUser(req, res) {
   }
 }
 
+/**
+ * 
+ * @param {import('express').Request} req 
+ * @param {import('express').Response} res 
+ */
+async function removeUserFromTeam(req,res){
+  try {
+    const {username , teamName} = req.body;
+    const result = await db.removeUserFromTeam(username, teamName);
+    if (result.count == 0) return res.send('user didnt deleted !');
+    return res.send('delete user from team successfuly');
+
+  }
+  catch (error) {
+    res.status(400).send(error);
+  }
+}
+
+
+
 
 
 module.exports = {
   createTeam,
-  insertUser
+  insertUserToTeam,
+  removeUserFromTeam
 };
