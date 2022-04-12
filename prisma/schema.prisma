@@ -67,7 +67,7 @@ model teamUsers {
 
 model teamTarget {
   teamName      String  @db.VarChar(20)
-  targetAddress String  @db.VarChar(20)
+  targetAddress String  @db.VarChar(50)
   team          teams   @relation(fields: [teamName], references: [teamName])
   target        targets @relation(fields: [targetAddress], references: [address])
 

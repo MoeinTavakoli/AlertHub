@@ -2,7 +2,7 @@
 const sms = require('../utils/sms');
 const axios = require('axios');
 const { addTarget } = require('../db/target');
-const { getContact } = require('../db/targetContact');
+const { getPhoneNumberContacts } = require('../db/targetContact');
 const { prometheus } = require('../config');
 const { insertAlertLog } = require('../db/alertLogs');
 
@@ -36,7 +36,7 @@ async function alertingService() {
       // insert to database
       Promise.allSettled([addTarget(target), insertAlertLog(alert)]);
       // fetch contact for each alert
-      const contacts = await getContact(target);
+      const contacts = await getPhoneNumberContacts(target);
 
       const message = `
       title  : ${job}
