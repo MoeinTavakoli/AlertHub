@@ -18,11 +18,11 @@ app.use('/admin', require('../router/admin'));
 
 app.use('/target', require('../router/target'));
 
-app.use('/targetContact' , require('../router/targetContact'));
+app.use('/target/user', require('../router/targetContact'));
 
 app.use('/team', require('../router/team'));
 
-app.use('/target/team' , require('../router/teamTarget'));
+app.use('/target/team', require('../router/teamTarget'));
 
 // app.use((err, req, res, next) => {
 //     console.log(err.message);
