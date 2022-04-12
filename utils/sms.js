@@ -26,7 +26,7 @@ class sms {
         },
         (response, status) => {
           if (status != 200) {
-            console.log(response);
+            console.log(`status kavenegar : ${status}`);
             rocketchat.sendError((`failed to send sms \n
                    status kavenegar : ${status}\n
                    message : ${message} `));
