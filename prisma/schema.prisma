@@ -24,6 +24,7 @@ model targets {
   createdAt      DateTime?        @default(now()) @db.Timestamptz(6)
   updatedAt      DateTime?        @updatedAt @db.Timestamptz(6)
   targetContacts targetContacts[]
+  teamTarget     teamTarget[]
 }
 
 model alertLogs {
@@ -48,10 +49,11 @@ model targetContacts {
 }
 
 model teams {
-  teamName      String      @id @db.VarChar(50)
+  teamName      String       @id @db.VarChar(50)
   teamUsers     teamUsers[]
-  users         users?      @relation(fields: [usersUsername], references: [username])
-  usersUsername String?     @db.VarChar(50)
+  users         users?       @relation(fields: [usersUsername], references: [username])
+  usersUsername String?      @db.VarChar(50)
+  teamTarget    teamTarget[]
 }
 
 model teamUsers {
@@ -61,6 +63,16 @@ model teamUsers {
   user     users  @relation(fields: [username], references: [username])
 
   @@id([username, teamName])
+}
+
+model teamTarget {
+  teamName      String  @db.VarChar(20)
+  targetAddress String  @db.VarChar(20)
+  team          teams   @relation(fields: [teamName], references: [teamName])
+  target        targets @relation(fields: [targetAddress], references: [address])
+
+
+  @@id([teamName, targetAddress])
 }
 
 enum enum_method {
