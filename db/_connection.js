@@ -5,6 +5,9 @@ const config = require('../config');
 
 const client = new Client(config.databse);
 
-client.connect();
+
+client.connect().catch((err) => {
+    console.log(err);
+  });
 
 module.exports = client;
