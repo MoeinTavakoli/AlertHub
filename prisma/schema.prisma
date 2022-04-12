@@ -54,10 +54,10 @@ model teams {
 }
 
 model teamUsers {
-  teamName    String @db.VarChar(20)
-  username    String @db.VarChar(50)
-  team        teams  @relation(fields: [teamName], references: [teamName])
-  username_fk users  @relation(fields: [username], references: [username])
+  teamName String @db.VarChar(20)
+  username String @db.VarChar(50)
+  team     teams  @relation(fields: [teamName], references: [teamName])
+  user     users  @relation(fields: [username], references: [username])
 
   @@id([username, teamName])
 }

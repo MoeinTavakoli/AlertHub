@@ -55,8 +55,6 @@ async function removeUserFromTeam(req,res){
 
 
 
-
-
 module.exports = {
   createTeam,
   insertUserToTeam,

@@ -68,6 +68,35 @@ async function removeUserFromTeam(username, teamName) {
 
 
 
+/**
+ * 
+ * @param {String} teamName 
+ */
+async function getAllPhoneNumberUserByTeam(teamName) {
+  // eslint-disable-next-line no-useless-catch
+  try {
+    return await prisma.teamUsers.findMany({
+      where: {
+        teamName
+      },
+      select: {
+        user: {
+          select: {
+            phoneNumber: true
+          }
+        }
+      }
+    });
+  }
+  catch (error) {
+    throw error;
+  }
+
+}
+
+
+
+
 
 
 
@@ -75,5 +104,6 @@ async function removeUserFromTeam(username, teamName) {
 module.exports = {
   createTeam,
   insertUserToTeam,
-  removeUserFromTeam
+  removeUserFromTeam,
+  getAllPhoneNumberUserByTeam
 };
