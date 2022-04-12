@@ -1,8 +1,6 @@
+const prisma = require('../loader/prisma');
+
 /* eslint-disable no-useless-catch */
-const { PrismaClient } = require('@prisma/client');
-
-const prisma = new PrismaClient();
-
 /**
  * 
  * @param {Array.<Object>} alerts - list of alerts from service 
