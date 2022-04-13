@@ -9,12 +9,6 @@ const defaultPassword = '1234554321';
   await prisma.users.createMany({
     data: [
       {
-        username: 'ali.nourollahi',
-        role: 'ADMIN',
-        password: defaultPassword,
-        phoneNumber : '09101112233'
-      },
-      {
         username: 'mahla.rahati',
         role: 'ADMIN',
         password: defaultPassword,
