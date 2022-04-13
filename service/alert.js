@@ -65,7 +65,6 @@ async function alertingService() {
 
   }
   catch (error) {
-    console.log(error);
     return error;
   }
 }

@@ -16,8 +16,7 @@ async function login(req, res) {
     res.send(generateToken(payload));
   }
   catch (error) {
-    console.log(error);
-    return error;
+    throw error
   }
 }
 
