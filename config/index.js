@@ -5,11 +5,7 @@ const config = {
     port: process.env.PORT || 3002
   },
   databse: {
-    host: process.env.HOST,
-    user: process.env.DATABASE_USER,
-    database: process.env.DATABASE_NAME,
-    password: process.env.DATABASE_PASSWORD,
-    port: process.env.DATABASE_PORT,
+    url : process.env.DATABASE_URL,
   },
   sms: {
     apiKey: process.env.SMS_APIKEY,

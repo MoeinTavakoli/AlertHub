@@ -3,7 +3,7 @@ const { Client } = require('pg');
 const config = require('../config');
 
 
-const client = new Client(config.databse);
+const client = new Client(config.databse.url);
 
 
 client.connect().catch((err) => {
