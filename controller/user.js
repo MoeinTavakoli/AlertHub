@@ -35,8 +35,7 @@ async function login(req, res) {
     const username = req.body.username;
     const password = req.body.password;
     const result = await db.login(username, password);
-
-    if (!result) return res.status(401).send('unauthorized ');
+    if (!result) return res.status(401).send('username or password is not correct ! ');
     res.send(generateToken(result));
   }
   catch (error) {
