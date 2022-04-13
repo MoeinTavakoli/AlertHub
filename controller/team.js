@@ -27,7 +27,6 @@ async function insertUserToTeam(req, res) {
   try {
     const { username, teamName } = req.body;
     const result = await db.insertUserToTeam(username, teamName);
-    console.log(result);
     if (!result) return res.send('insert user to team failed !');
     return res.send('insert user to team successfuly');
   }

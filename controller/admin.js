@@ -7,6 +7,7 @@ const db = require('../db/admin');
  * @param {import('express').Response} res 
  */
 async function login(req, res) {
+  // eslint-disable-next-line no-useless-catch
   try {
     const username = req.body.username;
     const password = req.body.password;
@@ -16,7 +17,7 @@ async function login(req, res) {
     res.send(generateToken(payload));
   }
   catch (error) {
-    throw error
+    throw error;
   }
 }
 

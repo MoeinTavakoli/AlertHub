@@ -1,6 +1,6 @@
 const serverInit = require('./loader/server');
 const cronAlertingService = require('./cron');
-require("./db/_connection");
+require('./db/_connection');
 
 /**
  * 
