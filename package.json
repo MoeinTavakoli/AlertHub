@@ -10,7 +10,7 @@
     "seed": "node prisma/seed.js"
   },
   "keywords": [],
-  "author": "mtawakoli2283@gmail.com",
+  "author": "mtawakoli2283@gmail.com , moein tavakoli",
   "license": "UNLICENSED",
   "dependencies": {
     "@prisma/client": "^3.12.0",
