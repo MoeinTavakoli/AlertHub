@@ -11,7 +11,7 @@ model users {
   username       String           @id @unique @db.VarChar(50)
   password       String           @db.VarChar(100)
   phoneNumber    String           @db.VarChar(12)
-  role           enum_Users_role?
+  role           enum_Users_role
   createdAt      DateTime?        @default(now()) @db.Timestamptz(6)
   updatedAt      DateTime?        @updatedAt @db.Timestamptz(6)
   targetContacts targetContacts[]

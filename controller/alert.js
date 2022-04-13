@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-
+const {prometheus} = require("../config");
 
 /**
  * 
@@ -10,7 +10,8 @@ const axios = require('axios');
 async function alertingService(req, res) {
 
   try {
-    const response = await axios.get('http://172.30.201.88:9090/api/v1/alerts');
+    const url = `http://${prometheus.ip}:${prometheus.port}/api/v1/alerts`;
+    const response = await axios.get(url);
     const result = response.data;
     const alerts = result.status == 'success' ? result.data.alerts : false;
     res.send(alerts);
