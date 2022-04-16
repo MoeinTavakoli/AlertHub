@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config({path : '../.env'});
 
 const config = {
   httpServer: {
@@ -24,7 +24,6 @@ const config = {
     port : process.env.PROMETHEUS_PORT
   }
 };
-
 
 
 module.exports = config;
