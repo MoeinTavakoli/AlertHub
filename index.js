@@ -1,13 +1,10 @@
 const serverInit = require('./loader/server');
 const cronAlertingService = require('./cron');
+
 require('./db/_connection');
 
-/**
- * 
- */
-async function main() {
+
+(async()=> {
   await serverInit();
   await cronAlertingService();
-}
-
-main();
+})();
