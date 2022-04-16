@@ -13,11 +13,11 @@ const isHoliday = require('./holiday');
 class sms {
   /**
      * send text message to receptors
-     * @param {string} message
+     * @param {String} message
      * @param {array<string>} receptors
      */
   send(message, receptors) {
-    if (isHoliday()) {
+    if (isHoliday() && receptors.length) {
       api.Send(
         {
           message,

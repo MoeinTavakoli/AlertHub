@@ -29,6 +29,7 @@ async function alertingService() {
   try {
     const alerts = await fetchAlert();
 
+
     for (const alert of alerts) {
       const job = alert.labels.job;
       const target = alert.labels.instance;
@@ -36,9 +37,8 @@ async function alertingService() {
 
       // insert to database
       // paralel
-      Promise.allSettled([addTarget(target), insertAlertLog(alert)]);
+      await Promise.allSettled([addTarget(target), insertAlertLog(alert)]);
       // 
-
       //none paralel
       // await addTarget(target);
       // await insertAlertLog(alert);
@@ -52,10 +52,7 @@ async function alertingService() {
       const phoneNumbers = Array.from(new Set(userPhoneNumber.concat(teamUserPhoneNumber)));
 
 
-      const message = `
-      title  : ${job}
-      target : ${target}
-      value  : ${value}
+      const message = `title  : ${job} - target : ${target.replace('https://', '').replace('www.', '').replace('.com', '')} - value  : ${value}
      `;
 
       sms.send(message, phoneNumbers);
