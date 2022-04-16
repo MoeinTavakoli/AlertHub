@@ -1,13 +1,13 @@
 const { KavenegarApi } = require('kavenegar');
 const config = require('../config');
 
-const apiKey = config.sms.apiKey;
+const apikey = config.sms.apiKey;
 const sender = config.sms.number;
 
 
-const api = KavenegarApi({ apiKey });
+const api = KavenegarApi({ apikey });
 
-const rocketchat = require('../utils/rocketchat');
+const rocketchat = require('./rocketchat');
 const isHoliday = require('./holiday');
 
 class sms {
@@ -43,5 +43,3 @@ class sms {
 
 
 module.exports = new sms();
-
-
