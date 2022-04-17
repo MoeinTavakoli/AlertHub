@@ -15,7 +15,7 @@ const controller = require('../controller/admin');
 
 app.post('/login', validator.login, controller.login);
 app.put('/phone/:username', verifyToken , IsAdmin ,   controller.updatePhoneUsers);
-app.post('/create', controller.createUser);
+app.post('/create', validator.createUser, controller.createUser);
 
 
 module.exports = app;
