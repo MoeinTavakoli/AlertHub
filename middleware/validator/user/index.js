@@ -1,5 +1,6 @@
 /* eslint-disable global-require */
 module.exports = {
-  signup : require('./signup'),
-  login : require("./login")
+  signup: require('./signup'),
+  login: require('./login'),
+  UpdatePhoneNumber: require('./updatePhoneNumber')
 };
