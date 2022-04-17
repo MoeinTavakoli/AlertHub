@@ -13,7 +13,6 @@ async function assignUserToTarget(req, res) {
     res.send('assign user to target successfuly');
   }
   catch (error) {
-    console.log(error);
     res.send(error);
   }
 }
@@ -35,7 +34,7 @@ async function deleteUserToTarget(req, res) {
       return res.send('delete user to target successfuly');
     }
 
-    res.send('delete user to target failed !');
+    res.send('there  isnt any row with this information to delete !!!');
 
 
   }
