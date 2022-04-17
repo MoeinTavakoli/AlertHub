@@ -6,5 +6,5 @@ require('./db/_connection');
 
 (async()=> {
   await serverInit();
-  // await cronAlertingService();
+  await cronAlertingService();
 })();
