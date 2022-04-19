@@ -31,5 +31,9 @@
     "eslint": "^8.13.0",
     "eslint-config-google": "^0.14.0",
     "prettier": "^2.6.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.partdp.ir/network/lms/monia/new-monia/alertmanager/monia.git"
   }
 }
