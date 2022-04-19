@@ -25,20 +25,17 @@ async function webhook(req, res) {
 
       const userPhoneNumber = await getPhoneNumberContacts(target);
 
-      console.log(`userPhoneNumber : ${userPhoneNumber}`);
-
       const teamUserPhoneNumber = await getAllPhoneNumberUserByTeam(target);
-
-      console.log(`teamUserPhoneNumber : ${teamUserPhoneNumber}`);
 
       const phoneNumbers = Array.from(new Set(userPhoneNumber.concat(teamUserPhoneNumber)));
 
-      const message = `title  : ${from} - target : ${target.replace('https://', '').replace('www.', '').replace('.com', '')}
-     - value  : ${value} - status : ${status}`;
+      const message = `
+      title  : ${from} 
+      target : ${target.replace('https://', '').replace('www.', '').replace('.com', '')} 
+      value  : ${value} 
+      status : ${status}`;
 
-      // sms.send(message, phoneNumbers);
-
-
+      sms.send(message, phoneNumbers);
     }
   }
   catch (error) {
