@@ -24,7 +24,6 @@ app.use('/team', require('../router/team'));
 
 app.use('/target/team', require('../router/teamTarget'));
 
-app.use('/', require('../router/webhook'));
 
 module.exports = () => {
   app.listen(httpServer.port, () => {
