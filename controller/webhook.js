@@ -3,6 +3,7 @@ const { insertAlertLog } = require('../db/alertLogs');
 const { getPhoneNumberContacts } = require('../db/targetContact');
 const { getAllPhoneNumberUserByTeam } = require('../db/teamTarget');
 const sms = require('../utils/sms');
+const removeUrlCharachter = require('../utils/removeURL');
 /**
  * 
  * @param {import('express').Request} req 
@@ -31,7 +32,7 @@ async function webhook(req, res) {
 
       const message = `
       title  : ${from} 
-      target : ${target.replace('https://', '').replace('www.', '').replace('.com', '')} 
+      target : ${removeUrlCharachter(target)} 
       value  : ${value} 
       status : ${status}`;
 
