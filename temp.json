@@ -1,0 +1,60 @@
+{
+    "receiver": "web\\.hook",
+    "status": "firing",
+    "alerts": [
+        {
+            "status": "firing",
+            "labels": {
+                "alertname": "DownTargets",
+                "information": "map[instance:142.251.39.110 job:node1-ping phase:rtt]   ",
+                "instance": "142.251.39.110",
+                "job": "node1-ping",
+                "phase": "rtt",
+                "severity": "critical"
+            },
+            "annotations": {
+                "description": "142.251.39.110 from job node1-ping can find ping for more than 1 minute",
+                "title": "DOWN ping "
+            },
+            "startsAt": "2022-04-19T06:35:32.521Z",
+            "endsAt": "0001-01-01T00:00:00Z",
+            "generatorURL": "http://moeen-System-Product-Name:9090/graph?g0.expr=probe_icmp_duration_seconds%7Bphase%3D%22rtt%22%7D+%2A+1000+%3D%3D+0&g0.tab=1",
+            "fingerprint": "44bb60f5ec1964ae"
+        },
+        {
+            "status": "firing",
+            "labels": {
+                "alertname": "DownTargets",
+                "information": "map[instance:142.251.39.110 job:node2-ping phase:rtt]   ",
+                "instance": "142.251.39.110",
+                "job": "node2-ping",
+                "phase": "rtt",
+                "severity": "critical"
+            },
+            "annotations": {
+                "description": "142.251.39.110 from job node2-ping can find ping for more than 1 minute",
+                "title": "DOWN ping "
+            },
+            "startsAt": "2022-04-19T06:35:32.521Z",
+            "endsAt": "0001-01-01T00:00:00Z",
+            "generatorURL": "http://moeen-System-Product-Name:9090/graph?g0.expr=probe_icmp_duration_seconds%7Bphase%3D%22rtt%22%7D+%2A+1000+%3D%3D+0&g0.tab=1",
+            "fingerprint": "c36a9ef1a663db48"
+        }
+    ],
+    "groupLabels": {
+        "alertname": "DownTargets"
+    },
+    "commonLabels": {
+        "alertname": "DownTargets",
+        "instance": "142.251.39.110",
+        "phase": "rtt",
+        "severity": "critical"
+    },
+    "commonAnnotations": {
+        "title": "DOWN ping "
+    },
+    "externalURL": "http://moeen-System-Product-Name:9093",
+    "version": "4",
+    "groupKey": "{}:{alertname=\"DownTargets\"}",
+    "truncatedAlerts": 0
+}

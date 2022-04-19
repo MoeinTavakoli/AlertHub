@@ -18,6 +18,7 @@ async function insertAlertLog(from, target, activeAt, value,) {
     });
   }
   catch (error) {
+    console.log(error);
     return error;
   }
 }
