@@ -14,7 +14,7 @@ app.use('/api', require('../router'));
 
 app.use('/user', require('../router/user'));
 
-app.use('/admin', require('../router/admin'));
+app.use('/monia-admin', require('../router/moniaAdmin'));
 
 app.use('/target', require('../router/target'));
 
@@ -24,7 +24,7 @@ app.use('/team', require('../router/team'));
 
 app.use('/target/team', require('../router/teamTarget'));
 
-app.use('/root' , require('../router/root'));
+app.use('/root', require('../router/root'));
 
 
 module.exports = () => {

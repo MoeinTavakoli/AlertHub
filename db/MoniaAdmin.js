@@ -29,9 +29,12 @@ async function loginMoniaAdmin(username, password) {
  */
 async function updatePhoneUsers(username, newPhone) {
   try {
-    return await prisma.users.update({
+    return await prisma.users.updateMany({
       where: {
         username,
+        role : {
+          not : 'ROOT'
+        }
       },
       data: {
         phoneNumber: newPhone
@@ -49,7 +52,7 @@ async function updatePhoneUsers(username, newPhone) {
  * @param {String} password 
  * @param {String} phoneNumber 
  */
-async function createUser(username, password, phoneNumber , role) {
+async function createUser(username, password, phoneNumber, role = 'CONTACT') {
   try {
     return await prisma.users.create({
       data: {

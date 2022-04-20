@@ -1,18 +1,18 @@
 const { generateToken } = require('../utils/jwt');
-const db = require('../db/admin');
+const db = require('../db/MoniaAdmin');
 
 /**
  * 
  * @param {import('express').Request} req 
  * @param {import('express').Response} res 
  */
-async function login(req, res) {
+async function loginMoniaAdmin(req, res) {
   // eslint-disable-next-line no-useless-catch
   try {
     const username = req.body.username;
     const password = req.body.password;
 
-    const payload = await db.login(username, password);
+    const payload = await db.loginMoniaAdmin(username, password);
     if (!payload) return res.send('username or password is not correct ...');
     res.send(generateToken(payload));
   }
@@ -32,7 +32,7 @@ async function updatePhoneUsers(req, res) {
     const phoneNumber = req.body.phoneNumber;
 
     const result = await db.updatePhoneUsers(username, phoneNumber);
-    if (!result) return res.send('faild to update phone number ...');
+    if (result.count == 0) return res.send('faild to update phone number maybe you didnt have permission !');
     res.send('update successfuly ...');
 
   }
@@ -49,9 +49,11 @@ async function updatePhoneUsers(req, res) {
  */
 async function createUser(req, res) {
   try {
-    const { username, password, phoneNumber } = req.body;
+    const { username, password, phoneNumber, role } = req.body;
 
-    const result = await db.createUser(username, password, phoneNumber);
+    if (role == 'ROOT') return res.status(400).send('permission denied ! you cant add root user ');
+
+    const result = await db.createUser(username, password, phoneNumber, role);
     if (!result) return res.send('create user failed !!!');
     res.send('user created');
 
@@ -64,7 +66,7 @@ async function createUser(req, res) {
 
 
 module.exports = {
-  login,
+  loginMoniaAdmin,
   updatePhoneUsers,
   createUser
 };
