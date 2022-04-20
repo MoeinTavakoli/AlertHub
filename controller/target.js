@@ -1,4 +1,4 @@
-const { addTarget, removeTarget } = require('../db/target');
+const { addTargetWithError, removeTarget } = require('../db/target');
 
 
 /**
@@ -10,7 +10,8 @@ async function createTarget(req, res) {
   try {
 
     const address = req.body.address;
-    const result = await addTarget( address);
+    const method = req.body.method;
+    const result = await addTargetWithError(address, method);
     if (!result) return res.send('create target failed ');
     res.send('target created ...');
   }
@@ -30,8 +31,9 @@ async function deleteTarget(req, res) {
 
   try {
     const address = req.body.address;
-    const result = await removeTarget(address);
-    if (!result) return res.send('delete target failed ');
+    const method = req.body.method;
+    const result = await removeTarget(address, method);
+    if (result.count == 0) return res.send('target didnt find to delete !!!');
     res.send('target deleted ...');
   }
   catch (error) {

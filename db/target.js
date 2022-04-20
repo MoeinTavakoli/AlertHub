@@ -6,17 +6,18 @@ const prisma = require('../loader/prisma');
  * @param {String} name 
  * @returns 
  */
-async function removeTarget(name) {
+async function removeTarget(address, method) {
   // eslint-disable-next-line no-useless-catch
   try {
-    return await prisma.targets.delete({
+    return await prisma.targets.deleteMany({
       where: {
-        name
+        address,
+        method
       }
     });
 
   }
- catch (error) {
+  catch (error) {
     throw error;
   }
 }
@@ -27,24 +28,25 @@ async function removeTarget(name) {
  * @param {String} address 
  * @returns 
  */
-async function addTarget(address) {
+async function addTargetWithError(address, method) {
   // eslint-disable-next-line no-useless-catch
   try {
     return await prisma.targets.create({
       data: {
-        address
+        address,
+        method
       }
     });
   }
   catch (error) {
-    return error;
+    throw error;
   }
 }
 
 
 
 module.exports = {
-  addTarget,
+  addTargetWithError,
   removeTarget
 
 };

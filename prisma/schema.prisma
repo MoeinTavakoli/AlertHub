@@ -19,13 +19,14 @@ model users {
 }
 
 model targets {
-  address        String           @id
+  address        String
   method         enum_method
   createdAt      DateTime?        @default(now()) @db.Timestamptz(6)
   updatedAt      DateTime?        @updatedAt @db.Timestamptz(6)
   targetContacts targetContacts[]
   teamTarget     teamTarget[]
 
+  @@id([address, method])
   @@unique([address, method])
 }
 
@@ -43,9 +44,10 @@ model alertLogs {
 
 model targetContacts {
   targetAddress String
-  username      String  @db.VarChar(50)
-  target        targets @relation(fields: [targetAddress], references: [address])
-  userContact   users   @relation(fields: [username], references: [username])
+  method        enum_method
+  username      String      @db.VarChar(50)
+  target        targets     @relation(fields: [targetAddress, method], references: [address, method])
+  userContact   users       @relation(fields: [username], references: [username])
 
   @@id([username, targetAddress])
 }
@@ -66,10 +68,11 @@ model teamUsers {
 }
 
 model teamTarget {
-  teamName      String  @db.VarChar(20)
-  targetAddress String  @db.VarChar(50)
-  team          teams   @relation(fields: [teamName], references: [teamName])
-  target        targets @relation(fields: [targetAddress], references: [address])
+  teamName      String      @db.VarChar(20)
+  targetAddress String      @db.VarChar(50)
+  method        enum_method
+  team          teams       @relation(fields: [teamName], references: [teamName])
+  target        targets     @relation(fields: [targetAddress, method], references: [address, method])
 
 
   @@id([teamName, targetAddress])
