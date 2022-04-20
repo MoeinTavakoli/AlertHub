@@ -6,13 +6,13 @@ const prisma = require('../loader/prisma');
  * @param {String} password 
  * @returns 
  */
-async function login(username, password) {
+async function loginMoniaAdmin(username, password) {
   try {
     return await prisma.users.findFirst({
       where: {
         username,
         password,
-        role: 'ADMIN'
+        role: 'MONIA_ADMIN'
       }
     });
   }
@@ -31,7 +31,7 @@ async function updatePhoneUsers(username, newPhone) {
   try {
     return await prisma.users.update({
       where: {
-        username
+        username,
       },
       data: {
         phoneNumber: newPhone
@@ -44,19 +44,19 @@ async function updatePhoneUsers(username, newPhone) {
 }
 
 /**
- * 
+ * create user thar you can set permission for this user 
  * @param {String} username 
  * @param {String} password 
  * @param {String} phoneNumber 
  */
-async function createUser(username, password, phoneNumber) {
+async function createUser(username, password, phoneNumber , role) {
   try {
     return await prisma.users.create({
       data: {
         username,
         password,
         phoneNumber,
-        role: 'REPORTER'
+        role
       }
     });
   }
@@ -69,7 +69,7 @@ async function createUser(username, password, phoneNumber) {
 
 
 module.exports = {
-  login,
+  loginMoniaAdmin,
   updatePhoneUsers,
   createUser
 };
