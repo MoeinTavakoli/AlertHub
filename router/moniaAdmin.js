@@ -16,6 +16,7 @@ app.post('/login', controller.loginMoniaAdmin);
 app.post('/user/create', auth, isMoniaAdmin, controller.createUser);
 app.put('/phone/:username', auth, isMoniaAdmin, controller.updatePhoneUsers);
 app.put('/username/:username', auth, isMoniaAdmin, controller.changeUsername);
+app.put('/password/:username', auth, isMoniaAdmin , controller.changePassword);
 app.delete('/user/delete', auth, isMoniaAdmin, controller.deleteUser);
 
 module.exports = app;
