@@ -10,7 +10,7 @@ const app = express();
 const controller = require('../controller/root');
 // 
 
-
+app.post('/login' , controller.loginRoot);
 app.post('/admin-monia/create', controller.createMoniaAdmin);
 app.delete('/admin-monia/delete', controller.removeMoniaAdmin);
 
