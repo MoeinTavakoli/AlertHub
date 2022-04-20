@@ -7,7 +7,7 @@ const prisma = require('../loader/prisma.js');
  * @param {String} phoneNumber 
  * @returns 
  */
-async function addMoniaAdmin(username, password, phoneNumber) {
+async function addMoniaAdmin(username, password, phoneNumber, role = 'CONTACT') {
   // eslint-disable-next-line no-useless-catch
   try {
     return await prisma.users.create({
@@ -15,7 +15,7 @@ async function addMoniaAdmin(username, password, phoneNumber) {
         username,
         password,
         phoneNumber,
-        role: 'MONIA_ADMIN'
+        role
       }
     });
   }
