@@ -13,6 +13,5 @@ const prisma = new PrismaClient();
       role : 'ROOT',
     }
   });
-
-
+  
 })();
