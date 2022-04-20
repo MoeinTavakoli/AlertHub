@@ -95,7 +95,8 @@ async function changeUsername(req, res) {
     const result = await db.changeUsername(oldUsername, newUsername);
     if (!result) return res.status(400).send('couldnt change the username ');
     res.send('username changed');
-  } catch (error) {
+  }
+  catch (error) {
     res.status(400).send(error);
   }
 }
