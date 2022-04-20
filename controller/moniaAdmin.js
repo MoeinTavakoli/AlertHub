@@ -83,10 +83,29 @@ async function deleteUser(req, res) {
 }
 
 
+/**
+ * 
+ * @param {import('express').Request} req 
+ * @param {import('express').Response} res 
+ */
+async function changeUsername(req, res) {
+  try {
+    const oldUsername = req.params.username;
+    const newUsername = req.body.newUsername;
+    const result = await db.changeUsername(oldUsername, newUsername);
+    if (!result) return res.status(400).send('couldnt change the username ');
+    res.send('username changed');
+  } catch (error) {
+    res.status(400).send(error);
+  }
+}
+
+
 
 module.exports = {
   loginMoniaAdmin,
   updatePhoneUsers,
   createUser,
-  deleteUser
+  deleteUser,
+  changeUsername
 };
