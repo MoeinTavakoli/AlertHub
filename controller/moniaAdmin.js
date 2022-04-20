@@ -64,9 +64,29 @@ async function createUser(req, res) {
 }
 
 
+/**
+ * 
+ * @param {import('express').Request} req 
+ * @param {import('express').Response} res 
+ */
+async function deleteUser(req, res) {
+  try {
+    const { username } = req.body;
+    const result = await db.deleteMoniaAdmin(username);
+    if (!result) return res.send('delete is not sucessfuly');
+    res.send('edit successfuly');
+
+  }
+  catch (error) {
+    res.status(400).send(error);
+  }
+}
+
+
 
 module.exports = {
   loginMoniaAdmin,
   updatePhoneUsers,
-  createUser
+  createUser,
+  deleteUser
 };

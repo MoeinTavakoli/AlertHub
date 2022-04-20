@@ -32,8 +32,8 @@ async function updatePhoneUsers(username, newPhone) {
     return await prisma.users.updateMany({
       where: {
         username,
-        role : {
-          not : 'ROOT'
+        role: {
+          not: 'ROOT'
         }
       },
       data: {
@@ -68,11 +68,34 @@ async function createUser(username, password, phoneNumber, role = 'CONTACT') {
   }
 }
 
+/**
+ * 
+ * @param {String} username 
+ */
+async function deleteMoniaAdmin(username) {
+  try {
+    const now = new Date();
+    return await prisma.users.update({
+      where: {
+        username,
+      },
+      data: {
+        deactiveAt: now
+      }
+    });
+  }
+  catch (error) {
+    throw error;
+  }
+
+}
+
 
 
 
 module.exports = {
   loginMoniaAdmin,
   updatePhoneUsers,
-  createUser
+  createUser,
+  deleteMoniaAdmin
 };
