@@ -1,0 +1,49 @@
+const prisma = require('../loader/prisma.js');
+
+/**
+ * 
+ * @param {String} username 
+ * @param {String} password 
+ * @param {String} phoneNumber 
+ * @returns 
+ */
+async function addMoniaAdmin(username, password, phoneNumber) {
+  // eslint-disable-next-line no-useless-catch
+  try {
+    return await prisma.users.create({
+      data: {
+        username,
+        password,
+        phoneNumber,
+        role: 'MONIA_ADMIN'
+      }
+    });
+  }
+  catch (error) {
+    throw error;
+  }
+}
+
+/**
+ * 
+ * @param {String} username 
+ * @returns 
+ */
+async function deleteMoniaAdmin(username) {
+  // eslint-disable-next-line no-useless-catch
+  try {
+    return await prisma.users.delete({
+      where: {
+        username
+      }
+    });
+  }
+  catch (error) {
+    throw error;
+  }
+}
+
+module.exports = {
+  addMoniaAdmin,
+  deleteMoniaAdmin
+};
