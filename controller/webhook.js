@@ -9,7 +9,7 @@ const removeUrlCharachter = require('../utils/removeURL');
  * @param {import('express').Request} req 
  * @param {import('express').Response} res 
  */
-async function webhook(req, res) {
+async function webhook(req) {
 
   try {
     const alerts = req.body.alerts;
