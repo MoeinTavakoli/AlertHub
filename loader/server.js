@@ -24,11 +24,6 @@ app.use('/team', require('../router/team'));
 
 app.use('/target/team', require('../router/teamTarget'));
 
-// 
-const { addMoniaAdmin, deleteMoniaAdmin } = require("../db/root");
-
-app.post('/root/admin-monia/create', );
-
 
 
 module.exports = () => {
