@@ -14,7 +14,7 @@ model users {
   role           enum_Users_role
   createdAt      DateTime?        @default(now()) @db.Timestamptz(6)
   updatedAt      DateTime?        @updatedAt @db.Timestamptz(6)
-  deactiveAt     DateTime?
+  isDeleted      Boolean          @default(false)
   targetContacts targetContacts[]
   teamUsers      teamUsers[]
 }
