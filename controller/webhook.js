@@ -17,16 +17,16 @@ async function webhook(req) {
       const status = alert.status;
       const instance = alert.labels.instance;
       const job = alert.labels.job;
-      const startedAt = alert.startsAt;
+      const activeAt = alert.startsAt;
       const value = alert.labels.value || -1;
 
 
-      await Promise.allSettled([addTargetWithError(job), insertAlertLog(job, instance, startedAt, value)]);
+      await Promise.allSettled([addTargetWithError(instance), insertAlertLog(job, instance , activeAt , value)]);
 
 
-      const userPhoneNumber = await getPhoneNumberContacts(job);
+      const userPhoneNumber = await getPhoneNumberContacts(instance);
 
-      const teamUserPhoneNumber = await getAllPhoneNumberUserByTeam(job);
+      const teamUserPhoneNumber = await getAllPhoneNumberUserByTeam(instance);
 
       const phoneNumbers = Array.from(new Set(userPhoneNumber.concat(teamUserPhoneNumber)));
 
