@@ -44,10 +44,10 @@ model alertLogs {
 
 model targetContacts {
   targetAddress String
-  method enum_method
-  username      String  @db.VarChar(50)
-  target        targets @relation(fields: [targetAddress , method], references: [address , method])
-  userContact   users   @relation(fields: [username], references: [username])
+  method        enum_method
+  username      String      @db.VarChar(50)
+  target        targets     @relation(fields: [targetAddress, method], references: [address, method])
+  userContact   users       @relation(fields: [username], references: [username])
 
   @@id([username, targetAddress])
 }
@@ -68,11 +68,11 @@ model teamUsers {
 }
 
 model teamTarget {
-  teamName      String  @db.VarChar(20)
-  targetAddress String  @db.VarChar(50)
-  method enum_method
-  team          teams   @relation(fields: [teamName], references: [teamName])
-  target        targets @relation(fields: [targetAddress , method], references: [address , method])
+  teamName      String      @db.VarChar(20)
+  targetAddress String      @db.VarChar(50)
+  method        enum_method
+  team          teams       @relation(fields: [teamName], references: [teamName])
+  target        targets     @relation(fields: [targetAddress, method], references: [address, method])
 
 
   @@id([teamName, targetAddress])
