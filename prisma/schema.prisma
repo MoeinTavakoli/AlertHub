@@ -80,7 +80,7 @@ model teamTarget {
 
 enum enum_method {
   ping
-  http_request
+  status_code
 }
 
 enum enum_Users_role {
