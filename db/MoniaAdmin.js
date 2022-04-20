@@ -114,6 +114,31 @@ async function changeUsername(oldUsername, newUsername) {
   }
 }
 
+/**
+ * 
+ * @param {String} username 
+ * @param {String} newPassword 
+ * @returns 
+ */
+async function changePassword(username, newPassword) {
+  try {
+    return await prisma.users.updateMany({
+      where: {
+        username,
+        isDeleted: false
+      },
+      data: {
+        password: newPassword
+      }
+    });
+  }
+  catch (error) {
+    throw error;
+  }
+}
+
+
+
 
 
 module.exports = {
@@ -121,5 +146,6 @@ module.exports = {
   updatePhoneUsers,
   createUser,
   deleteMoniaAdmin,
-  changeUsername
+  changeUsername,
+  changePassword
 };
