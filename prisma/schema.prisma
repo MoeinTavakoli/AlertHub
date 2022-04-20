@@ -19,11 +19,14 @@ model users {
 }
 
 model targets {
-  address        String           @id @unique
+  address        String           @id
+  method         enum_method
   createdAt      DateTime?        @default(now()) @db.Timestamptz(6)
   updatedAt      DateTime?        @updatedAt @db.Timestamptz(6)
   targetContacts targetContacts[]
   teamTarget     teamTarget[]
+
+  @@unique([address, method])
 }
 
 model alertLogs {
@@ -48,9 +51,9 @@ model targetContacts {
 }
 
 model teams {
-  teamName      String       @id @db.VarChar(50)
-  teamUsers     teamUsers[]
-  teamTarget    teamTarget[]
+  teamName   String       @id @db.VarChar(50)
+  teamUsers  teamUsers[]
+  teamTarget teamTarget[]
 }
 
 model teamUsers {
