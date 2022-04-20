@@ -74,14 +74,15 @@ async function createUser(username, password, phoneNumber, role = 'CONTACT') {
  */
 async function deleteMoniaAdmin(username) {
   try {
-    const now = new Date();
-    return await prisma.users.update({
+    return await prisma.users.updateMany({
       where: {
         username,
+        isDeleted : false
+        
       },
       data: {
-        deactiveAt: now
-      }
+        isDeleted: true
+      },
     });
   }
   catch (error) {

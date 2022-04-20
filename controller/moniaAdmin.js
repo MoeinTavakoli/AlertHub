@@ -73,7 +73,7 @@ async function deleteUser(req, res) {
   try {
     const { username } = req.body;
     const result = await db.deleteMoniaAdmin(username);
-    if (!result) return res.send('delete is not sucessfuly');
+    if (result.count == 0) return res.send('cant find to delete , maybe deleted !!!');
     res.send('edit successfuly');
 
   }
