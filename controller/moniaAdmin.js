@@ -74,7 +74,7 @@ async function deleteUser(req, res) {
     const { username } = req.body;
     const result = await db.deleteMoniaAdmin(username);
     if (result.count == 0) return res.send('cant find to delete , maybe deleted !!!');
-    res.send('edit successfuly');
+    res.send('delete successfuly');
 
   }
   catch (error) {
@@ -101,6 +101,24 @@ async function changeUsername(req, res) {
   }
 }
 
+/**
+ * 
+ * @param {import('express').Request} req 
+ * @param {import('express').Response} res 
+ */
+async function changePassword(req, res) {
+  try {
+    const username = req.params.username;
+    const password = req.body.password;
+    const result = await db.changePassword(username, password);
+    if (result.count == 0) return res.status(400).send('username didint find to update !!!');
+    res.send('password updated ...');
+  }
+  catch (error) {
+    res.status(400).send(error);
+  }
+}
+
 
 
 module.exports = {
@@ -108,5 +126,6 @@ module.exports = {
   updatePhoneUsers,
   createUser,
   deleteUser,
-  changeUsername
+  changeUsername,
+  changePassword
 };
