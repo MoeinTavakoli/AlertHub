@@ -11,7 +11,7 @@ async function insertAlertLog(job, instance, activeAt, value,) {
       data: {
         job,
         instance,
-        activeAt: activeAt,
+        activeAt,
         value: parseInt(value),
         method: job.indexOf('ping') > -1 ? 'ping' : 'http_request'
       }
