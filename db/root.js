@@ -43,7 +43,31 @@ async function deleteMoniaAdmin(username) {
   }
 }
 
+/**
+ * 
+ * @param {String} username 
+ * @param {String} password 
+ * @returns 
+ */
+async function loginRoot(username , password) {
+  // eslint-disable-next-line no-useless-catch
+  try {
+    return await prisma.users.findFirst({
+      where : {
+        username ,
+        password,
+        role : 'ROOT'
+      }
+    });
+  }
+  catch (error) {
+    throw error;
+  }
+}
+
+
 module.exports = {
+  loginRoot,
   addMoniaAdmin,
   deleteMoniaAdmin
 };

@@ -1,4 +1,25 @@
 const db = require('../db/root');
+const { generateToken } = require('../utils/jwt.js');
+
+/**
+ * 
+ * @param {import('express').Request} req 
+ * @param {import('express').Response} res 
+ */
+const loginRoot = async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    const result = await db.loginRoot(username, password);
+    if (!result) return res.status(400).send('username or password is not correct !');
+    res.send(generateToken(result));
+  }
+  catch (error) {
+    res.status(400).send(error);
+  }
+};
+
+
+
 
 /**
  * 
@@ -40,6 +61,7 @@ const removeMoniaAdmin = async (req, res) => {
 
 
 module.exports = {
+  loginRoot,
   createMoniaAdmin,
   removeMoniaAdmin
 };
