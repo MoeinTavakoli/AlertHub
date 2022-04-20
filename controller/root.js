@@ -29,8 +29,8 @@ const removeMoniaAdmin = async (req, res) => {
   try {
     const { username } = req.body;
     const result = await db.deleteMoniaAdmin(username);
-    if (result.count == 0) return res.status(400).send('admin monia didnt find to delete !!!');
-    res.send('monia-admin deleted ...');
+    if (result) return res.send('monia-admin deleted ...');
+    res.status(400).send('admin monia didnt find to delete !!!');
   }
   catch (error) {
     res.status(400).send(error);
