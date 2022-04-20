@@ -15,24 +15,24 @@ async function webhook(req) {
     const alerts = req.body.alerts;
     for (const alert of alerts) {
       const status = alert.status;
-      const target = alert.labels.instance;
-      const from = alert.labels.job;
+      const instance = alert.labels.instance;
+      const job = alert.labels.job;
       const startedAt = alert.startsAt;
       const value = alert.labels.value || -1;
 
 
-      await Promise.allSettled([addTargetWithError(target), insertAlertLog(from, target, startedAt, value)]);
+      await Promise.allSettled([addTargetWithError(job), insertAlertLog(job, instance, startedAt, value)]);
 
 
-      const userPhoneNumber = await getPhoneNumberContacts(target);
+      const userPhoneNumber = await getPhoneNumberContacts(job);
 
-      const teamUserPhoneNumber = await getAllPhoneNumberUserByTeam(target);
+      const teamUserPhoneNumber = await getAllPhoneNumberUserByTeam(job);
 
       const phoneNumbers = Array.from(new Set(userPhoneNumber.concat(teamUserPhoneNumber)));
 
       const message = `
-      title  : ${from} 
-      target : ${removeUrlCharachter(target)} 
+      title  : ${job} 
+      target : ${removeUrlCharachter(instance)} 
       value  : ${value} 
       status : ${status}`;
 
