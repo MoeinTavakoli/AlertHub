@@ -77,8 +77,8 @@ async function deleteMoniaAdmin(username) {
     return await prisma.users.updateMany({
       where: {
         username,
-        isDeleted : false
-        
+        isDeleted: false
+
       },
       data: {
         isDeleted: true
@@ -92,11 +92,34 @@ async function deleteMoniaAdmin(username) {
 }
 
 
+/**
+ * 
+ * @param {*} oldUsername 
+ * @param {*} newUsername 
+ * @returns 
+ */
+async function changeUsername(oldUsername, newUsername) {
+  try {
+    return await prisma.users.update({
+      where: {
+        username: oldUsername
+      },
+      data: {
+        username: newUsername
+      }
+    });
+  }
+  catch (error) {
+    throw error;
+  }
+}
+
 
 
 module.exports = {
   loginMoniaAdmin,
   updatePhoneUsers,
   createUser,
-  deleteMoniaAdmin
+  deleteMoniaAdmin,
+  changeUsername
 };
