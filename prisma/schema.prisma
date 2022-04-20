@@ -31,14 +31,14 @@ model targets {
 }
 
 model alertLogs {
-  id         Int          @id @default(autoincrement())
-  nodeName   String       @db.VarChar(50)
-  targetName String       @db.VarChar(50)
-  method     enum_method?
-  value      Int
-  activeAt   DateTime
-  createdAt  DateTime?    @default(now()) @db.Timestamptz(6)
-  updatedAt  DateTime?    @updatedAt @db.Timestamptz(6)
+  id        Int          @id @default(autoincrement())
+  job       String       @db.VarChar(50)
+  instance  String       @db.VarChar(50)
+  method    enum_method?
+  value     Int
+  activeAt  DateTime
+  createdAt DateTime?    @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime?    @updatedAt @db.Timestamptz(6)
 
 }
 
@@ -49,7 +49,7 @@ model targetContacts {
   target        targets     @relation(fields: [targetAddress, method], references: [address, method])
   userContact   users       @relation(fields: [username], references: [username])
 
-  @@id([username, targetAddress , method])
+  @@id([username, targetAddress, method])
 }
 
 model teams {
@@ -75,7 +75,7 @@ model teamTarget {
   target        targets     @relation(fields: [targetAddress, method], references: [address, method])
 
 
-  @@id([teamName, targetAddress , method])
+  @@id([teamName, targetAddress, method])
 }
 
 enum enum_method {

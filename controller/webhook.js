@@ -1,4 +1,4 @@
-const { addTarget } = require('../db/target');
+const { addTargetWithError } = require('../db/target');
 const { insertAlertLog } = require('../db/alertLogs');
 const { getPhoneNumberContacts } = require('../db/targetContact');
 const { getAllPhoneNumberUserByTeam } = require('../db/teamTarget');
@@ -21,7 +21,7 @@ async function webhook(req, res) {
       const value = alert.labels.value || -1;
 
 
-      await Promise.allSettled([addTarget(target), insertAlertLog(from, target, startedAt, value)]);
+      await Promise.allSettled([addTargetWithError(target), insertAlertLog(from, target, startedAt, value)]);
 
 
       const userPhoneNumber = await getPhoneNumberContacts(target);

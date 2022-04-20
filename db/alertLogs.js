@@ -5,20 +5,19 @@ const prisma = require('../loader/prisma');
  * 
  * @param {Array.<Object>} alerts - list of alerts from service 
  */
-async function insertAlertLog(from, target, activeAt, value,) {
+async function insertAlertLog(job, instance, activeAt, value,) {
   try {
     await prisma.alertLogs.create({
       data: {
-        nodeName: from,
-        targetName: target,
+        job,
+        instance,
         activeAt: activeAt,
         value: parseInt(value),
-        method: from.indexOf('http') > -1 ? 'http_request' : 'ping'
+        method: job.indexOf('ping') > -1 ? 'ping' : 'http_request'
       }
     });
   }
   catch (error) {
-    console.log(error);
     return error;
   }
 }
