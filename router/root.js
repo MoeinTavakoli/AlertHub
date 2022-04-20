@@ -6,7 +6,6 @@ const auth = require('../middleware/auth');
 const isRoot = require('../middleware/isRoot');
 // 
 
-
 // controller
 const controller = require('../controller/root');
 // 
