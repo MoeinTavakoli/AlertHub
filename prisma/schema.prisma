@@ -49,7 +49,7 @@ model targetContacts {
   target        targets     @relation(fields: [targetAddress, method], references: [address, method])
   userContact   users       @relation(fields: [username], references: [username])
 
-  @@id([username, targetAddress])
+  @@id([username, targetAddress , method])
 }
 
 model teams {
@@ -75,7 +75,7 @@ model teamTarget {
   target        targets     @relation(fields: [targetAddress, method], references: [address, method])
 
 
-  @@id([teamName, targetAddress])
+  @@id([teamName, targetAddress , method])
 }
 
 enum enum_method {
