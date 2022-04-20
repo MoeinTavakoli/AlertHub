@@ -24,6 +24,7 @@ app.use('/team', require('../router/team'));
 
 app.use('/target/team', require('../router/teamTarget'));
 
+app.use('/root' , require('../router/root'));
 
 
 module.exports = () => {
