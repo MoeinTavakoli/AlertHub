@@ -5,13 +5,14 @@ const prisma = require('../loader/prisma');
  * @param {String} targetAddress 
  * @param {String} teamName 
  */
-async function createTeamTarget(targetAddress, teamName) {
+async function createTeamTarget(targetAddress, teamName, method) {
   // eslint-disable-next-line no-useless-catch
   try {
     return await prisma.teamTarget.create({
       data: {
         targetAddress,
-        teamName
+        teamName,
+        method
       }
     });
   }
@@ -26,13 +27,14 @@ async function createTeamTarget(targetAddress, teamName) {
  * @param {*} teamName 
  * @returns 
  */
-async function removeTeamFromTarget(targetAddress, teamName) {
+async function removeTeamFromTarget(targetAddress, teamName, method) {
   // eslint-disable-next-line no-useless-catch
   try {
     return await prisma.teamTarget.deleteMany({
       where: {
         targetAddress,
-        teamName
+        teamName,
+        method
       }
     });
   }
