@@ -8,7 +8,8 @@ async function assignUserToTarget(req, res) {
   try {
     const username = req.body.username;
     const targetAddress = req.body.targetAddress;
-    const result = await db.addUserToTarget(username, targetAddress);
+    const method = req.body.method;
+    const result = await db.addUserToTarget(username, targetAddress , method);
     if (!result) return res.send('assign user to target failed !');
     res.send('assign user to target successfuly');
   }
@@ -29,7 +30,8 @@ async function deleteUserToTarget(req, res) {
   try {
     const username = req.body.username;
     const targetAddress = req.body.targetAddress;
-    const result = await db.removeUserToTarget(username, targetAddress);
+    const method = req.body.method;
+    const result = await db.removeUserToTarget(username, targetAddress , method);
     if (result.count > 0) {
       return res.send('delete user to target successfuly');
     }

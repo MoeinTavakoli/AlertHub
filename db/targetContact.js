@@ -7,13 +7,14 @@ const prisma = require('../loader/prisma');
  * @param {String} targetName 
  * @returns 
  */
-async function addUserToTarget(username, targetAddress) {
+async function addUserToTarget(username, targetAddress , method) {
   // eslint-disable-next-line no-useless-catch
   try {
     return await prisma.targetContacts.create({
       data: {
         username,
-        targetAddress
+        targetAddress,
+        method
       }
     });
   }
@@ -28,13 +29,14 @@ async function addUserToTarget(username, targetAddress) {
  * @param {String} targetName 
  * @returns 
  */
-async function removeUserToTarget(username, targetAddress) {
+async function removeUserToTarget(username, targetAddress, method) {
   // eslint-disable-next-line no-useless-catch
   try {
     return await prisma.targetContacts.deleteMany({
       where: {
         username,
-        targetAddress
+        targetAddress,
+        method
       }
     });
   }
