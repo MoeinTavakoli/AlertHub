@@ -11,5 +11,4 @@ function isRoot(req,res,next) {
   next();
 }
 
-
 module.exports = isRoot;
