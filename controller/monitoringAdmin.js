@@ -75,9 +75,30 @@ async function changePassword(req, res) {
   }
 }
 
+/**
+ * 
+ * @param {import('express').Request} req 
+ * @param {import('express').Response} res 
+ */
+async function updatePhoneNumber(req, res) {
+  try {
+    const { username } = req.params;
+    const { phoneNumber } = req.body;
+    const result = await db.updatePhoneNumber(username, phoneNumber);
+    if (result.count == 0) return res.status(400).send('didnt changed phoneNumber !!!');
+    res.send('phoneNumber changed ...');
+
+  }
+  catch (error) {
+    res.status(400).send(error);
+  }
+}
+
+
 module.exports = {
   createMonitoringAdmin,
   deleteMonitoringAdmin,
   changeUsername,
-  changePassword
+  changePassword,
+  updatePhoneNumber
 };
