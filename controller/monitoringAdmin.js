@@ -55,8 +55,29 @@ async function changeUsername(req, res) {
 }
 
 
+/**
+ * 
+ * @param {import('express').Request} req 
+ * @param {import('express').Response} res 
+ */
+async function changePassword(req, res) {
+  // eslint-disable-next-line no-useless-catch
+  try {
+    const { username } = req.params;
+    const { password } = req.body;
+    const result = await db.updatePassword(username, password);
+    if (result.count == 0) return res.status(400).send('didnt changed password !!!');
+    res.send('password changed ...');
+
+  }
+  catch (error) {
+    throw error;
+  }
+}
+
 module.exports = {
   createMonitoringAdmin,
   deleteMonitoringAdmin,
-  changeUsername
+  changeUsername,
+  changePassword
 };
