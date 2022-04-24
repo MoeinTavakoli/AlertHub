@@ -15,7 +15,7 @@ async function signup(username, password, phoneNumber) {
         username,
         password,
         phoneNumber,
-        role: 'REPORTER'
+        role: 'CONTACT'
       }
     });
   }
