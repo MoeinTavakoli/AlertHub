@@ -131,6 +131,29 @@ async function updatePhoneNumber(username, phoneNumber) {
   }
 }
 
+/**
+ * 
+ * @param {String} username 
+ * @param {String} password 
+ * @returns 
+ */
+async function login(username, password) {
+  // eslint-disable-next-line no-useless-catch
+  try {
+    return await prisma.users.findFirst({
+      where: {
+        username,
+        password,
+        isDeleted: false,
+        role: 'MONITORING_ADMIN'
+      }
+    });
+  }
+  catch (error) {
+    throw error;
+  }
+}
+
 
 
 
@@ -139,5 +162,6 @@ module.exports = {
   deleteMonitoringAdmin,
   changeUsername,
   updatePassword,
-  updatePhoneNumber
+  updatePhoneNumber,
+  login
 };
