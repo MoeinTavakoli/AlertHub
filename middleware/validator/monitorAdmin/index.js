@@ -4,4 +4,5 @@ module.exports = {
   deleteUser: require('./deleteUser'),
   changeUsername: require('./deleteUser'),
   changePassword: require('./changePassword'),
+  changePhoneNumber: require('./changePhoneNumber')
 };
