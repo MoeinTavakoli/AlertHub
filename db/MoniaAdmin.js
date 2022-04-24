@@ -100,9 +100,10 @@ async function deleteMoniaAdmin(username) {
  */
 async function changeUsername(oldUsername, newUsername) {
   try {
-    return await prisma.users.update({
+    return await prisma.users.updateMany({
       where: {
-        username: oldUsername
+        username: oldUsername,
+        isDeleted: false
       },
       data: {
         username: newUsername
