@@ -24,7 +24,38 @@ async function createMonitoringAdmin(username, password, phoneNumber) {
   }
 }
 
+/**
+ *
+ * @param {String} username 
+ * @returns 
+ */
+async function deleteMonitoringAdmin(username) {
+  // eslint-disable-next-line no-useless-catch
+  try {
+    return await prisma.users.updateMany({
+      where: {
+        username,
+        isDeleted: false,
+        AND: {
+          role: {
+            in: ['CONTACT', 'MONITORING_ADMIN']
+          }
+        }
+      },
+      data: {
+        isDeleted: true
+      }
+    });
+  }
+  catch (error) {
+    throw error;
+  }
+}
+
+
+
 
 module.exports = {
-  createMonitoringAdmin
+  createMonitoringAdmin,
+  deleteMonitoringAdmin
 };
