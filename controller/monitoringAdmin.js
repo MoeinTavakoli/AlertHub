@@ -1,5 +1,5 @@
 const db = require('../db/monitoringAdmin');
-
+const { generateToken } = require('../utils/jwt');
 
 /**
  * 
@@ -95,10 +95,29 @@ async function updatePhoneNumber(req, res) {
 }
 
 
+/**
+ * 
+ * @param {import('express').Request} req 
+ * @param {import('express').Response} res 
+ */
+async function login(req, res) {
+  try {
+    const { username, password } = req.body;
+    const payload = await db.login(username, password);
+    if (!payload) return res.status(400).send('username or password is not correct !!!');
+    res.send(generateToken(payload));
+  }
+  catch (error) {
+    res.status(400).send(error);
+  }
+}
+
 module.exports = {
   createMonitoringAdmin,
   deleteMonitoringAdmin,
   changeUsername,
   changePassword,
-  updatePhoneNumber
+  updatePhoneNumber,
+  login
+
 };
