@@ -8,8 +8,8 @@ const db = require('../db/monitoringAdmin');
  */
 async function createMonitoringAdmin(req, res) {
   try {
-    const { username, password, phoneNumber } = req.body;
-    const result = await db.createMonitoringAdmin(username, password, phoneNumber);
+    const { username, password, phoneNumber, role } = req.body;
+    const result = await db.createMonitoringAdmin(username, password, phoneNumber, role || 'CONTACT');
     if (!result) return res.status(400).send('create monitoring admin failed');
     res.send('monitoring admin created ...');
   }
