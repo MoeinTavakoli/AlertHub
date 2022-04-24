@@ -36,6 +36,7 @@ async function login(username, password,) {
       where: {
         username,
         password,
+        isDeleted: false
       }
     });
   }
@@ -54,9 +55,10 @@ async function login(username, password,) {
 async function changePhoneNumber(username, newPhone) {
   // eslint-disable-next-line no-useless-catch
   try {
-    return await prisma.users.update({
+    return await prisma.users.updateMany({
       where: {
-        username
+        username,
+        isDeleted: false
       },
       data: {
         phoneNumber: newPhone
