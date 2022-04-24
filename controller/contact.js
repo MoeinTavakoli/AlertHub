@@ -10,11 +10,9 @@ const { generateToken } = require('../utils/jwt');
  */
 async function signup(req, res) {
   try {
-    const username = req.body.username;
-    const password = req.body.password;
-    const phone = req.body.phoneNumber;
+    const { password, username, phoneNumber } = req.body;
 
-    const result = await db.signup(username, password, phone);
+    const result = await db.signup(username, password, phoneNumber);
     res.send(result);
   }
   catch (error) {
@@ -32,8 +30,7 @@ async function signup(req, res) {
  */
 async function login(req, res) {
   try {
-    const username = req.body.username;
-    const password = req.body.password;
+    const { username, password } = req.body;
     const result = await db.login(username, password);
     if (!result) return res.status(401).send('username or password is not correct ! ');
     res.send(generateToken(result));
