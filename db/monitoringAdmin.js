@@ -7,7 +7,7 @@ const prisma = require('../loader/prisma');
  * @param {String} phoneNumber 
  * @returns 
  */
-async function createMonitoringAdmin(username, password, phoneNumber, role ) {
+async function createMonitoringAdmin(username, password, phoneNumber, role) {
   // eslint-disable-next-line no-useless-catch
   try {
     return await prisma.users.create({
@@ -51,9 +51,38 @@ async function deleteMonitoringAdmin(username) {
 }
 
 
+/**
+ * 
+ * @param {String} oldUsername 
+ * @param {String} newUsername 
+ * @returns 
+ */
+async function changeUsername(oldUsername, newUsername) {
+  // eslint-disable-next-line no-useless-catch
+  try {
+    return await prisma.users.updateMany({
+      where: {
+        username: oldUsername,
+        isDeleted: false,
+        role: {
+          in: ['CONTACT', 'MONITORING_ADMIN']
+        }
+      },
+      data: {
+        username: newUsername
+      }
+    });
+  }
+  catch (error) {
+    throw error;
+  }
+}
+
+
 
 
 module.exports = {
   createMonitoringAdmin,
-  deleteMonitoringAdmin
+  deleteMonitoringAdmin,
+  changeUsername
 };
