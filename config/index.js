@@ -5,7 +5,7 @@ const config = {
     port: process.env.PORT || 3002
   },
   databse: {
-    url : process.env.DATABASE_URL,
+    url: process.env.DATABASE_URL,
   },
   sms: {
     apiKey: process.env.SMS_APIKEY,
@@ -22,6 +22,9 @@ const config = {
   prometheus : {
     ip: process.env.PROMETHEUS_IP ,
     port : process.env.PROMETHEUS_PORT
+  },
+  ROOT: {
+    password: process.env.ROOT_PASSWORD
   }
 };
 
