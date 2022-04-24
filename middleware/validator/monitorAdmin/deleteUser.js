@@ -5,7 +5,7 @@
  * @returns 
  */
 function deleteUserValidator(req, res, next) {
-  if (!req.params.username) return res.status(400).send('please inseet username in url ');
+  if (!req.body.newUsername) return res.status(400).send('please insert newUsername in body ');
   next();
 }
 
