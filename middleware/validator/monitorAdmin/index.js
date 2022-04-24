@@ -1,8 +1,7 @@
 /* eslint-disable global-require */
 module.exports = {
   createUser: require('./createUser'),
-  deleteUser: require('./deleteUser'),
-  changeUsername: require('./deleteUser'),
+  changeUsername: require('./changeUsername'),
   changePassword: require('./changePassword'),
   changePhoneNumber: require('./changePhoneNumber')
 };
