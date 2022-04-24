@@ -104,10 +104,40 @@ async function updatePassword(username, password) {
   }
 }
 
+/**
+ * 
+ * @param {*} username 
+ * @param {*} phoneNumber 
+ * @returns 
+ */
+async function updatePhoneNumber(username, phoneNumber) {
+  // eslint-disable-next-line no-useless-catch
+  try {
+    return await prisma.users.updateMany({
+      where: {
+        username,
+        isDeleted: false,
+        role: {
+          in: ['CONTACT', 'MONITORING_ADMIN']
+        }
+      },
+      data: {
+        phoneNumber
+      }
+    });
+  }
+  catch (error) {
+    throw error;
+  }
+}
+
+
+
 
 module.exports = {
   createMonitoringAdmin,
   deleteMonitoringAdmin,
   changeUsername,
-  updatePassword
+  updatePassword,
+  updatePhoneNumber
 };
