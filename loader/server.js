@@ -26,6 +26,7 @@ app.use('/target/team', require('../router/teamTarget'));
 
 app.use('/root', require('../router/root'));
 
+app.use('/monitoring-admin', require('../router/monitoringAdmin'));
 
 module.exports = () => {
   app.listen(httpServer.port, () => {
