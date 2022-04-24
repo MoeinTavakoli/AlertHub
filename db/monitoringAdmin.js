@@ -36,10 +36,8 @@ async function deleteMonitoringAdmin(username) {
       where: {
         username,
         isDeleted: false,
-        AND: {
-          role: {
-            in: ['CONTACT', 'MONITORING_ADMIN']
-          }
+        role: {
+          in: ['CONTACT', 'MONITORING_ADMIN']
         }
       },
       data: {
