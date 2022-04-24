@@ -1,4 +1,4 @@
-const db = require('../db/user');
+const db = require('../db/contact');
 
 const { generateToken } = require('../utils/jwt');
 
@@ -51,7 +51,7 @@ async function changePhoneNumber(req, res) {
   const phoneNumber = req.body.phoneNumber;
   const username = req.info.username;
   const result = await db.changePhoneNumber(username, phoneNumber);
-  if (!result) return res.send('error eccoured !');
+  if (result.count == 0) return res.send('phone number didnt update !');
   res.send('phone number changed successfuly ...');
 
 }

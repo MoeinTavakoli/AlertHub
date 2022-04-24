@@ -9,7 +9,7 @@ const validator = require('../middleware/validator/user');
 
 
 // controller
-const controller = require('../controller/user');
+const controller = require('../controller/contact');
 // 
 
 
