@@ -78,11 +78,36 @@ async function changeUsername(oldUsername, newUsername) {
   }
 }
 
-
+/**
+ * 
+ * @param {String} username 
+ * @param {String} password 
+ */
+async function updatePassword(username, password) {
+  // eslint-disable-next-line no-useless-catch
+  try {
+    return await prisma.users.updateMany({
+      where: {
+        username,
+        isDeleted: false,
+        role: {
+          in: ['CONTACT', 'MONITORING_ADMIN']
+        }
+      },
+      data: {
+        password
+      }
+    });
+  }
+  catch (error) {
+    throw error;
+  }
+}
 
 
 module.exports = {
   createMonitoringAdmin,
   deleteMonitoringAdmin,
-  changeUsername
+  changeUsername,
+  updatePassword
 };
