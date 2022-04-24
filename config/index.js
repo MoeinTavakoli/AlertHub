@@ -19,10 +19,6 @@ const config = {
   JWT: {
     secretKey : process.env.JWT_SECRET
   },
-  prometheus : {
-    ip: process.env.PROMETHEUS_IP ,
-    port : process.env.PROMETHEUS_PORT
-  },
   ROOT: {
     password: process.env.ROOT_PASSWORD
   }
