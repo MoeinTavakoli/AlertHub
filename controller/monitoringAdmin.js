@@ -36,10 +36,27 @@ async function deleteMonitoringAdmin(req, res) {
 }
 
 
-
+/**
+ * 
+ * @param {import('express').Request} req 
+ * @param {import('express').Response} res 
+ */
+async function changeUsername(req, res) {
+  try {
+    const oldUsername = req.params.username;
+    const { newUsername } = req.body;
+    const result = await db.changeUsername(oldUsername, newUsername);
+    if (result.count == 0) return res.status(400).send('didnt change username !!!');
+    res.send('username changed');
+  }
+  catch (error) {
+    res.status(400).send(error);
+  }
+}
 
 
 module.exports = {
   createMonitoringAdmin,
-  deleteMonitoringAdmin
+  deleteMonitoringAdmin,
+  changeUsername
 };
