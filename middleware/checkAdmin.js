@@ -5,7 +5,7 @@
  * @param {Function} next 
  */
 async function IsAdmin(req, res, next) {
-  if (req.info.role !== 'ADMIN') {
+  if (req.info.role == 'CONTACT') {
     res.status(401).send('permission denied !');
   }
   next();
