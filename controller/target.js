@@ -16,7 +16,7 @@ async function createTarget(req, res) {
     res.send('target created ...');
   }
   catch (error) {
-    res.send(error);
+    res.status(400).send(error);
   }
 }
 
@@ -37,7 +37,7 @@ async function deleteTarget(req, res) {
     res.send('target deleted ...');
   }
   catch (error) {
-    res.send(error);
+    res.status(400).send(error);
   }
 }
 
