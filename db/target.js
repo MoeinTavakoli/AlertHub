@@ -39,7 +39,6 @@ async function addTargetWithError(address, method) {
     });
   }
   catch (error) {
-    console.log(error);
     throw error;
   }
 }
