@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 const request = require('supertest');
-const app = require('../loader/server');
+const app = require('../../loader/server');
 
 
 const body = {
