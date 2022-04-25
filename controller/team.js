@@ -11,7 +11,7 @@ async function createTeam(req, res) {
     const { teamName } = req.body;
     const result = await db.createTeam(teamName);
     if (!result) return res.send('add team failed !');
-    return res.send('add team successfuly');
+    res.send('add team successfuly');
   }
   catch (error) {
     res.status(400).send(error);
@@ -40,9 +40,9 @@ async function insertUserToTeam(req, res) {
  * @param {import('express').Request} req 
  * @param {import('express').Response} res 
  */
-async function removeUserFromTeam(req,res){
+async function removeUserFromTeam(req, res) {
   try {
-    const {username , teamName} = req.body;
+    const { username, teamName } = req.body;
     const result = await db.removeUserFromTeam(username, teamName);
     if (result.count == 0) return res.send('user didnt deleted !');
     return res.send('delete user from team successfuly');
