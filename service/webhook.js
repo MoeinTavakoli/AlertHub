@@ -4,6 +4,8 @@ const { getPhoneNumberContacts } = require('../db/targetContact');
 const { getAllPhoneNumberUserByTeam } = require('../db/teamTarget');
 const sms = require('../utils/sms');
 const removeUrlCharachter = require('../utils/removeURL');
+const rocketchat = require('../utils/rocketchat');
+
 /**
  * 
  * @param {import('express').Request} req 
@@ -42,7 +44,7 @@ async function webhook(req) {
     }
   }
   catch (error) {
-    console.log(error);
+    rocketchat.sendError(error);
   }
 }
 
