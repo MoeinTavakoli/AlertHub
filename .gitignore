@@ -2,5 +2,4 @@
 .env
 .prettierrc.json
 package-lock.json
-/tests
 package-lock.json
