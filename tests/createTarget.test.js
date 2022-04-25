@@ -4,7 +4,7 @@ const app = require('../loader/server');
 
 
 const body = {
-  address: 'https://chat.partd4.com',
+  address: 'https://chat.partd5.com',
   method: 'http_request'
 };
 
@@ -28,7 +28,7 @@ test('create target route without token for auth', async () => {
   const response = await request(app).post('/target')
     .send(body)
     .set('Content-type', 'application/json');
-    expect(response.text).toBe('token not found !');
+  expect(response.text).toBe('token not found !');
 });
 
 
@@ -48,7 +48,6 @@ test('create target route with body and repetitive', async () => {
     .send(body)
     .set('Content-type', 'application/json')
     .set('Authorization', monitoringAdminToken);
-  console.log(response);
   expect(response.status).toBe(400);
   expect(response.body.code).toBe('P2002');
 });
