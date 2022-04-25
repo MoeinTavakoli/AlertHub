@@ -3,7 +3,7 @@ const app = express();
 
 const bodyParser = require('body-parser');
 
-const { httpServer } = require('../config');
+require('../db/_connection');   
 
 // middleware bodyParser
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -30,8 +30,5 @@ app.use('/root', require('../router/root'));
 
 app.use('/monitoring-admin', require('../router/monitoringAdmin'));
 
-module.exports = () => {
-  app.listen(httpServer.port, () => {
-    return console.log(`server running on http://127.0.0.1:${httpServer.port}`);
-  });
-};
+
+module.exports = app;
