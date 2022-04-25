@@ -4,7 +4,7 @@ const app = require('../loader/server');
 
 
 const body = {
-  address: 'https://chat.partd3.com',
+  address: 'https://chat.partd4.com',
   method: 'http_request'
 };
 
@@ -21,6 +21,14 @@ test('create target route without any argument !!!', async () => {
     .set('Authorization', monitoringAdminToken);
   expect(response.text).toBe('address must be entered');
   expect(response.status).toBe(400);
+});
+
+
+test('create target route without token for auth', async () => {
+  const response = await request(app).post('/target')
+    .send(body)
+    .set('Content-type', 'application/json');
+    expect(response.text).toBe('token not found !');
 });
 
 
