@@ -39,7 +39,29 @@ async function addTargetWithError(address, method) {
     });
   }
   catch (error) {
+    console.log(error);
     throw error;
+  }
+}
+
+
+/**
+ * 
+ * @param {String} address 
+ * @returns 
+ */
+async function addTargetWithoutError(address, method) {
+  // eslint-disable-next-line no-useless-catch
+  try {
+    return await prisma.targets.create({
+      data: {
+        address,
+        method
+      }
+    });
+  }
+  catch (error) {
+    return error;
   }
 }
 
@@ -47,6 +69,7 @@ async function addTargetWithError(address, method) {
 
 module.exports = {
   addTargetWithError,
-  removeTarget
+  addTargetWithoutError,
+  removeTarget,
 
 };
