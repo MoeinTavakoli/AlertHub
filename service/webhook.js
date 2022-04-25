@@ -1,4 +1,4 @@
-const { addTargetWithError } = require('../db/target');
+const { addTargetWithoutError } = require('../db/target');
 const { insertAlertLog } = require('../db/alertLogs');
 const { getPhoneNumberContacts } = require('../db/targetContact');
 const { getAllPhoneNumberUserByTeam } = require('../db/teamTarget');
@@ -19,9 +19,11 @@ async function webhook(req) {
       const job = alert.labels.job;
       const activeAt = alert.startsAt;
       const value = alert.labels.value || -1;
+      const method = alert.labels.job.toLowerCase().indexOf('http') > -1 ? 'http_request' : 'ping'; 
 
+      
 
-      await Promise.allSettled([addTargetWithError(instance), insertAlertLog(job, instance , activeAt , value)]);
+      await Promise.allSettled([addTargetWithoutError(instance , method), insertAlertLog(job, instance, activeAt, value)]);
 
 
       const userPhoneNumber = await getPhoneNumberContacts(instance);
