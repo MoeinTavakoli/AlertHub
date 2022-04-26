@@ -9,9 +9,10 @@ const { generateToken } = require('../utils/jwt.js');
 const loginRoot = async (req, res) => {
   try {
     const { username, password } = req.body;
-    const result = await db.loginRoot(username, password);
-    if (!result) return res.status(400).send('username or password is not correct !');
-    res.send(generateToken(result));
+    const payload = await db.loginRoot(username, password);
+    
+    if (payload.password !== password) return res.status(400).send('username or password is not correct !');
+    res.send(generateToken(payload));
   }
   catch (error) {
     res.status(400).send(error);
