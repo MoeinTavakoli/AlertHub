@@ -14,8 +14,6 @@ app.use('/api', require('../router'));
 
 app.use('/webhook', require('../router/webhook'));
 
-app.use('/user', require('../router/user'));
-
 app.use('/monia-admin', require('../router/moniaAdmin'));
 
 app.use('/target', require('../router/target'));
