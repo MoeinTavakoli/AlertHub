@@ -22,7 +22,13 @@ test('change username without any argument (error schema validator)', async () =
   expect(response.status).toBe(400);
 });
 
-// TODO: test auth
+test('change username without token for auth', async () => {
+    const response = await request(app).put(`/monia-admin/username/${username}`)
+    .send(body)
+    .set('Content-type', 'application/json');
+  expect(response.text).toBe('token not found !');
+});
+
 
 
 test('change username with body', async () => {
