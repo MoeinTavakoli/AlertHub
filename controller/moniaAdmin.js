@@ -13,7 +13,7 @@ async function loginMoniaAdmin(req, res) {
     const password = req.body.password;
 
     const payload = await db.loginMoniaAdmin(username, password);
-    if (!payload) return res.send('username or password is not correct ...');
+    if (!payload) return res.status(400).send('username or password is not correct ...');
     res.send(generateToken(payload));
   }
   catch (error) {
