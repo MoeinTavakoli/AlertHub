@@ -5,6 +5,7 @@ const app = express();
 // midlleware
 const auth = require('../middleware/auth');
 const isMoniaAdmin = require('../middleware/isMoniaAdmin');
+const schemaValidator = require('../middleware/validator/moniaAdmin');
 // 
 
 
@@ -12,11 +13,11 @@ const isMoniaAdmin = require('../middleware/isMoniaAdmin');
 const controller = require('../controller/moniaAdmin');
 // 
 
-app.post('/login', controller.loginMoniaAdmin);
-app.post('/user/create', auth, isMoniaAdmin, controller.createUser);
-app.put('/phone/:username', auth, isMoniaAdmin, controller.updatePhoneUsers);
-app.put('/username/:username', auth, isMoniaAdmin, controller.changeUsername);
-app.put('/password/:username', auth, isMoniaAdmin , controller.changePassword);
-app.delete('/user/delete', auth, isMoniaAdmin, controller.deleteUser);
+app.post('/login', schemaValidator.login, controller.loginMoniaAdmin);
+app.post('/user/create', schemaValidator.createUser, auth, isMoniaAdmin, controller.createUser);
+app.put('/phone/:username', schemaValidator.changePhoneNumber, auth, isMoniaAdmin, controller.updatePhoneUsers);
+app.put('/username/:username', schemaValidator.changeUsername, auth, isMoniaAdmin, controller.changeUsername);
+app.put('/password/:username', auth, schemaValidator.changePassword, isMoniaAdmin, controller.changePassword);
+app.delete('/user/delete', schemaValidator.removeUser, auth, isMoniaAdmin, controller.deleteUser);
 
 module.exports = app;
