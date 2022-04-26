@@ -37,7 +37,7 @@ test('login route with body', async () => {
 });
 
 
-test('update phone with invalid phone numbers ', async () => {
+test('update phone with invalid phone number ', async () => {
   const response = await request(app).put(`/monitoring-admin/phone/${username}`)
     .send(invalidBody)
     .set('Content-type', 'application/json')
