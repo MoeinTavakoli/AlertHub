@@ -82,7 +82,6 @@ async function getAllPhoneNumberUserByTeam(targetAddress) {
 }
 
 
-getAllPhoneNumberUserByTeam('142.251.39.110');
 
 
 module.exports = {
