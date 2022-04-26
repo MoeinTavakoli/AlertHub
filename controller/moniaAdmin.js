@@ -59,7 +59,7 @@ async function createUser(req, res) {
 
   }
   catch (error) {
-    res.send(error);
+    res.status(400).send(error);
   }
 }
 
@@ -73,7 +73,7 @@ async function deleteUser(req, res) {
   try {
     const { username } = req.body;
     const result = await db.deleteMoniaAdmin(username);
-    if (result.count == 0) return res.send('cant find to delete , maybe deleted !!!');
+    if (result.count == 0) return res.status(400).send('cant find to delete , maybe deleted !!!');
     res.send('delete successfuly');
 
   }

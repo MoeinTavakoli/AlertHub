@@ -36,7 +36,7 @@ async function deleteUserToTarget(req, res) {
       return res.send('delete user to target successfuly');
     }
 
-    res.send('there  isnt any row with this information to delete !!!');
+    res.status(400).send('there  isnt any row with this information to delete !!!');
 
 
   }

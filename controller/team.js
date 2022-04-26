@@ -10,7 +10,7 @@ async function createTeam(req, res) {
   try {
     const { teamName } = req.body;
     const result = await db.createTeam(teamName);
-    if (!result) return res.send('add team failed !');
+    if (!result) return res.status(400).send('add team failed !');
     res.send('add team successfuly');
   }
   catch (error) {
@@ -27,11 +27,11 @@ async function insertUserToTeam(req, res) {
   try {
     const { username, teamName } = req.body;
     const result = await db.insertUserToTeam(username, teamName);
-    if (!result) return res.send('insert user to team failed !');
+    if (!result) return res.status(400).send('insert user to team failed !');
     return res.send('insert user to team successfuly');
   }
   catch (error) {
-    res.send(error);
+    res.status(400).send(error);
   }
 }
 
@@ -44,7 +44,7 @@ async function removeUserFromTeam(req, res) {
   try {
     const { username, teamName } = req.body;
     const result = await db.removeUserFromTeam(username, teamName);
-    if (result.count == 0) return res.send('user didnt deleted !');
+    if (result.count == 0) return res.status(400).send('user didnt deleted !');
     return res.send('delete user from team successfuly');
 
   }
