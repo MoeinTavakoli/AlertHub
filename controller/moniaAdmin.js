@@ -54,7 +54,7 @@ async function createUser(req, res) {
     if (role == 'ROOT') return res.status(400).send('permission denied ! you cant add root user ');
 
     const result = await db.createUser(username, password, phoneNumber, role);
-    if (!result) return res.send('create user failed !!!');
+    if (!result) return res.status(400).send('create user failed !!!');
     res.send('user created');
 
   }
