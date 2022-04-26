@@ -32,6 +32,7 @@ async function updatePhoneUsers(username, newPhone) {
     return await prisma.users.updateMany({
       where: {
         username,
+        isDeleted: false,
         role: {
           not: 'ROOT'
         }
