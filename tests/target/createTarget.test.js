@@ -4,7 +4,7 @@ const app = require('../../loader/server');
 
 
 const body = {
-  address: 'https://chat.partd5.com',
+  address: 'http://sampleUrl6.ir',
   method: 'http_request'
 };
 
