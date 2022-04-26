@@ -137,15 +137,12 @@ async function updatePhoneNumber(username, phoneNumber) {
  * @param {String} password 
  * @returns 
  */
-async function login(username, password) {
+async function login(username) {
   // eslint-disable-next-line no-useless-catch
   try {
-    return await prisma.users.findFirst({
+    return await prisma.users.findUnique({
       where: {
-        username,
-        password,
-        isDeleted: false,
-        role: 'MONITORING_ADMIN'
+        username
       }
     });
   }
