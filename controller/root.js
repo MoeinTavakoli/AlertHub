@@ -11,7 +11,7 @@ const loginRoot = async (req, res) => {
     const { username, password } = req.body;
     const payload = await db.loginRoot(username, password);
     
-    if (payload.password !== password) return res.status(400).send('username or password is not correct !');
+    if (payload.password !== password || payload.role !== 'ROOT') return res.status(400).send('username or password is not correct !');
     res.send(generateToken(payload));
   }
   catch (error) {
