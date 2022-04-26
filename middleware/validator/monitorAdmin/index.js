@@ -3,5 +3,6 @@ module.exports = {
   createUser: require('./createUser'),
   changeUsername: require('./changeUsername'),
   changePassword: require('./changePassword'),
-  changePhoneNumber: require('./changePhoneNumber')
+  changePhoneNumber: require('./changePhoneNumber'),
+  login : require('./login')
 };
