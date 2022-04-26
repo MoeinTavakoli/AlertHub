@@ -32,9 +32,13 @@ async function addMoniaAdmin(username, password, phoneNumber, role = 'CONTACT') 
 async function deleteMoniaAdmin(username) {
   // eslint-disable-next-line no-useless-catch
   try {
-    return await prisma.users.delete({
+    return await prisma.users.updateMany({
       where: {
-        username
+        username,
+        isDeleted : false
+      },
+      data: {
+        isDeleted: true
       }
     });
   }
