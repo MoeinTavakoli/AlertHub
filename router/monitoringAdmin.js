@@ -15,12 +15,12 @@ const controller = require('../controller/monitoringAdmin');
 
 
 
-app.post('/login', controller.login);
-app.post('/user/create', schemaValidator.createUser, auth, isMonitorAdmin, controller.createMonitoringAdmin);
-app.delete('/user/delete/:username', auth, isMonitorAdmin, controller.deleteMonitoringAdmin);
-app.put('/user/username/:username', schemaValidator.changeUsername, auth, isMonitorAdmin, controller.changeUsername);
-app.put('/user/password/:username', schemaValidator.changePassword, auth, isMonitorAdmin, controller.changePassword);
-app.put('/user/phone/:username', auth, isMonitorAdmin, controller.updatePhoneNumber);
+app.post('/login', schemaValidator.login, controller.login);
+app.post('/create', schemaValidator.createUser, auth, isMonitorAdmin, controller.createMonitoringAdmin);
+app.delete('/delete/:username', auth, isMonitorAdmin, controller.deleteMonitoringAdmin);
+app.put('/username/:username', schemaValidator.changeUsername, auth, isMonitorAdmin, controller.changeUsername);
+app.put('/password/:username', schemaValidator.changePassword, auth, isMonitorAdmin, controller.changePassword);
+app.put('/phone/:username', schemaValidator.changePhoneNumber, auth, isMonitorAdmin, controller.updatePhoneNumber);
 
 
 module.exports = app;
