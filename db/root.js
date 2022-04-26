@@ -49,14 +49,12 @@ async function deleteMoniaAdmin(username) {
  * @param {String} password 
  * @returns 
  */
-async function loginRoot(username, password) {
+async function loginRoot(username) {
   // eslint-disable-next-line no-useless-catch
   try {
-    return await prisma.users.findFirst({
+    return await prisma.users.findUnique({
       where: {
-        username,
-        password,
-        role: 'ROOT'
+        username
       }
     });
   }
