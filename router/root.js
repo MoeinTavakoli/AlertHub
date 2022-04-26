@@ -11,9 +11,9 @@ const schemaValdator = require('../middleware/validator/root');
 const controller = require('../controller/root');
 // 
 
-app.post('/login',schemaValdator.login, controller.loginRoot);
-app.post('/admin-monia/create', auth, isRoot, controller.createMoniaAdmin);
-app.delete('/admin-monia/delete', auth, isRoot, controller.removeMoniaAdmin);
+app.post('/login', schemaValdator.login, controller.loginRoot);
+app.post('/admin-monia/create', schemaValdator.createMoniaAdmin, auth, isRoot, controller.createMoniaAdmin);
+app.delete('/admin-monia/delete', schemaValdator.removeMoniaAdmin, auth, isRoot, controller.removeMoniaAdmin);
 
 
 module.exports = app;
