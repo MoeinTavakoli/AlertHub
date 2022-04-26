@@ -12,16 +12,16 @@ const monitoringAdminToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ
 
 
 test('add user to team  without any argument !!!', async () => {
-  const response = await request(app).post('/team/user')
+  const response = await request(app).put('/team/user')
     .set('Content-type', 'application/json')
     .set('Authorization', monitoringAdminToken);
   expect(response.text).toBe('teamName and username must be inserted !!');
-    expect(response.status).toBe(400); // TODO: bug fix at change statusCode
+    expect(response.status).toBe(400); 
 });
 
 
 test('add user to team route without token for auth', async () => {
-  const response = await request(app).post('/team/user')
+  const response = await request(app).put('/team/user')
     .send(body)
     .set('Content-type', 'application/json');
   expect(response.text).toBe('token not found !');
@@ -30,7 +30,7 @@ test('add user to team route without token for auth', async () => {
 
 
 test('add user to team route with body', async () => {
-  const response = await request(app).post('/team/user')
+  const response = await request(app).put('/team/user')
     .send(body)
     .set('Content-type', 'application/json')
     .set('Authorization', monitoringAdminToken);
@@ -40,14 +40,10 @@ test('add user to team route with body', async () => {
 
 
 test('create team route with body and repetitive ', async () => {
-  const response = await request(app).post('/team/user')
+  const response = await request(app).put('/team/user')
     .send(body)
     .set('Content-type', 'application/json')
     .set('Authorization', monitoringAdminToken);
-  // expect(response.status).toBe(400); TODO: bug fix and change statusCode 
+  // expect(response.status).toBe(400);
   expect(response.body.code).toBe('P2003');
 });
-
-
-
-// TODO : add exept when user not found 

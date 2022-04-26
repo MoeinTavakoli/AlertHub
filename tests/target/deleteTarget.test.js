@@ -47,6 +47,6 @@ test('delete target route with body and repetitive', async () => {
     .set('Content-type', 'application/json')
     .set('Authorization', monitoringAdminToken);
     console.log(response);
-  // expect(response.status).toBe(400); TODO: fix bug status code
+  expect(response.status).toBe(400);
   expect(response.text).toBe('target didnt find to delete !!!');
 });

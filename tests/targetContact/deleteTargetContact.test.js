@@ -45,6 +45,6 @@ test('delete targetContact with body and repetitive', async () => {
     .send(body)
     .set('Content-type', 'application/json')
     .set('Authorization', monitoringAdminToken);
-  // expect(response.status).toBe(400); TODO: change status code 
+  // expect(response.status).toBe(400); 
   expect(response.text).toBe('there  isnt any row with this information to delete !!!');
 });

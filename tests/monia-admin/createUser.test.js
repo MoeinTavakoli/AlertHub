@@ -49,6 +49,6 @@ test('create user after create prev username ', async () => {
     .send(body)
     .set('Content-type', 'application/json')
     .set('Authorization', moniaAdminToken);
-//   expect(response.status).toBe(400); TODO: change statuse code 
+  expect(response.status).toBe(400);  
     expect(response.body.code).toBe('P2002');
 });

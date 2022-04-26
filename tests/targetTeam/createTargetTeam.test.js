@@ -17,7 +17,7 @@ test('create targetContact without any argument (error schema validator)', async
     .set('Content-type', 'application/json')
     .set('Authorization', monitoringAdminToken);
   expect(response.text).toBe('targetAddress and teamName must be inserted !');
-  //   expect(response.status).toBe(400); TODO: bug fix at change statusCode
+  //   expect(response.status).toBe(400); 
 });
 
 
@@ -45,7 +45,7 @@ test('create targetContact with body and repetitive', async () => {
     .send(body)
     .set('Content-type', 'application/json')
     .set('Authorization', monitoringAdminToken);
-    // expect(response.status).toBe(400); TODO: change status code 
+    // expect(response.status).toBe(400); 
   expect(response.body.code).toBe('P2002');
 });
 

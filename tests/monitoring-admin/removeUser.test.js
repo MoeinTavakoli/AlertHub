@@ -32,6 +32,6 @@ test('remove user after remove prev username ', async () => {
   const response = await request(app).delete(`/monitoring-admin/delete/${username}`)
     .set('Content-type', 'application/json')
     .set('Authorization', monitoringAdminToken);
-  //   expect(response.status).toBe(400); TODO: change statuse code 
+    expect(response.status).toBe(400); 
   expect(response.text).toBe('user didnt deleted  !!!');
 });

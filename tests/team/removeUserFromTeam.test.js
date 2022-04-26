@@ -17,7 +17,7 @@ test('remove user from team  without any argument !!!', async () => {
     .set('Content-type', 'application/json')
     .set('Authorization', monitoringAdminToken);
   expect(response.text).toBe('teamName and username must be inserted !!');
-  expect(response.status).toBe(400); // TODO: bug fix at change statusCode
+  expect(response.status).toBe(400); 
 });
 
 
@@ -45,16 +45,6 @@ test('remove user from team route with body and repetitive ', async () => {
     .send(body)
     .set('Content-type', 'application/json')
     .set('Authorization', monitoringAdminToken);
-  // expect(response.status).toBe(400); TODO: bug fix and change statusCode 
+  // expect(response.status).toBe(400);
   expect(response.text).toBe('user didnt deleted !');
 });
-
-
-
-// TODO : add exept when user not found 
-
-
-// teamName and username must be inserted !!
-// insert user to team successfuly
-// P2002 deleted
-// P2003 invalid username

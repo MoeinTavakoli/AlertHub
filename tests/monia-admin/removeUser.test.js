@@ -46,6 +46,6 @@ test('remove user after remove prev username ', async () => {
     .send(body)
     .set('Content-type', 'application/json')
     .set('Authorization', moniaAdminToken);
-  //   expect(response.status).toBe(400); TODO: change statuse code 
+  expect(response.status).toBe(400);
   expect(response.text).toBe('cant find to delete , maybe deleted !!!');
 });
