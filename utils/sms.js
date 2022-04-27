@@ -17,7 +17,7 @@ class sms {
      * @param {array<string>} receptors
      */
   send(message, receptors) {
-    if (isHoliday() && receptors.length) {
+    if (isHoliday() && receptors && receptors.length) {
       api.Send(
         {
           message,
