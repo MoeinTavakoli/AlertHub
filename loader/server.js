@@ -10,8 +10,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 //
 
-app.use('/api', require('../router'));
-
 app.use('/webhook', require('../router/webhook'));
 
 app.use('/monia-admin', require('../router/moniaAdmin'));
