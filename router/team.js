@@ -13,9 +13,9 @@ const controller = require('../controller/team');
 // 
 
 
-app.post('/', validator.createTeam, verifyToken, IsAdmin, controller.createTeam);
-app.put('/user', validator.addUserToTeam, verifyToken, IsAdmin, controller.insertUserToTeam);
-app.delete('/user', validator.removeUserFromTeam, verifyToken, IsAdmin, controller.removeUserFromTeam);
+app.post('/create', validator.createTeam, verifyToken, IsAdmin, controller.createTeam);
+app.put('/user/add', validator.addUserToTeam, verifyToken, IsAdmin, controller.insertUserToTeam);
+app.delete('/user/remove', validator.removeUserFromTeam, verifyToken, IsAdmin, controller.removeUserFromTeam);
 
 
 
