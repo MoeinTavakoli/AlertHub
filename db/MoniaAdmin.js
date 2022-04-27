@@ -12,7 +12,8 @@ async function loginMoniaAdmin(username, password) {
       where: {
         username,
         password,
-        role: 'MONIA_ADMIN'
+        role: 'MONIA_ADMIN',
+        isDeleted : false
       }
     });
   }
