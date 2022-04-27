@@ -13,8 +13,8 @@ const controller = require('../controller/target');
 // 
 
 
-app.post('/', validator.createTarget, verifyToken, IsAdmin, controller.createTarget);
-app.delete('/', validator.deleteTarget, verifyToken, IsAdmin, controller.deleteTarget);
+app.post('/create', validator.createTarget, verifyToken, IsAdmin, controller.createTarget);
+app.delete('/delete', validator.deleteTarget, verifyToken, IsAdmin, controller.deleteTarget);
 
 
 module.exports = app;
