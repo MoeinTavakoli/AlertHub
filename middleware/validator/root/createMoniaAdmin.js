@@ -1,3 +1,5 @@
+const roles = ['CONTACT', 'MONIA_ADMIN', 'MONITORING_ADMIN', 'CONTACT'];
+
 /**
  * 
  * @param {*} req 
@@ -9,9 +11,10 @@ function createMoniaAdmin(req, res, next) {
     return res.status(400).send('invalid argument for username and password and phoneNumber !!');
   }
 
-  if (req.body.phoneNumber.length !== 11) {
-    return res.status(400).send('phone number must be 11 digit lenght !!!');
-  }
+  if (req.body.phoneNumber.length !== 11) return res.status(400).send('phone number must be 11 digit lenght !!!');
+
+  if (req.body.role && !roles.includes(req.body.role)) return res.status(400).send('invalid role !!');
+
 
   next();
 }
