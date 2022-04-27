@@ -13,8 +13,8 @@ const controller = require('../controller/targetContact');
 // 
 
 
-app.post('/',validator.adduserToTarget ,verifyToken, isAdmin, controller.assignUserToTarget);
-app.delete('/',validator.removeUserToTarget ,verifyToken, isAdmin, controller.deleteUserToTarget);
+app.post('/create', validator.adduserToTarget, verifyToken, isAdmin, controller.assignUserToTarget);
+app.delete('/delete', validator.removeUserToTarget, verifyToken, isAdmin, controller.deleteUserToTarget);
 
 
 module.exports = app;
