@@ -36,7 +36,7 @@ async function checkRoleMiddleware(req,res,next){
   try {
     const {username , role} = req.info;
     const payload = await checkRoleDB(username , role);
-    if (payload.role !== role) return res.send(401).send('unauthorized');
+    if (!payload || payload.role !== role) return res.status(401).send('unauthorized');
     next();
 
   }
@@ -44,6 +44,5 @@ async function checkRoleMiddleware(req,res,next){
     res.status(400).send(error);
   }
 }
-
 
 module.exports = checkRoleMiddleware;
