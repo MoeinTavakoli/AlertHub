@@ -16,11 +16,11 @@ app.use('/monia-admin', require('../router/moniaAdmin'));
 
 app.use('/target', require('../router/target'));
 
-app.use('/target/user', require('../router/targetContact'));
+app.use('/userRel', require('../router/targetContact'));
 
 app.use('/team', require('../router/team'));
 
-app.use('/target/team', require('../router/teamTarget'));
+app.use('/teamRel', require('../router/teamTarget'));
 
 app.use('/root', require('../router/root'));
 
