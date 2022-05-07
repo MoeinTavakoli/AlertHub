@@ -37,6 +37,11 @@
 3. copy `.env.example` as `.env.` \
    `cp .env.example .env`
 
+4. create database in postgres \
+`sudo -u postgres psql`\
+`create DATABASE monia;`\
+'\q'
+
 4. fill the .env file \
    `PORT` is your port that you want to server run on this port \
    `HOST` is your hostname like localhost \
