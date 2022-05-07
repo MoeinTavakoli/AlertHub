@@ -21,6 +21,25 @@ async function login(req, res) {
 }
 
 
+/**
+ * 
+ * @param {import('express').Request} req 
+ * @param {import('express').Response} res 
+ */
+async function createUser(req, res) {
+  try {
+    const { username,password,phoneNumber,role} = req.body;
+    const result  = await db.create(username , password , phoneNumber , role);
+    if (!result) return res.status(400).send('cant create user');
+    res.send('user created ...'); 
+  }
+  catch (err) {
+    res.status(400).send(err);
+  }
+}
+
+
 module.exports = {
-  login
+  login,
+  createUser
 };
