@@ -26,6 +26,8 @@ app.use('/root', require('../router/root'));
 
 app.use('/monitoring-admin', require('../router/monitoringAdmin'));
 
+app.use('/user' , require('../router/user'));
+
 app.use('*' , (req,res)=>{
   res.status(404).send('not found !!!');
 });
