@@ -39,7 +39,26 @@ async function createUser(req, res) {
 }
 
 
+/**
+ * 
+ * @param {import('express').Request} req 
+ * @param {import('express').Response} res 
+ */
+async function deleteUser(req,res){
+  try {
+    const username = req.params.username;
+    const result = await db.deleteUser(username);
+    if(result.count == 0) return res.status(400).send('cant delete user');
+    res.send('user deleted ...');
+  }
+  catch (err) {
+    res.status(400).send(err);
+  }
+}
+
+
 module.exports = {
   login,
-  createUser
+  createUser,
+  deleteUser
 };

@@ -51,10 +51,57 @@ async function create(username, password, phoneNumber, role) {
   }
 }
 
+/**
+ * 
+ * @param {*} username 
+ * @returns 
+ */
+async function deleteUser(username) {
+  // eslint-disable-next-line no-useless-catch
+  try {
+    return await prisma.users.updateMany({
+      where: {
+        username,
+        isDeleted: false
+      },
+      data: {
+        isDeleted: true
+      }
+    });
+  }
+  catch (err) {
+    throw err;
+  }
+}
 
+
+/**
+ * 
+ * @param {*} username 
+ * @returns 
+ */
+async function getRole(username) {
+  // eslint-disable-next-line no-useless-catch
+  try {
+    return await prisma.users.findFirst({
+      where: {
+        username
+      },
+      select: {
+        role: true
+      }
+    });
+    // return payload.role;
+  }
+  catch (err) {
+    throw err;
+  }
+}
 
 
 module.exports = {
   login,
-  create
+  create,
+  deleteUser,
+  getRole
 };
