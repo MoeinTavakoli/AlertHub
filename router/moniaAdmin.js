@@ -14,7 +14,6 @@ const checkRole = require('../middleware/checkRole');
 const controller = require('../controller/moniaAdmin');
 // 
 
-app.post('/login', schemaValidator.login, controller.loginMoniaAdmin);
 app.post('/user/create', schemaValidator.createUser, auth, isMoniaAdmin, checkRole, controller.createUser);
 app.put('/phone/:username', schemaValidator.changePhoneNumber, auth, isMoniaAdmin, checkRole, controller.updatePhoneUsers);
 app.put('/username/:username', schemaValidator.changeUsername, auth, isMoniaAdmin, checkRole, controller.changeUsername);

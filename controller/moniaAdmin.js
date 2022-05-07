@@ -1,25 +1,6 @@
-const { generateToken } = require('../utils/jwt');
 const db = require('../db/MoniaAdmin');
 
-/**
- * 
- * @param {import('express').Request} req 
- * @param {import('express').Response} res 
- */
-async function loginMoniaAdmin(req, res) {
-  // eslint-disable-next-line no-useless-catch
-  try {
-    const username = req.body.username;
-    const password = req.body.password;
 
-    const payload = await db.loginMoniaAdmin(username, password);
-    if (!payload) return res.status(400).send('username or password is not correct ...');
-    res.send(generateToken(payload));
-  }
-  catch (error) {
-    throw error;
-  }
-}
 
 /**
  * 
@@ -122,7 +103,6 @@ async function changePassword(req, res) {
 
 
 module.exports = {
-  loginMoniaAdmin,
   updatePhoneUsers,
   createUser,
   deleteUser,

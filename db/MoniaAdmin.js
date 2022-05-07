@@ -6,21 +6,7 @@ const prisma = require('../loader/prisma');
  * @param {String} password 
  * @returns 
  */
-async function loginMoniaAdmin(username, password) {
-  try {
-    return await prisma.users.findFirst({
-      where: {
-        username,
-        password,
-        role: 'MONIA_ADMIN',
-        isDeleted : false
-      }
-    });
-  }
-  catch (error) {
-    throw error;
-  }
-}
+
 
 /**
  * 
