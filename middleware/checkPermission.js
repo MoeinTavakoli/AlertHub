@@ -10,9 +10,10 @@ const monitoringAdminRedline = ['ROOT', 'MONIA_ADMIN'];
 function checkPermission(req, res, next) {
   const payloadRole = req.info.role;
   const userRole = req.body.role;
-  if (payloadRole == 'CONTACT') return res.status(403).send('permission denied !');
-  if (payloadRole == 'MONIA_ADMIN' && moniaAdminRedline.includes(userRole)) return res.status(403).send('permission denied !');
-  if (payloadRole == 'MONITORING_ADMIN' && monitoringAdminRedline.includes(userRole)) return res.status(403).send('permission denied !');
+  if ((payloadRole == 'CONTACT') ||
+        (payloadRole == 'MONIA_ADMIN' && moniaAdminRedline.includes(userRole)) ||
+        (payloadRole == 'MONITORING_ADMIN' && monitoringAdminRedline.includes(userRole))
+  ) return res.status(403).send('permission denied !');
   next();
 
 }
