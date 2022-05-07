@@ -131,7 +131,6 @@ async function changePassword(username, newPassword) {
 
 
 module.exports = {
-  loginMoniaAdmin,
   updatePhoneUsers,
   createUser,
   deleteMoniaAdmin,
