@@ -12,8 +12,6 @@ app.use(bodyParser.json());
 
 app.use('/webhook', require('../router/webhook'));
 
-app.use('/monia-admin', require('../router/moniaAdmin'));
-
 app.use('/target', require('../router/target'));
 
 app.use('/userRel', require('../router/targetContact'));
@@ -21,10 +19,6 @@ app.use('/userRel', require('../router/targetContact'));
 app.use('/team', require('../router/team'));
 
 app.use('/teamRel', require('../router/teamTarget'));
-
-app.use('/root', require('../router/root'));
-
-app.use('/monitoring-admin', require('../router/monitoringAdmin'));
 
 app.use('/user' , require('../router/user'));
 
