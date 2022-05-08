@@ -122,10 +122,62 @@ async function updatePhoneNumber(username, phoneNumber) {
   }
 }
 
+/**
+ * 
+ * @param {*} username 
+ * @param {*} phoneNumber 
+ * @returns 
+ */
+async function updatePassword(username, password) {
+  // eslint-disable-next-line no-useless-catch
+  try {
+    return await prisma.users.updateMany({
+      where: {
+        username,
+        isDeleted: false
+      },
+      data: {
+        password
+      }
+    });
+  }
+  catch (err) {
+    throw err;
+  }
+}
+
+
+/**
+ * 
+ * @param {*} oldUsername 
+ * @param {*} newUsername 
+ * @returns 
+ */
+async function updateUsername(oldUsername , newUsername){
+  // eslint-disable-next-line no-useless-catch
+  try {
+    return await prisma.users.updateMany({
+      where: {
+        username : oldUsername,
+        isDeleted : false
+      },
+      data : {
+        username : newUsername
+      }
+    });
+  }
+  catch (err) {
+    throw err;
+  }
+}
+
+
 module.exports = {
   login,
   create,
   deleteUser,
   getRole,
-  updatePhoneNumber
+  updatePhoneNumber,
+  updatePassword,
+  updateUsername
 };
