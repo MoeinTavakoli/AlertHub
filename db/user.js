@@ -98,10 +98,34 @@ async function getRole(username) {
   }
 }
 
+/**
+ * 
+ * @param {*} username 
+ * @param {*} phoneNumber 
+ * @returns 
+ */
+async function updatePhoneNumber(username , phoneNumber){
+  // eslint-disable-next-line no-useless-catch
+  try {
+    return await prisma.users.updateMany({
+      where : {
+        username,
+        isDeleted : false
+      },
+      data : {
+        phoneNumber
+      }
+    });
+  }
+  catch (err) {
+    throw err;
+  }
+}
 
 module.exports = {
   login,
   create,
   deleteUser,
-  getRole
+  getRole,
+  updatePhoneNumber
 };

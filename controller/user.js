@@ -48,7 +48,7 @@ async function deleteUser(req,res){
   try {
     const username = req.params.username;
     const result = await db.deleteUser(username);
-    if(result.count == 0) return res.status(400).send('cant delete user');
+    if(result.count == 0) return res.status(400).send('user not found to delete !!!');
     res.send('user deleted ...');
   }
   catch (err) {
@@ -57,8 +57,29 @@ async function deleteUser(req,res){
 }
 
 
+/**
+ * 
+ * @param {import('express').Request} req 
+ * @param {import('express').Response} res 
+ */
+async function updatePhoneNumber(req, res) {
+  try {
+    const username = req.params.username;
+    const phoneNumber = req.body.phoneNumber;
+    const result = await db.updatePhoneNumber(username, phoneNumber);
+    if (result.count == 0) return res.status(400).send('user not found to change phone number !!!');
+    res.send('phone number updated ...');
+  }
+  catch (err) {
+    res.status(400).send(err);
+  }
+}
+
+
+
 module.exports = {
   login,
   createUser,
-  deleteUser
+  deleteUser,
+  updatePhoneNumber
 };
