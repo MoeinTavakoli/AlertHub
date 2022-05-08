@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "6127db11-87a0-491b-bc64-d579e4aa9586",
+		"_postman_id": "60232bc0-836f-410b-8971-a83f2a2c5e82",
 		"name": "Monia API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -113,7 +113,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"teamName\" : \"\"\n}",
+							"raw": "{\n    \"teamName\" : \"network\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -121,13 +121,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8090/team/create",
+							"raw": "http://192.168.49.59:8090/team/create",
 							"protocol": "http",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"192",
+								"168",
+								"49",
+								"59"
 							],
 							"port": "8090",
 							"path": [
@@ -381,523 +381,221 @@
 			]
 		},
 		{
-			"name": "PERMISSION",
+			"name": "users",
 			"item": [
 				{
-					"name": "root",
-					"item": [
-						{
-							"name": "login",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"username\" :\"\",\n    \"password\" : \"\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://127.0.0.1:8090/root/login",
-									"protocol": "http",
-									"host": [
-										"127",
-										"0",
-										"0",
-										"1"
-									],
-									"port": "8090",
-									"path": [
-										"root",
-										"login"
-									]
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n    \"username\" : \"\",\n    \"password\" : \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
 								}
-							},
-							"response": []
+							}
 						},
-						{
-							"name": "create monia-admin",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "{{rootToken}}",
-										"type": "default"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"username\" :\"\",\n    \"password\" : \"\",\n    \"phoneNumber\" : \"\",\n    \"role\" : \"\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://127.0.0.1:8090/root/admin-monia/create",
-									"protocol": "http",
-									"host": [
-										"127",
-										"0",
-										"0",
-										"1"
-									],
-									"port": "8090",
-									"path": [
-										"root",
-										"admin-monia",
-										"create"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "remove monia-admin",
-							"request": {
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "{{rootToken}}",
-										"type": "default"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"username\" :\"\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://127.0.0.1:8090/root/user/delete",
-									"protocol": "http",
-									"host": [
-										"127",
-										"0",
-										"0",
-										"1"
-									],
-									"port": "8090",
-									"path": [
-										"root",
-										"user",
-										"delete"
-									]
-								}
-							},
-							"response": []
+						"url": {
+							"raw": "http://localhost:8090/user/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"user",
+								"login"
+							]
 						}
-					]
+					},
+					"response": []
 				},
 				{
-					"name": "Monia  admin",
-					"item": [
-						{
-							"name": "login",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"username\" : \"\",\n    \"password\": \"\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://127.0.0.1:8090/monia-admin/login",
-									"protocol": "http",
-									"host": [
-										"127",
-										"0",
-										"0",
-										"1"
-									],
-									"port": "8090",
-									"path": [
-										"monia-admin",
-										"login"
-									]
+					"name": "create user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{monitoringAdmin}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\" : \"\",\n    \"password\" : \"\",\n    \"phoneNumber\" : \"\",\n    \"role\" : \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
 								}
-							},
-							"response": []
+							}
 						},
-						{
-							"name": "change phoneNumber",
-							"request": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "{{moniaAdmin}}",
-										"type": "default"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"phoneNumber\" : \"\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://127.0.0.1:8090/monia-admin/phone/USERNAME",
-									"protocol": "http",
-									"host": [
-										"127",
-										"0",
-										"0",
-										"1"
-									],
-									"port": "8090",
-									"path": [
-										"monia-admin",
-										"phone",
-										"USERNAME"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "change username",
-							"request": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "{{moniaAdmin}}",
-										"type": "default"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"newUsername\" : \"\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://127.0.0.1:8090/monia-admin/username/USERNAME",
-									"protocol": "http",
-									"host": [
-										"127",
-										"0",
-										"0",
-										"1"
-									],
-									"port": "8090",
-									"path": [
-										"monia-admin",
-										"username",
-										"USERNAME"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "change password",
-							"request": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "{{moniaAdmin}}",
-										"type": "default"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"password\" : \"\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://127.0.0.1:8090/monia-admin/password/USERNAME",
-									"protocol": "http",
-									"host": [
-										"127",
-										"0",
-										"0",
-										"1"
-									],
-									"port": "8090",
-									"path": [
-										"monia-admin",
-										"password",
-										"USERNAME"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "create user",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "{{moniaAdmin}}",
-										"type": "default"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"username\" : \"\",\n    \"password\" : \"\",\n    \"phoneNumber\" : \"\",\n    \"role\" : \"\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://127.0.0.1:8090/monia-admin/user/create",
-									"protocol": "http",
-									"host": [
-										"127",
-										"0",
-										"0",
-										"1"
-									],
-									"port": "8090",
-									"path": [
-										"monia-admin",
-										"user",
-										"create"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "delete users",
-							"request": {
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "{{moniaAdmin}}",
-										"type": "default"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"username\" : \"\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://127.0.0.1:8090/monia-admin/user/delete",
-									"protocol": "http",
-									"host": [
-										"127",
-										"0",
-										"0",
-										"1"
-									],
-									"port": "8090",
-									"path": [
-										"monia-admin",
-										"user",
-										"delete"
-									]
-								}
-							},
-							"response": []
+						"url": {
+							"raw": "http://127.0.0.1:8090/user/create",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8090",
+							"path": [
+								"user",
+								"create"
+							]
 						}
-					]
+					},
+					"response": []
 				},
 				{
-					"name": "Monitoring Admin",
-					"item": [
-						{
-							"name": "login",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{ \n    \"username\" : \"\",\n    \"password\" : \"\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8090/monitoring-admin/login",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8090",
-									"path": [
-										"monitoring-admin",
-										"login"
-									]
+					"name": "update password",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{monitoringAdmin}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"password\" : \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
 								}
-							},
-							"response": []
+							}
 						},
-						{
-							"name": "change phoneNumber",
-							"request": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "{{monitoringAdmin}}",
-										"type": "default"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"phoneNumber\": \"\"\n}\n",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8090/monitoring-admin/phone/USERNAME",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8090",
-									"path": [
-										"monitoring-admin",
-										"phone",
-										"USERNAME"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "change username",
-							"request": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "{{monitoringAdmin}}",
-										"type": "default"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"newUsername\": \"\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8090/monitoring-admin/username/USERNMAE",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8090",
-									"path": [
-										"monitoring-admin",
-										"username",
-										"USERNMAE"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "change password",
-							"request": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "{{monitoringAdmin}}",
-										"type": "default"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"password\": \"\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8090/monitoring-admin/password/USERNAME",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8090",
-									"path": [
-										"monitoring-admin",
-										"password",
-										"USERNAME"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "delete monitoring admin",
-							"request": {
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "{{monitoringAdmin}}",
-										"type": "default"
-									}
-								],
-								"url": {
-									"raw": "http://localhost:8090/monitoring-admin/delete/USERNAME",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8090",
-									"path": [
-										"monitoring-admin",
-										"delete",
-										"USERNAME"
-									]
-								}
-							},
-							"response": []
+						"url": {
+							"raw": "http://127.0.0.1:8090/user/password/USERNAME",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8090",
+							"path": [
+								"user",
+								"password",
+								"USERNAME"
+							]
 						}
-					]
+					},
+					"response": []
+				},
+				{
+					"name": "update phone number",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{monitoringAdmin}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"phoneNumber\" : \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8090/user/phone/USERNAME",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8090",
+							"path": [
+								"user",
+								"phone",
+								"USERNAME"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update username",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{monitoringAdmin}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"newUsername\" : \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8090/user/username/USERNAME",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8090",
+							"path": [
+								"user",
+								"username",
+								"USERNAME"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete users",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{monitoringAdmin}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8090/user/delete/USERNAME",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8090",
+							"path": [
+								"user",
+								"delete",
+								"USERNAME"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
