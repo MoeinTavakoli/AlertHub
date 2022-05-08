@@ -13,11 +13,11 @@ const body = {
 
 
 
-const moniaAdminToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1vZWVuLm1vbmlhLmFkbWluIiwicGFzc3dvcmQiOiIxMjM0NSIsInBob25lTnVtYmVyIjoiMDkxMDgyOTU1ODkiLCJyb2xlIjoiTU9OSUFfQURNSU4iLCJjcmVhdGVkQXQiOiIyMDIyLTA0LTI2VDA2OjE5OjU3LjU5OVoiLCJ1cGRhdGVkQXQiOiIyMDIyLTA0LTI2VDA2OjE5OjU3LjU5OVoiLCJpc0RlbGV0ZWQiOmZhbHNlLCJpYXQiOjE2NTA5NTQwMTN9.kSu30JnPHKToN-tIAG3tKPvnxw_7acdUBPSuavr2N-0';
+const moniaAdminToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1vZWVuLm1vbmlhLmFkbWluIiwicGhvbmVOdW1iZXIiOiIwOTEwODI5NTU4OSIsInJvbGUiOiJNT05JQV9BRE1JTiIsImlhdCI6MTY1MDk1NDAxM30.rJCgv9b503h6XqD3fHDLhx8Gi7U_3fQM4FKhpsYIFbs';
 
 
 test('create user without any argument (error schema validator)', async () => {
-  const response = await request(app).post('/monia-admin/user/create')
+  const response = await request(app).post('/user/user/create')
     .set('Content-type', 'application/json')
     .set('Authorization', moniaAdminToken);
   expect(response.text).toBe('please insert username in body ');
@@ -25,7 +25,7 @@ test('create user without any argument (error schema validator)', async () => {
 });
 
 test('create user without token for auth', async () => {
-  const response = await request(app).post('/monia-admin/user/create')
+  const response = await request(app).post('/user/user/create')
     .send(body)
     .set('Content-type', 'application/json');
   expect(response.text).toBe('token not found !');
@@ -34,7 +34,7 @@ test('create user without token for auth', async () => {
 
 
 test('create user with body', async () => {
-  const response = await request(app).post('/monia-admin/user/create')
+  const response = await request(app).post('/user/user/create')
     .send(body)
     .set('Content-type', 'application/json')
     .set('Authorization', moniaAdminToken);
@@ -45,10 +45,10 @@ test('create user with body', async () => {
 
 
 test('create user after create prev username ', async () => {
-  const response = await request(app).post('/monia-admin/user/create')
+  const response = await request(app).post('/user/user/create')
     .send(body)
     .set('Content-type', 'application/json')
     .set('Authorization', moniaAdminToken);
-  expect(response.status).toBe(400);  
-    expect(response.body.code).toBe('P2002');
+  expect(response.status).toBe(400);
+  expect(response.body.code).toBe('P2002');
 });
