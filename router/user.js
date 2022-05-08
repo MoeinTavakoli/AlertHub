@@ -3,6 +3,7 @@ const app = express();
 
 
 // midlleware
+const schemaValidator = require('../middleware/validator/user');
 const auth = require('../middleware/auth');
 const checkPermission = require('../middleware/checkPermission');
 // 
@@ -12,12 +13,12 @@ const checkPermission = require('../middleware/checkPermission');
 const controller = require('../controller/user');
 // 
 
-app.post('/login', controller.login);
-app.post('/create', auth, checkPermission, controller.createUser);
+app.post('/login', schemaValidator.login, controller.login);
+app.post('/create', schemaValidator.createUser, auth, checkPermission, controller.createUser);
 app.delete('/delete/:username', auth, checkPermission, controller.deleteUser);
-app.put('/phone/:username', auth, checkPermission, controller.updatePhoneNumber);
-app.put('/password/:username', auth, checkPermission, controller.updatePassword);
-app.put('/username/:username', auth, checkPermission, controller.updateUsername);
+app.put('/phone/:username', schemaValidator.updatePhone, auth, checkPermission, controller.updatePhoneNumber);
+app.put('/password/:username', schemaValidator.updatePassword, auth, checkPermission, controller.updatePassword);
+app.put('/username/:username', schemaValidator.updateUsername, auth, checkPermission, controller.updateUsername);
 
 
 module.exports = app;
