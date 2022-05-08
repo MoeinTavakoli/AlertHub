@@ -3,9 +3,8 @@ const app = express();
 
 // middlware
 const verifyToken = require('../middleware/auth');
-const isAdmin = require('../middleware/checkAdmin');
+const isAdmin = require('../middleware/isAdmin');
 const validator = require('../middleware/validator/targetContact');
-const checkRole = require('../middleware/checkRole');
 // 
 
 
@@ -14,8 +13,8 @@ const controller = require('../controller/targetContact');
 // 
 
 
-app.post('/create', validator.adduserToTarget, verifyToken, isAdmin, checkRole, controller.assignUserToTarget);
-app.delete('/delete', validator.removeUserToTarget, verifyToken, isAdmin, checkRole, controller.deleteUserToTarget);
+app.post('/create', validator.adduserToTarget, verifyToken, isAdmin, controller.assignUserToTarget);
+app.delete('/delete', validator.removeUserToTarget, verifyToken, isAdmin, controller.deleteUserToTarget);
 
 
 module.exports = app;
