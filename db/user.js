@@ -83,7 +83,7 @@ async function deleteUser(username) {
 async function getRole(username) {
   // eslint-disable-next-line no-useless-catch
   try {
-    return await prisma.users.findFirst({
+    const payload = await prisma.users.findFirst({
       where: {
         username
       },
@@ -91,10 +91,10 @@ async function getRole(username) {
         role: true
       }
     });
-    // return payload.role;
+    return payload.role;
   }
   catch (err) {
-    throw err;
+    return 'CONTACT';
   }
 }
 
@@ -104,15 +104,15 @@ async function getRole(username) {
  * @param {*} phoneNumber 
  * @returns 
  */
-async function updatePhoneNumber(username , phoneNumber){
+async function updatePhoneNumber(username, phoneNumber) {
   // eslint-disable-next-line no-useless-catch
   try {
     return await prisma.users.updateMany({
-      where : {
+      where: {
         username,
-        isDeleted : false
+        isDeleted: false
       },
-      data : {
+      data: {
         phoneNumber
       }
     });
