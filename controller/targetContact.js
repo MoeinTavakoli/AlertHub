@@ -14,7 +14,7 @@ async function assignUserToTarget(req, res) {
     res.send('assign user to target successfuly');
   }
   catch (error) {
-    if (error.code == 'P2002') return res.status(400).json({ code: error.code, message: 'duplicate username and teamName and method !!!' });
+    if (error.code == 'P2002') return res.status(400).json({ code: error.code, message: 'duplicate username OR teamName and method !!!' });
     if (error.code == 'P2003') return res.status(400).json({ code: error.code, message: 'username or teamName and method not found !!!' });
     res.send(error);
   }
