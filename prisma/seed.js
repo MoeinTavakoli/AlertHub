@@ -4,12 +4,14 @@ const prisma = new PrismaClient();
 
 const { ROOT } = require('../config');
 
-(async () => {
+const { hashPassword } = require('../utils/bcrypt');
 
+(async () => {
+  const hashedPassword = await hashPassword(ROOT.password);
   await prisma.users.create({
     data: {
       username: 'ROOT',
-      password: ROOT.password,
+      password: hashedPassword,
       phoneNumber: '09000000000',
       role: 'ROOT',
     }
