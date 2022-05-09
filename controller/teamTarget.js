@@ -13,6 +13,9 @@ async function createTeamTarget(req, res) {
     return res.send('create teamTarget successfuly ...');
   }
   catch (error) {
+    if (error.code == 'P2002') return res.status(400).json({ code: error.code, message: 'duplicate teamName and targetAddress and method !!!' });
+    if (error.code == 'P2003') return res.status(400).json({ code: error.code, message: 'teamName and targetAddress and method not found !!!' });
+
     res.status(400).send(error);
   }
 }

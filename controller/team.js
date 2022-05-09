@@ -14,6 +14,7 @@ async function createTeam(req, res) {
     res.send('add team successfuly');
   }
   catch (error) {
+    if (error.code == 'P2002') return res.status(400).json({ code: error.code, message: 'duplicate team name !!!' });
     res.status(400).send(error);
   }
 }
@@ -31,7 +32,10 @@ async function insertUserToTeam(req, res) {
     return res.send('insert user to team successfuly');
   }
   catch (error) {
+    if (error.code == 'P2002') return res.status(400).json({ code: error.code, message: 'duplicate username , teamName !!!' });
+    if (error.code == 'P2003') return res.status(400).json({ code: error.code, message: 'username or teamName not found !!!' });
     res.status(400).send(error);
+
   }
 }
 

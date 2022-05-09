@@ -37,8 +37,10 @@ async function createUser(req, res) {
     if (!result) return res.status(400).send('cant create user');
     res.send('user created ...');
   }
-  catch (err) {
-    res.status(400).send(err);
+  catch (error) {
+    if (error.code == 'P2002') return res.status(400).json({ code: error.code, message: 'duplicate username !!!' });
+
+    res.status(400).send(error);
   }
 }
 

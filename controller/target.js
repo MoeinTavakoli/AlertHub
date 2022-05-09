@@ -16,6 +16,7 @@ async function createTarget(req, res) {
     res.send('target created ...');
   }
   catch (error) {
+    if (error.code == 'P2002') return res.status(400).json({ code: error.code, message: 'duplicate target and method' });
     res.status(400).send(error);
   }
 }
