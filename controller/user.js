@@ -1,10 +1,11 @@
 const { generateToken } = require('../utils/jwt');
 const db = require('../db/user');
+const { compairPassword, hashPassword } = require('../utils/bcrypt');
 
 /**
  * 
- * @param {*} req 
- * @param {*} res 
+ * @param {import('express').Request} req 
+ * @param {import('express').Response} res 
  * @returns 
  */
 async function login(req, res) {
@@ -12,8 +13,10 @@ async function login(req, res) {
   try {
     const { username, password } = req.body;
     const payload = await db.login(username, password);
-    if (!payload) return res.status(400).send('username or password is not correct ...');
-    res.send(generateToken(payload));
+    if (!payload) return res.status(401).send('username or password is not correct !!!');
+    const isCorrectUser = await compairPassword(password, payload.password);
+    if (!isCorrectUser) return res.status(401).send('username or password is not correct !!!');
+    res.send(generateToken({ username: payload.username, role: payload.role }));
   }
   catch (error) {
     throw error;
@@ -29,7 +32,8 @@ async function login(req, res) {
 async function createUser(req, res) {
   try {
     const { username, password, phoneNumber, role } = req.body;
-    const result = await db.create(username, password, phoneNumber, role);
+    const hashedPassword = await hashPassword(password);
+    const result = await db.create(username, hashedPassword, phoneNumber, role);
     if (!result) return res.status(400).send('cant create user');
     res.send('user created ...');
   }
@@ -86,7 +90,8 @@ async function updatePassword(req, res) {
   try {
     const username = req.params.username;
     const password = req.body.password;
-    const result = await db.updatePassword(username, password);
+    const hashedPassword = await hashPassword(password);
+    const result = await db.updatePassword(username, hashedPassword);
     if (result.count == 0) return res.status(400).send('user not found to change password !!!');
     res.send('password updated ...');
   }
