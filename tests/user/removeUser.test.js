@@ -14,7 +14,7 @@ const moniaAdminToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im
 
 
 test('remove user without any argument (error schema validator)', async () => {
-  const response = await request(app).delete('/user/user/delete')
+  const response = await request(app).delete(`/user/delete/${body.username}`)
     .set('Content-type', 'application/json')
     .set('Authorization', moniaAdminToken);
   expect(response.text).toBe('please insert username in body ');
@@ -22,7 +22,7 @@ test('remove user without any argument (error schema validator)', async () => {
 });
 
 test('remove user without token for auth', async () => {
-  const response = await request(app).delete('/user/user/delete')
+  const response = await request(app).delete(`/user/delete/${body.username}`)
     .send(body)
     .set('Content-type', 'application/json');
   expect(response.text).toBe('token not found !');
@@ -31,7 +31,7 @@ test('remove user without token for auth', async () => {
 
 
 test('remove user with body', async () => {
-  const response = await request(app).delete('/user/user/delete')
+  const response = await request(app).delete(`/user/delete/${body.username}`)
     .send(body)
     .set('Content-type', 'application/json')
     .set('Authorization', moniaAdminToken);
@@ -42,7 +42,7 @@ test('remove user with body', async () => {
 
 
 test('remove user after remove prev username ', async () => {
-  const response = await request(app).delete('/user/user/delete')
+  const response = await request(app).delete(`/user/delete/${body.username}`)
     .send(body)
     .set('Content-type', 'application/json')
     .set('Authorization', moniaAdminToken);
