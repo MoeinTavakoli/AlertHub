@@ -12,9 +12,9 @@ async function login(req, res) {
   // eslint-disable-next-line no-useless-catch
   try {
     const { username, password } = req.body;
-    const payload = await db.login(username, password);
+    const payload = await db.login(username);
     if (!payload) return res.status(401).send('username or password is not correct !!!');
-    const isCorrectUser = await compairPassword(password, payload.password);
+    const isCorrectUser = await compairPassword(password.trim(), payload.password);
     if (!isCorrectUser) return res.status(401).send('username or password is not correct !!!');
     res.send(generateToken({ username: payload.username, role: payload.role }));
   }
@@ -32,7 +32,7 @@ async function login(req, res) {
 async function createUser(req, res) {
   try {
     const { username, password, phoneNumber, role } = req.body;
-    const hashedPassword = await hashPassword(password);
+    const hashedPassword = await hashPassword(password.trim());
     const result = await db.create(username, hashedPassword, phoneNumber, role);
     if (!result) return res.status(400).send('cant create user');
     res.send('user created ...');
@@ -90,7 +90,7 @@ async function updatePassword(req, res) {
   try {
     const username = req.params.username;
     const password = req.body.password;
-    const hashedPassword = await hashPassword(password);
+    const hashedPassword = await hashPassword(password.trim());
     const result = await db.updatePassword(username, hashedPassword);
     if (result.count == 0) return res.status(400).send('user not found to change password !!!');
     res.send('password updated ...');
