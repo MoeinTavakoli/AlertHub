@@ -10,7 +10,7 @@ const { hashPassword } = require('../utils/bcrypt');
   const hashedPassword = await hashPassword(ROOT.password);
   await prisma.users.create({
     data: {
-      username: 'ROOT',
+      username: 'root',
       password: hashedPassword,
       phoneNumber: '09000000000',
       role: 'ROOT',
