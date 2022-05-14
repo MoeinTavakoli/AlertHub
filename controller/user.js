@@ -122,11 +122,29 @@ async function updateUsername(req, res) {
     res.status(400).send(err);
   }
 }
+
+/**
+ * 
+ * @param {import('express').Request} req 
+ * @param {import('express').Response} res 
+ */
+async function getAllUsers(req,res) {
+  try {
+    const accessRoles = req.info.accessRoles;
+    const result = await db.getAllUsers(accessRoles);
+    res.send(result);
+  }
+  catch (err) {
+    res.status(400).send(err);
+  }
+}
+
 module.exports = {
   login,
   createUser,
   deleteUser,
   updatePhoneNumber,
   updatePassword,
-  updateUsername
+  updateUsername,
+  getAllUsers
 };
