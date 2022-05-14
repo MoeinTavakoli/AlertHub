@@ -105,12 +105,12 @@ async function getRole(username) {
  * @param {*} phoneNumber 
  * @returns 
  */
-async function updatePhoneNumber(username, phoneNumber) {
+async function updatePhoneNumber(userID, phoneNumber) {
   // eslint-disable-next-line no-useless-catch
   try {
     return await prisma.users.updateMany({
       where: {
-        username,
+        userID,
         isDeleted: false
       },
       data: {
