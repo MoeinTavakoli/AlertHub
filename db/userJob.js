@@ -1,4 +1,3 @@
-
 const prisma = require('../loader/prisma');
 
 /**
@@ -50,22 +49,22 @@ async function removeUserToTarget(username, targetAddress, method) {
  * @param {*} targetName 
  * @returns 
  */
-async function getPhoneNumberContacts(targetAddress) {
+async function getPhoneNumberContacts(jobName) {
   // eslint-disable-next-line no-useless-catch
   try {
-    const result = await prisma.targetContacts.findMany({
+    const result = await prisma.userJob.findMany({
       where: {
-        targetAddress
+        jobName
       },
-      select: {
-        userContact: {
-          select: {
+      include : {
+        usersRel :{
+          select : {
             phoneNumber: true
           }
         }
-      }
+      },
+  
     });
-
     const phoneNumbers = result.length > 0 ? result.map(x => x.userContact.phoneNumber) : [];
     return phoneNumbers;
   }

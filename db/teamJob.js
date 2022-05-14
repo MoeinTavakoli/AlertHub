@@ -47,12 +47,12 @@ async function removeTeamFromTarget(targetAddress, teamName, method) {
 /**
  * @param {String} teamName
  */
-async function getAllPhoneNumberUserByTeam(targetAddress) {
+async function getAllPhoneNumberUserByTeam(jobName) {
   // eslint-disable-next-line no-useless-catch
   try {
-    const result = await prisma.teamTarget.findMany({
+    const result = await prisma.teamJobs.findMany({
       where: {
-        targetAddress
+        jobName
       },
       select: {
         team: {
@@ -70,6 +70,7 @@ async function getAllPhoneNumberUserByTeam(targetAddress) {
         }
       }
     });
+
     const phoneNumbers = result[0] !== undefined && result[0].team.teamUsers.length > 0 ? result[0].team.teamUsers.map(x => {
       return x.user.phoneNumber;
     }) : [];

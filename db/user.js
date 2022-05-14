@@ -14,9 +14,10 @@ async function login(username) {
         isDeleted: false
       },
       select: {
-        username: true,
+        user_id : true,
         role: true,
-        password : true
+        password : true,
+        username : true // TODO: remove in next commit  
       }
     });
   }
@@ -34,7 +35,7 @@ async function login(username) {
  * @param {String} role 
  * @returns 
  */
-async function create(username, password, phoneNumber, role) {
+async function createUser(username, password, phoneNumber, role) {
   // eslint-disable-next-line no-useless-catch
   try {
     return await prisma.users.create({
@@ -56,12 +57,12 @@ async function create(username, password, phoneNumber, role) {
  * @param {*} username 
  * @returns 
  */
-async function deleteUser(username) {
+async function deleteUser(user_id) {
   // eslint-disable-next-line no-useless-catch
   try {
     return await prisma.users.updateMany({
       where: {
-        username,
+        user_id,
         isDeleted: false
       },
       data: {
@@ -174,7 +175,7 @@ async function updateUsername(oldUsername , newUsername){
 
 module.exports = {
   login,
-  create,
+  createUser,
   deleteUser,
   getRole,
   updatePhoneNumber,
