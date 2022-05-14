@@ -8,7 +8,7 @@ datasource db {
 }
 
 model users {
-  user_id     String          @unique @default(uuid()) @db.Uuid()
+  userID     String          @id @db.Uuid() @default(uuid()) 
   username    String          @db.VarChar(50)
   password    String          @db.VarChar(100)
   phoneNumber String          @db.VarChar(12)
@@ -43,11 +43,11 @@ model alertLogs {
 
 model userJob {
   jobName  String @db.VarChar(30)
-  user_id  String @db.Uuid()
+  userID  String @db.Uuid()
   job      jobs   @relation(fields: [jobName], references: [jobName])
-  usersRel users  @relation(fields: [user_id], references: [user_id])
+  usersRel users  @relation(fields: [userID], references: [userID])
 
-  @@id([jobName, user_id])
+  @@id([jobName, userID])
 }
 
 model teams {
@@ -59,11 +59,11 @@ model teams {
 
 model teamUsers {
   teamName String @db.VarChar(20)
-  user_id  String @db.Uuid()
+  userID  String @db.Uuid()
   team     teams  @relation(fields: [teamName], references: [teamName])
-  user     users  @relation(fields: [user_id], references: [user_id])
+  user     users  @relation(fields: [userID], references: [userID])
 
-  @@id([user_id, teamName])
+  @@id([userID, teamName])
 }
 
 model teamJobs {
