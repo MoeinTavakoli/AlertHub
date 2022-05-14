@@ -31,14 +31,13 @@ model jobs {
 }
 
 model alertLogs {
-  id        Int          @id @default(autoincrement())
-  job       String       @db.VarChar(50)
-  instance  String       @db.VarChar(50)
-  method    enum_method?
+  id        Int       @id @default(autoincrement())
+  job       String    @db.VarChar(50)
+  instance  String    @db.VarChar(50)
   value     Int
   activeAt  DateTime
-  createdAt DateTime?    @default(now()) @db.Timestamptz(6)
-  updatedAt DateTime?    @updatedAt @db.Timestamptz(6)
+  createdAt DateTime? @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime? @updatedAt @db.Timestamptz(6)
 
 }
 
