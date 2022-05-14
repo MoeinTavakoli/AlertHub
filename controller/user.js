@@ -112,10 +112,10 @@ async function updatePassword(req, res) {
  */
 async function updateUsername(req, res) {
   try {
-    const oldUsername = req.params.username;
+    const {userID} = req.params;
     const {newUsername} = req.body;
-    const result = await db.updateUsername(oldUsername, newUsername);
-    if (result.count == 0) return res.status(400).send('user not found ro change username !!!');
+    const result = await db.updateUsername(userID, newUsername);
+    if (result.count == 0) return res.status(400).send('user not found !!!');
     res.send('username updated ...');
   }
   catch (err) {
