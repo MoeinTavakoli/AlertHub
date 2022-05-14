@@ -154,12 +154,12 @@ async function updatePassword(userID, password) {
  * @param {*} newUsername 
  * @returns 
  */
-async function updateUsername(oldUsername , newUsername){
+async function updateUsername(userID , newUsername){
   // eslint-disable-next-line no-useless-catch
   try {
     return await prisma.users.updateMany({
       where: {
-        username : oldUsername,
+        userID,
         isDeleted : false
       },
       data : {
