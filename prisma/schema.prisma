@@ -8,27 +8,26 @@ datasource db {
 }
 
 model users {
-  username       String           @id @unique @db.VarChar(50)
-  password       String           @db.VarChar(100)
-  phoneNumber    String           @db.VarChar(12)
-  role           enum_Users_role
-  createdAt      DateTime?        @default(now()) @db.Timestamptz(6)
-  updatedAt      DateTime?        @updatedAt @db.Timestamptz(6)
-  isDeleted      Boolean          @default(false)
-  targetContacts targetContacts[]
-  teamUsers      teamUsers[]
+  user_id     String          @unique @default(uuid()) @db.Uuid()
+  username    String          @db.VarChar(50)
+  password    String          @db.VarChar(100)
+  phoneNumber String          @db.VarChar(12)
+  role        enum_Users_role
+  createdAt   DateTime?       @default(now()) @db.Timestamptz(6)
+  updatedAt   DateTime?       @updatedAt @db.Timestamptz(6)
+  isDeleted   Boolean         @default(false)
+  userJob     userJob[]
+  teamUsers   teamUsers[]
 }
 
-model targets {
-  address        String
-  method         enum_method
-  createdAt      DateTime?        @default(now()) @db.Timestamptz(6)
-  updatedAt      DateTime?        @updatedAt @db.Timestamptz(6)
-  targetContacts targetContacts[]
-  teamTarget     teamTarget[]
+model jobs {
+  jobName   String    @id @unique @db.VarChar(40)
+  createdAt DateTime? @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime? @updatedAt @db.Timestamptz(6)
 
-  @@id([address, method])
-  @@unique([address, method])
+  userJob userJob[]
+
+  teamJobs teamJobs[]
 }
 
 model alertLogs {
@@ -43,45 +42,44 @@ model alertLogs {
 
 }
 
-model targetContacts {
-  targetAddress String
-  method        enum_method
-  username      String      @db.VarChar(50)
-  target        targets     @relation(fields: [targetAddress, method], references: [address, method])
-  userContact   users       @relation(fields: [username], references: [username])
+model userJob {
+  jobName  String @db.VarChar(30)
+  user_id  String @db.Uuid()
+  job      jobs   @relation(fields: [jobName], references: [jobName])
+  usersRel users  @relation(fields: [user_id], references: [user_id])
 
-  @@id([username, targetAddress, method])
+  @@id([jobName, user_id])
 }
 
 model teams {
-  teamName   String       @id @db.VarChar(50)
-  teamUsers  teamUsers[]
-  teamTarget teamTarget[]
+  teamName  String      @id @db.VarChar(50)
+  teamUsers teamUsers[]
+
+  teamJobs teamJobs[]
 }
 
 model teamUsers {
   teamName String @db.VarChar(20)
-  username String @db.VarChar(50)
+  user_id  String @db.Uuid()
   team     teams  @relation(fields: [teamName], references: [teamName])
-  user     users  @relation(fields: [username], references: [username])
+  user     users  @relation(fields: [user_id], references: [user_id])
 
-  @@id([username, teamName])
+  @@id([user_id, teamName])
 }
 
-model teamTarget {
-  teamName      String      @db.VarChar(20)
-  targetAddress String      @db.VarChar(50)
-  method        enum_method
-  team          teams       @relation(fields: [teamName], references: [teamName])
-  target        targets     @relation(fields: [targetAddress, method], references: [address, method])
+model teamJobs {
+  teamName String @db.VarChar(20)
+  jobName  String @db.VarChar(40)
+  team     teams  @relation(fields: [teamName], references: [teamName])
+  job      jobs   @relation(fields: [jobName], references: [jobName])
 
 
-  @@id([teamName, targetAddress, method])
+  @@id([teamName, jobName])
 }
 
 enum enum_method {
-  ping
-  http_request
+  PING
+  HTTP_REQUEST
 }
 
 enum enum_Users_role {
