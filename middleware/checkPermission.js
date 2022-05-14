@@ -11,7 +11,7 @@ const { getRole } = require('../db/user');
  */
 async function checkPermission(req, res, next) {
   const payloadRole = req.info.role;
-  const userRole = req.body.role ? req.body.role : await getRole(req.params.username);
+  const userRole = req.body.role ? req.body.role : await getRole(req.params.userID);
   if ((payloadRole == 'CONTACT') ||
     (payloadRole == 'MONIA_ADMIN' && moniaAdminRedline.includes(userRole)) ||
     (payloadRole == 'MONITORING_ADMIN' && monitoringAdminRedline.includes(userRole))
