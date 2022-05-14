@@ -16,7 +16,7 @@ async function login(req, res) {
     if (!payload) return res.status(401).send('username or password is not correct !!!');
     const isCorrectUser = await compairPassword(password.trim(), payload.password);
     if (!isCorrectUser) return res.status(401).send('username or password is not correct !!!');
-    res.send(generateToken({ username: payload.username, role: payload.role }));
+    res.send(generateToken({ username: payload.username, role: payload.role , user_id : payload.user_id }));
   }
   catch (error) {
     throw error;
@@ -33,7 +33,7 @@ async function createUser(req, res) {
   try {
     const { username, password, phoneNumber, role } = req.body;
     const hashedPassword = await hashPassword(password.trim());
-    const result = await db.create(username, hashedPassword, phoneNumber, role);
+    const result = await db.createUser(username, hashedPassword, phoneNumber, role);
     if (!result) return res.status(400).send('cant create user');
     res.send('user created ...');
   }
@@ -52,9 +52,9 @@ async function createUser(req, res) {
  */
 async function deleteUser(req, res) {
   try {
-    const username = req.params.username;
-    const result = await db.deleteUser(username);
-    if (result.count == 0) return res.status(400).send('user not found to delete !!!');
+    const userID = req.params.userID;
+    const result = await db.deleteUser(userID);
+    if (result.count == 0) return res.status(400).send('user not found or deleted !');
     res.send('user deleted ...');
   }
   catch (err) {
