@@ -130,12 +130,12 @@ async function updateUsername(req, res) {
  */
 async function getAllUsers(req,res) {
   try {
-    const accessRoles = req.info.accessRoles;
-    const result = await db.getAllUsers(accessRoles);
-    res.send(result);
+    const accessRoles = req.accessRoles;
+    const users = await db.getAllUsers(accessRoles);
+    res.json({success : true , users  });
   }
-  catch (err) {
-    res.status(400).send(err);
+  catch (error) {
+    res.status(400).json({success : false , error});
   }
 }
 
