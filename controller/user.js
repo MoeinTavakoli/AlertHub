@@ -16,7 +16,7 @@ async function login(req, res) {
     if (!payload) return res.status(401).send('username or password is not correct !!!');
     const isCorrectUser = await compairPassword(password.trim(), payload.password);
     if (!isCorrectUser) return res.status(401).send('username or password is not correct !!!');
-    res.send(generateToken({ username: payload.username, role: payload.role , user_id : payload.user_id }));
+    res.send(generateToken({ username: payload.username, role: payload.role , userID : payload.userID }));
   }
   catch (error) {
     throw error;
@@ -90,10 +90,10 @@ async function updatePhoneNumber(req, res) {
  */
 async function updatePassword(req, res) {
   try {
-    const username = req.params.username;
+    const userID = req.params.userID;
     const password = req.body.password;
     const hashedPassword = await hashPassword(password.trim());
-    const result = await db.updatePassword(username, hashedPassword);
+    const result = await db.updatePassword(userID, hashedPassword);
     if (result.count == 0) return res.status(400).send('user not found to change password !!!');
     res.send('password updated ...');
   }
@@ -113,7 +113,7 @@ async function updatePassword(req, res) {
 async function updateUsername(req, res) {
   try {
     const oldUsername = req.params.username;
-    const newUsername = req.body.newUsername;
+    const {newUsername} = req.body;
     const result = await db.updateUsername(oldUsername, newUsername);
     if (result.count == 0) return res.status(400).send('user not found ro change username !!!');
     res.send('username updated ...');
@@ -132,7 +132,7 @@ async function getAllUsers(req,res) {
   try {
     const accessRoles = req.accessRoles;
     const users = await db.getAllUsers(accessRoles);
-    res.json({success : true , users  });
+    res.json({success : true ,accessRoles ,  users  });
   }
   catch (error) {
     res.status(400).json({success : false , error});
