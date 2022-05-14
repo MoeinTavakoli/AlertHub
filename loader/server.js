@@ -12,8 +12,6 @@ app.use(bodyParser.json());
 
 app.use('/webhook', require('../router/webhook'));
 
-app.use('/target', require('../router/target'));
-
 app.use('/userRel', require('../router/targetContact'));
 
 app.use('/team', require('../router/team'));
