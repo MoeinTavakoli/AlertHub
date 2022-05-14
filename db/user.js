@@ -172,6 +172,32 @@ async function updateUsername(oldUsername , newUsername){
   }
 }
 
+/**
+ * 
+ * @param {Array} accessRoles 
+ */
+async function getAllUsers(accessRoles = ['CONTACT']){
+  // eslint-disable-next-line no-useless-catch
+  try {
+    return await prisma.users.findMany({
+      where : {
+        isDeleted : false,
+        role :{
+          in : accessRoles
+        }
+      },
+      select: {
+        user_id : true,
+        username : true , 
+        role: true  
+      }
+    });
+  }
+  catch (error) {
+    throw error;
+  }
+}
+
 
 module.exports = {
   login,
@@ -180,5 +206,6 @@ module.exports = {
   getRole,
   updatePhoneNumber,
   updatePassword,
-  updateUsername
+  updateUsername,
+  getAllUsers
 };
