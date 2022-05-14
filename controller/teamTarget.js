@@ -1,4 +1,4 @@
-const db = require('../db/teamTarget');
+const db = require('../db/teamJob');
 
 /**
  * 

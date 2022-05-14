@@ -1,4 +1,4 @@
-const db = require('../db/targetContact');
+const db = require('../db/userJob');
 /**
  * 
  * @param {import('express').Request} req 
