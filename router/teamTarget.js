@@ -9,7 +9,7 @@ const validator = require('../middleware/validator/teamTarget');
 // 
 
 // controller
-const controller = require('../controller/teamTarget');
+const controller = require('../controller/teamJob');
 // 
 
 
