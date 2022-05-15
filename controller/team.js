@@ -32,10 +32,11 @@ async function insertUserToTeam(req, res) {
     return res.send('insert user to team successfuly');
   }
   catch (error) {
-    if (error.code == 'P2002') return res.status(400).json({ code: error.code, message: 'this userID is already exist in this team !' });
-    if (error.code == 'P2003') return res.status(400).json({ code: error.code, message: 'userID or teamName not found !!!' });
-    res.status(400).send(error);
-
+    if (error.code == 'P2002') return res.status(400).json({success : false ,  code: error.code, message: 'this userID is already exist in this team !' });
+    if (error.code == 'P2003') return res.status(400).json({success : false ,  code: error.code, message: 'user deleted or teamName not found !!!' });
+    if (error.code == 'P404') return res.status(400).json({success : false ,  code: error.code, message : error.message });
+    return res.status(400).json({success : false ,  error });
+    
   }
 }
 
