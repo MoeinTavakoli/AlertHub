@@ -6,14 +6,13 @@ const prisma = require('../loader/prisma');
  * @param {String} targetName 
  * @returns 
  */
-async function addUserToTarget(username, targetAddress , method) {
+async function assignUserToJob(userID , jobName) {
   // eslint-disable-next-line no-useless-catch
   try {
-    return await prisma.targetContacts.create({
+    return await prisma.userJob.create({
       data: {
-        username,
-        targetAddress,
-        method
+        jobName,
+        userID
       }
     });
   }
@@ -28,14 +27,13 @@ async function addUserToTarget(username, targetAddress , method) {
  * @param {String} targetName 
  * @returns 
  */
-async function removeUserToTarget(username, targetAddress, method) {
+async function revokeUserFromJob(userID , jobName) {
   // eslint-disable-next-line no-useless-catch
   try {
-    return await prisma.targetContacts.deleteMany({
+    return await prisma.userJob.deleteMany({
       where: {
-        username,
-        targetAddress,
-        method
+        userID , 
+        jobName
       }
     });
   }
@@ -65,7 +63,9 @@ async function getPhoneNumberContacts(jobName) {
       },
   
     });
-    const phoneNumbers = result.length > 0 ? result.map(x => x.userContact.phoneNumber) : [];
+    const phoneNumbers = result.length > 0 ? result.map(x => {
+      return x.userContact.phoneNumber;
+    }) : [];
     return phoneNumbers;
   }
   catch (error) {
@@ -77,7 +77,7 @@ async function getPhoneNumberContacts(jobName) {
 
 
 module.exports = {
-  addUserToTarget,
-  removeUserToTarget,
+  assignUserToJob,
+  revokeUserFromJob,
   getPhoneNumberContacts
 };
