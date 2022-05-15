@@ -54,17 +54,16 @@ async function getPhoneNumberContacts(jobName) {
       where: {
         jobName
       },
-      include : {
-        usersRel :{
-          select : {
-            phoneNumber: true
+      include :{
+        usersRel : {
+          select: {
+            phoneNumber : true
           }
         }
-      },
-  
+      }
     });
     const phoneNumbers = result.length > 0 ? result.map(x => {
-      return x.userContact.phoneNumber;
+      return x.usersRel.phoneNumber;
     }) : [];
     return phoneNumbers;
   }
