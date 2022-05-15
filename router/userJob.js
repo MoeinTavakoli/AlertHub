@@ -13,8 +13,8 @@ const controller = require('../controller/userJob');
 // 
 
 
-app.post('/create', validator.adduserToTarget, verifyToken, isAdmin, controller.assignUserToTarget);
-app.delete('/delete', validator.removeUserToTarget, verifyToken, isAdmin, controller.deleteUserToTarget);
+app.post('/create', validator.adduserToTarget, verifyToken, isAdmin, controller.assignUserToJob);
+app.delete('/delete', validator.removeUserToTarget, verifyToken, isAdmin, controller.revokeUserFromTarget);
 
 
 module.exports = app;
