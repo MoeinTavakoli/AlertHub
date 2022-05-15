@@ -29,7 +29,7 @@ async function createTeamJob( teamName , jobName) {
 async function removeTeamJob(teamName , jobName) {
   // eslint-disable-next-line no-useless-catch
   try {
-    return await prisma.teamTarget.deleteMany({
+    return await prisma.teamJobs.deleteMany({
       where: {
         teamName , 
         jobName
