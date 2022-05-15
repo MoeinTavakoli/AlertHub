@@ -28,8 +28,13 @@
 
 ### Deploy a node
 
+1. `cd /opt` \
+
 1. clone the repo \
    `git clone -b release_1.0.0 https://gitlab.partdp.ir/network/lms/monia/new-monia/alertmanager/monia.git`
+
+3. go to monia directory and copy .env then fill the .env \
+`cd monia && cp .env.example .env` \ 
 
 2. install npm packages \
    `npm i`
@@ -40,6 +45,9 @@
 4. create database in postgres \
 `sudo -u postgres psql`\
 `create DATABASE monia;`\
+`create user monia with encrypted password 'monia';` \
+`grant all privileges on database monia to monia;` \
+`ALTER USER monia CREATEDB;` \
 '\q'
 
 4. fill the .env file \
@@ -55,11 +63,19 @@
    `JWT_SECRET` is your secret key for generate token (take care to keep it safe !!!) \
    `ROOT_PASSWORD` is for root password that you
 
-5. migrate database \
-   `npx prisma migrate`
+8. migrate database \
+   `npx prisma migrate dev`
 
-6. seed database (must be run once ) \
+9. seed database (just run once time ) \
    `npx prisma db seed`
 
+10. edit config postgres \
+`vim /etc/postgresql/14/main/postgresql.conf` \
+uncomment: \
+`listen_addresses= 'localhost'`
+
+11. install pm2 \
+`npm install pm2@latest -g`
+
 7. Run monia \
-   `node index.js` Or `pm2 start index.js`
+    `pm2 start index.js`
