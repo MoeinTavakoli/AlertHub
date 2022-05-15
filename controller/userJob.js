@@ -4,18 +4,16 @@ const db = require('../db/userJob');
  * @param {import('express').Request} req 
  * @param {import('express').Response} res 
  */
-async function assignUserToTarget(req, res) {
+async function assignUserToJob(req, res) {
   try {
-    const username = req.body.username;
-    const targetAddress = req.body.targetAddress;
-    const method = req.body.method;
-    const result = await db.addUserToTarget(username, targetAddress, method);
+    const {userID , jobName} = req.body;
+    const result = await db.assignUserToJob(userID , jobName);
     if (!result) return res.send('assign user to target failed !');
     res.send('assign user to target successfuly');
   }
   catch (error) {
-    if (error.code == 'P2002') return res.status(400).json({ code: error.code, message: 'duplicate username and teamName and method !!!' });
-    if (error.code == 'P2003') return res.status(400).json({ code: error.code, message: 'username or teamName and method not found !!!' });
+    if (error.code == 'P2002') return res.status(400).json({ code: error.code, message: 'user with this jobName is already have realation !!!' });
+    if (error.code == 'P2003') return res.status(400).json({ code: error.code, message: 'userID or teamName not found !!!' });
     res.send(error);
   }
 }
@@ -28,18 +26,15 @@ async function assignUserToTarget(req, res) {
  * @param {import('express').Request} req 
  * @param {import('express').Response} res 
  */
-async function deleteUserToTarget(req, res) {
+async function revokeUserFromTarget(req, res) {
   try {
-    const username = req.body.username;
-    const targetAddress = req.body.targetAddress;
-    const method = req.body.method;
-    const result = await db.removeUserToTarget(username, targetAddress, method);
-    if (result.count > 0) {
-      return res.send('delete user to target successfuly');
+    const {userID , jobName} = req.body;
+    const result = await db.revokeUserFromJob(userID , jobName);
+    if (result.count !== 0) {
+      return res.send('revoke user to target successfuly');
     }
 
-    res.status(400).send('there  isnt any row with this information to delete !!!');
-
+    res.status(400).send('cant find any realtion userID , jobName to delete !!!');
 
   }
   catch (error) {
@@ -51,6 +46,6 @@ async function deleteUserToTarget(req, res) {
 
 
 module.exports = {
-  assignUserToTarget,
-  deleteUserToTarget
+  assignUserToJob,
+  revokeUserFromTarget
 };
