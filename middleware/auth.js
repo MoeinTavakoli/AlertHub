@@ -15,9 +15,10 @@ async function authentication(req, res, next) {
     if (!payload) {
       return res.status(401).send('unathorized');
     }
-
-    if (await checkRole(payload.username , payload.role) == 0 ) {
-      return res.status(401).send('token is not valid');
+    if (await checkRole(payload.userID , payload.role) == 0 ) {
+      return res.status(401).json({
+        message : 'your token is not valid' ,
+        description: 'your role in token is not equal in database OR maybe you are deleted'});
     }
 
     req.info = payload;
@@ -35,12 +36,12 @@ async function authentication(req, res, next) {
  * @param {String} username 
  * @param {String} role 
  */
-async function checkRole(username, role) {
+async function checkRole(userID, role) {
   // eslint-disable-next-line no-useless-catch
   try {
     return await prisma.users.count({
       where: {
-        username,
+        userID,
         role,
         isDeleted: false
       }
