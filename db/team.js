@@ -26,12 +26,12 @@ async function createTeam(teamName) {
  * @param {String} teamName 
  * @returns 
  */
-async function insertUserToTeam(username, teamName) {
+async function insertUserToTeam(userID, teamName) {
   // eslint-disable-next-line no-useless-catch
   try {
     return await prisma.teamUsers.create({
       data: {
-        username,
+        userID,
         teamName
       }
     });
@@ -49,12 +49,12 @@ async function insertUserToTeam(username, teamName) {
  * @param {String} teamName 
  * @returns 
  */
-async function removeUserFromTeam(username, teamName) {
+async function removeUserFromTeam(userID, teamName) {
   // eslint-disable-next-line no-useless-catch
   try {
     return await prisma.teamUsers.deleteMany({
       where: {
-        username,
+        userID,
         teamName
       }
     });
