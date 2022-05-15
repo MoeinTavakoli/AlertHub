@@ -102,7 +102,23 @@ async function getAllPhoneNumberUserByTeam(teamName) {
 
 }
 
-
+/**
+ * 
+ * @returns all teams
+ */
+async function getAllTeam(){
+  // eslint-disable-next-line no-useless-catch
+  try {
+    return await prisma.teams.findMany({
+      select : {
+        teamName : true
+      }
+    });
+  }
+  catch (error) {
+    throw error;
+  }
+}
 
 
 
@@ -113,5 +129,6 @@ module.exports = {
   createTeam,
   insertUserToTeam,
   removeUserFromTeam,
-  getAllPhoneNumberUserByTeam
+  getAllPhoneNumberUserByTeam,
+  getAllTeam
 };
