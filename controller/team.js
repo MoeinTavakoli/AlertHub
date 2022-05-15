@@ -26,8 +26,8 @@ async function createTeam(req, res) {
  */
 async function insertUserToTeam(req, res) {
   try {
-    const { username, teamName } = req.body;
-    const result = await db.insertUserToTeam(username, teamName);
+    const { userID, teamName } = req.body;
+    const result = await db.insertUserToTeam(userID, teamName);
     if (!result) return res.status(400).send('insert user to team failed !');
     return res.send('insert user to team successfuly');
   }
@@ -46,9 +46,9 @@ async function insertUserToTeam(req, res) {
  */
 async function removeUserFromTeam(req, res) {
   try {
-    const { username, teamName } = req.body;
-    const result = await db.removeUserFromTeam(username, teamName);
-    if (result.count == 0) return res.status(400).send('user didnt deleted !');
+    const { userID, teamName } = req.body;
+    const result = await db.removeUserFromTeam(userID, teamName);
+    if (result.count == 0) return res.status(400).send('user with this team not found deleted !');
     return res.send('delete user from team successfuly');
 
   }
