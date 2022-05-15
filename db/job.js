@@ -22,9 +22,25 @@ async function addJob(jobName) {
   }
 }
 
-
+/**
+ * 
+ */
+async function getAllJobs(){
+  // eslint-disable-next-line no-useless-catch
+  try {
+    return await prisma.jobs.findMany({
+      select : {
+        jobName : true,
+      }
+    });
+  }
+  catch (error) {
+    throw error; 
+  }
+}
 
 
 module.exports = {
-  addJob
+  addJob,
+  getAllJobs
 };
