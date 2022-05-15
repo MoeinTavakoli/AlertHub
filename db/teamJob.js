@@ -8,6 +8,14 @@ const prisma = require('../loader/prisma');
 async function createTeamJob( teamName , jobName) {
   // eslint-disable-next-line no-useless-catch
   try {
+    const countTeam = await prisma.teams.count({
+      where: {
+        teamName
+      }
+    });
+
+    if(countTeam == 0) throw Error('team not found !');
+
     return await prisma.teamJobs.create({
       data: {
         jobName,

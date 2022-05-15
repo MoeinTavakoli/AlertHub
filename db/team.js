@@ -29,11 +29,20 @@ async function createTeam(teamName) {
 async function insertUserToTeam(userID, teamName) {
   // eslint-disable-next-line no-useless-catch
   try {
+    const result = await prisma.users.count({
+      where :{
+        userID , 
+        isDeleted : false
+      }
+    });
+    
+    if(result == 0) throw Error('user not found   !');
+    
     return await prisma.teamUsers.create({
       data: {
         userID,
         teamName
-      }
+      },
     });
   }
   catch (error) {
@@ -80,7 +89,8 @@ async function getAllPhoneNumberUserByTeam(teamName) {
       select: {
         user: {
           select: {
-            phoneNumber: true
+            phoneNumber: true,
+            isDeleted: false
           }
         }
       }
