@@ -58,10 +58,26 @@ async function removeUserFromTeam(req, res) {
   }
 }
 
+/**
+ * 
+ * @param {import('express').Request} req 
+ * @param {import('express').Response} res 
+ */
+async function getAllTeam(req , res) {
+  try {
+    const result = await db.getAllTeam();
+    res.json({success : true , result});
+  }
+  catch (error) {
+    res.status(400).json({success : false , error});
+  }
+}
+
 
 
 module.exports = {
   createTeam,
   insertUserToTeam,
-  removeUserFromTeam
+  removeUserFromTeam,
+  getAllTeam
 };
