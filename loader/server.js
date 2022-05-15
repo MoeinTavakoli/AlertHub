@@ -20,6 +20,8 @@ app.use('/teamRel', require('../router/teamJob'));
 
 app.use('/user' , require('../router/user'));
 
+app.use('/job' , require('../router/job'));
+
 app.use('*' , (req,res)=>{
   res.status(404).send('not found !!!');
 });
