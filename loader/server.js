@@ -12,11 +12,11 @@ app.use(bodyParser.json());
 
 app.use('/webhook', require('../router/webhook'));
 
-app.use('/userRel', require('../router/targetContact'));
+app.use('/userRel', require('../router/userJob'));
 
 app.use('/team', require('../router/team'));
 
-app.use('/teamRel', require('../router/teamTarget'));
+app.use('/teamRel', require('../router/teamJob'));
 
 app.use('/user' , require('../router/user'));
 
