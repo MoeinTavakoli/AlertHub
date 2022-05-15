@@ -16,7 +16,7 @@ const controller = require('../controller/team');
 app.post('/create', validator.createTeam, verifyToken, IsAdmin,  controller.createTeam);
 app.put('/user/add', validator.addUserToTeam, verifyToken, IsAdmin, controller.insertUserToTeam);
 app.delete('/user/remove', validator.removeUserFromTeam, verifyToken, IsAdmin, controller.removeUserFromTeam);
-
+app.get('/info', verifyToken, IsAdmin , controller.getAllTeam );
 
 
 module.exports = app;
