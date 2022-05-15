@@ -5,16 +5,16 @@ const db = require('../db/teamJob');
  * @param {import('express').Request} req 
  * @param {import('express').Response} res 
  */
-async function createTeamTarget(req, res) {
+async function createTeamJob(req, res) {
   try {
-    const { targetAddress, teamName, method } = req.body;
-    const result = await db.createTeamTarget(targetAddress, teamName, method);
-    if (!result) return res.status(400).send('create teamTarget failed !');
-    return res.send('create teamTarget successfuly ...');
+    const {  teamName, jobName } = req.body;
+    const result = await db.createTeamJob(teamName , jobName);
+    if (!result) return res.status(400).send('create teamJob failed !');
+    return res.send('create relation teamName, jobName  successfuly ...');
   }
   catch (error) {
-    if (error.code == 'P2002') return res.status(400).json({ code: error.code, message: 'duplicate teamName and targetAddress and method !!!' });
-    if (error.code == 'P2003') return res.status(400).json({ code: error.code, message: 'teamName and targetAddress and method not found !!!' });
+    if (error.code == 'P2002') return res.status(400).json({ code: error.code, message: 'duplicate teamName and jobName  !!!' });
+    if (error.code == 'P2003') return res.status(400).json({ code: error.code, message: 'teamName OR jobName not found !!!' });
 
     res.status(400).send(error);
   }
@@ -25,21 +25,21 @@ async function createTeamTarget(req, res) {
  * @param {import('express').Request} req 
  * @param {import('express').Response} res 
  */
-async function removeTeamTarget(req, res) {
+async function removeTeamJob(req, res) {
   try {
-    const { targetAddress, teamName, method } = req.body;
-    const result = await db.removeTeamFromTarget(targetAddress, teamName, method);
-    if (result.count == 0) return res.status(400).send('didnt teamTarget deleted !');
-    return res.send(' teamTarget  deleted successfuly ...');
+    const { teamName,jobName } = req.body;
+    const result = await db.removeTeamJob(teamName , jobName);
+    if (result.count == 0) return res.status(400).send('didnt find relation teamName and jobName to delete !');
+    return res.send('teamJob  deleted successfuly ...');
   }
   catch (error) {
-    res.send(400).send(error);
+    res.status(400).send(error);
   }
 }
 
 
 
 module.exports = {
-  createTeamTarget,
-  removeTeamTarget
+  createTeamJob , 
+  removeTeamJob
 };
