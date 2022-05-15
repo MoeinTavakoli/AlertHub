@@ -4,7 +4,7 @@ const app = express();
 // middlware
 const verifyToken = require('../middleware/auth');
 const isAdmin = require('../middleware/isAdmin');
-const validator = require('../middleware/validator/targetContact');
+const validator = require('../middleware/validator/userJob');
 // 
 
 
