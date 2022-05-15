@@ -32,8 +32,8 @@ async function insertUserToTeam(req, res) {
     return res.send('insert user to team successfuly');
   }
   catch (error) {
-    if (error.code == 'P2002') return res.status(400).json({ code: error.code, message: 'duplicate username , teamName !!!' });
-    if (error.code == 'P2003') return res.status(400).json({ code: error.code, message: 'username or teamName not found !!!' });
+    if (error.code == 'P2002') return res.status(400).json({ code: error.code, message: 'this userID is already exist in this team !' });
+    if (error.code == 'P2003') return res.status(400).json({ code: error.code, message: 'userID or teamName not found !!!' });
     res.status(400).send(error);
 
   }
@@ -48,7 +48,7 @@ async function removeUserFromTeam(req, res) {
   try {
     const { userID, teamName } = req.body;
     const result = await db.removeUserFromTeam(userID, teamName);
-    if (result.count == 0) return res.status(400).send('user with this team not found deleted !');
+    if (result.count == 0) return res.status(400).send('user didnt exist in this team !');
     return res.send('delete user from team successfuly');
 
   }
