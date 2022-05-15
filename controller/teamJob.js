@@ -13,10 +13,9 @@ async function createTeamJob(req, res) {
     return res.send('create relation teamName, jobName  successfuly ...');
   }
   catch (error) {
-    if (error.code == 'P2002') return res.status(400).json({ code: error.code, message: 'duplicate teamName and jobName  !!!' });
-    if (error.code == 'P2003') return res.status(400).json({ code: error.code, message: 'teamName OR jobName not found !!!' });
-
-    res.status(400).send(error);
+    if (error.code == 'P2002') return res.status(400).json({success : false , code: error.code, message: 'duplicate teamName and jobName  !!!' });
+    if (error.code == 'P2003') return res.status(400).json({success : false , code: error.code, message: 'jobName not found !!!' });
+    res.status(400).json({success : false , message :error.message});
   }
 }
 
