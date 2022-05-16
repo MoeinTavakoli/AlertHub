@@ -9,6 +9,14 @@ const prisma = require('../loader/prisma');
 async function assignUserToJob(userID , jobName) {
   // eslint-disable-next-line no-useless-catch
   try {
+    const countJob = await prisma.jobs.count({
+      where : {
+        jobName
+      }
+    });
+
+    if(countJob == 0 ) throw Error('job not found');
+
     return await prisma.userJob.create({
       data: {
         jobName,
