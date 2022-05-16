@@ -8,8 +8,8 @@ async function assignUserToJob(req, res) {
   try {
     const {userID , jobName} = req.body;
     const result = await db.assignUserToJob(userID , jobName);
-    if (!result) return res.send('assign user to target failed !');
-    res.send('assign user to target successfuly');
+    if (!result) return res.json({succes : false , message :'assign user to target failed !'});
+    res.json({success:true , message : 'assign user to target successfuly'});
   }
   catch (error) {
     if (error.code == 'P2002') return res.status(400).json({success : false, code: error.code, message: 'user with this jobName is already have realation !!!' });
@@ -31,10 +31,9 @@ async function revokeUserFromTarget(req, res) {
     const {userID , jobName} = req.body;
     const result = await db.revokeUserFromJob(userID , jobName);
     if (result.count !== 0) {
-      return res.send('revoke user to target successfuly');
+      return res.json({succes : true , message : 'revoke user to target successfuly'});
     }
-
-    res.status(400).send('cant find any realtion userID , jobName to delete !!!');
+    res.status(400).json({success : false , message: 'didnt have realtion userID , jobName to delete !!!'});
 
   }
   catch (error) {

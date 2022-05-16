@@ -1,5 +1,4 @@
 const db = require('../db/job'); 
-
 /**
  * 
  * @param {import('express').Request} req 
@@ -11,7 +10,7 @@ async function getAllJobs (req,res){
     res.json({success : true , jobs});
   }
   catch (error) {
-    res.status(400).send(error);
+    res.status(400).json({success : false , error});
   }
 }
 

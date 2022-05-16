@@ -13,13 +13,14 @@ async function login(req, res) {
   try {
     const { username, password } = req.body;
     const payload = await db.login(username);
-    if (!payload) return res.status(401).send('username or password is not correct !!!');
+    if (!payload) return res.status(401).json({success : false , message :'username or password is not correct !!!'});
     const isCorrectUser = await compairPassword(password.trim(), payload.password);
-    if (!isCorrectUser) return res.status(401).send('username or password is not correct !!!');
-    res.send(generateToken({ username: payload.username, role: payload.role , userID : payload.userID }));
+    if (!isCorrectUser) return res.status(401).json({success : false , message :'username or password is not correct !!!'});
+    res.json({success : true , time : new Date(),
+      token : generateToken({ username: payload.username, role: payload.role , userID : payload.userID })});
   }
   catch (error) {
-    throw error;
+    res.status(500).json({success : false , error});
   }
 }
 
@@ -34,13 +35,13 @@ async function createUser(req, res) {
     const { username, password, phoneNumber, role } = req.body;
     const hashedPassword = await hashPassword(password.trim());
     const result = await db.createUser(username, hashedPassword, phoneNumber, role);
-    if (!result) return res.status(400).send('cant create user');
-    res.send('user created ...');
+    if (!result) return res.status(400).json({success : false ,  message : 'cant create user'});
+    res.json({success : true ,  message : 'user created ...'});
   }
   catch (error) {
-    if (error.code == 'P2002') return res.status(400).json({ code: error.code, message: 'username already exsits !' });
+    if (error.code == 'P2002') return res.status(400).json({success : false ,  code: error.code, message: 'username already exsits !' });
 
-    res.status(400).send(error);
+    res.status(400).json({success : false ,  error});
   }
 }
 
@@ -57,8 +58,8 @@ async function deleteUser(req, res) {
     if (result.count == 0) return res.status(400).send('user not found !');
     res.send('user deleted ...');
   }
-  catch (err) {
-    res.status(400).send(err);
+  catch (error) {
+    res.status(400).json({success : false  , error});
   }
 }
 
@@ -73,11 +74,11 @@ async function updatePhoneNumber(req, res) {
     const {userID} = req.params;
     const {phoneNumber} = req.body;
     const result = await db.updatePhoneNumber(userID, phoneNumber);
-    if (result.count == 0) return res.status(400).send('user not found !!!');
-    res.send('phone number updated ...');
+    if (result.count == 0) return res.status(400).json({success : false  , message : 'user not found !!!'});
+    res.json({success : true , message : 'phone number updated ...'});
   }
-  catch (err) {
-    res.status(400).send(err);
+  catch (error) {
+    res.status(400).json({success : false , error});
   }
 }
 
@@ -94,11 +95,11 @@ async function updatePassword(req, res) {
     const password = req.body.password;
     const hashedPassword = await hashPassword(password.trim());
     const result = await db.updatePassword(userID, hashedPassword);
-    if (result.count == 0) return res.status(400).send('user not found to change password !!!');
-    res.send('password updated ...');
+    if (result.count == 0) return res.status(400).json({success : false , message : 'user not found to change password !!!'});
+    res.json({success : true , message : 'password updated ...'});
   }
-  catch (err) {
-    res.status(400).send(err);
+  catch (error) {
+    res.status(400).json({success : false , error });
   }
 }
 
@@ -115,11 +116,11 @@ async function updateUsername(req, res) {
     const {userID} = req.params;
     const {newUsername} = req.body;
     const result = await db.updateUsername(userID, newUsername);
-    if (result.count == 0) return res.status(400).send('user not found !!!');
-    res.send('username updated ...');
+    if (result.count == 0) return res.status(400).json({success : false , message: 'user not found !!!' });
+    res.json({success : true , message  : 'username updated ...'});
   }
   catch (err) {
-    res.status(400).send(err);
+    res.status(400).json({success : false , error : err});
   }
 }
 
