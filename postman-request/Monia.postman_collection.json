@@ -1,102 +1,10 @@
 {
 	"info": {
-		"_postman_id": "47496344-c857-4a59-a9c6-9f015b3ba40f",
+		"_postman_id": "ccd7369f-e823-489d-85fe-7b23c65d058d",
 		"name": "Monia",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
-		{
-			"name": "target",
-			"item": [
-				{
-					"name": "create target",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{monitoringAdmin}}",
-								"type": "default"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"address\" : \"https://www.google.com\",\n    \"method\" : \"http_request\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://127.0.0.1:8090/target/create",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8090",
-							"path": [
-								"target",
-								"create"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "delete target",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{monitoringAdmin}}",
-								"type": "default"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"address\" : \"https://www.google.com\",\n    \"method\" : \"http_request\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://127.0.0.1:8090/target/delete",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8090",
-							"path": [
-								"target",
-								"delete"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
 		{
 			"name": "team",
 			"item": [
@@ -107,7 +15,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "{{monitoringAdmin}}",
+								"value": "{{monitoring}}",
 								"type": "default"
 							}
 						],
@@ -121,18 +29,41 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8090/team/create",
+							"raw": "http://{{ip}}:{{port}}/team/create",
 							"protocol": "http",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{ip}}"
 							],
-							"port": "8090",
+							"port": "{{port}}",
 							"path": [
 								"team",
 								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all teams",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{monitoring}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://{{ip}}:{{port}}/team/info",
+							"protocol": "http",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"team",
+								"info"
 							]
 						}
 					},
@@ -145,13 +76,13 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "{{monitoringAdmin}}",
+								"value": "{{monitoring}}",
 								"type": "default"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"teamName\" : \"network\",\n    \"username\" : \"moeen.tavakoli\"\n}",
+							"raw": "{\n    \"teamName\" : \"network\",\n    \"userID\" : \"UUID_USER\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -159,15 +90,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8090/team/user/add",
+							"raw": "http://{{ip}}:{{port}}/team/user/add",
 							"protocol": "http",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{ip}}"
 							],
-							"port": "8090",
+							"port": "{{port}}",
 							"path": [
 								"team",
 								"user",
@@ -184,13 +112,13 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "{{monitoringAdmin}}",
+								"value": "{{monitoring}}",
 								"type": "default"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"teamName\" : \"android\",\n    \"username\" : \"moeen.tavakoli\"\n}",
+							"raw": "{\n    \"teamName\" : \"network\",\n    \"userID\" : \"UUID_USER\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -198,15 +126,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8090/team/user/remove",
+							"raw": "http://{{ip}}:{{port}}/team/user/remove",
 							"protocol": "http",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{ip}}"
 							],
-							"port": "8090",
+							"port": "{{port}}",
 							"path": [
 								"team",
 								"user",
@@ -219,22 +144,22 @@
 			]
 		},
 		{
-			"name": "targetContact",
+			"name": "userJob",
 			"item": [
 				{
-					"name": "add targetContact",
+					"name": "assign user to job",
 					"request": {
 						"method": "POST",
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "{{monitoringAdmin}}",
+								"value": "{{monitoring}}",
 								"type": "default"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"username\": \"moeen.tavakoli\",\n    \"targetAddress\" : \"https://www.google.com\",\n    \"method\" : \"http_request\"\n}",
+							"raw": "{\n    \"userID\" : \"UUID_USER\",\n    \"jobName\" : \"node1-ping\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -242,15 +167,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8090/userRel/create",
+							"raw": "http://{{ip}}:{{port}}/userRel/create",
 							"protocol": "http",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{ip}}"
 							],
-							"port": "8090",
+							"port": "{{port}}",
 							"path": [
 								"userRel",
 								"create"
@@ -260,19 +182,19 @@
 					"response": []
 				},
 				{
-					"name": "delete user from target",
+					"name": "revoke user to job",
 					"request": {
 						"method": "DELETE",
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "{{monitoringAdmin}}",
+								"value": "{{monitoring}}",
 								"type": "default"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"username\": \"moeen.tavakoli\",\n    \"targetAddress\" : \"https://www.google.com\",\n    \"method\" : \"http_request\"\n}",
+							"raw": "{\n    \"userID\" : \"UUID_USER\",\n    \"jobName\" : \"node1-ping\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -280,15 +202,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8090/userRel/delete",
+							"raw": "http://{{ip}}:{{port}}/userRel/delete",
 							"protocol": "http",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{ip}}"
 							],
-							"port": "8090",
+							"port": "{{port}}",
 							"path": [
 								"userRel",
 								"delete"
@@ -300,7 +219,7 @@
 			]
 		},
 		{
-			"name": "teamTarget",
+			"name": "jobTeam",
 			"item": [
 				{
 					"name": "add teamTarget",
@@ -309,13 +228,13 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "{{monitoringAdmin}}",
+								"value": "{{monitoring}}",
 								"type": "default"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"teamName\": \"network\",\n    \"targetAddress\" : \"https://www.google.com\",\n    \"method\" : \"http_request\"\n}",
+							"raw": "{\n    \"teamName\": \"android\",\n    \"jobName\" : \"node1-ping\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -323,15 +242,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8090/teamRel/create",
+							"raw": "http://{{ip}}:{{port}}/teamRel/create",
 							"protocol": "http",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{ip}}"
 							],
-							"port": "8090",
+							"port": "{{port}}",
 							"path": [
 								"teamRel",
 								"create"
@@ -347,13 +263,13 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "{{monitoringAdmin}}",
+								"value": "{{monitoring}}",
 								"type": "default"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"teamName\": \"network\",\n    \"targetAddress\" : \"https://www.google.com\",\n    \"method\" : \"http_request\"\n}",
+							"raw": "{\n    \"teamName\": \"android\",\n    \"jobName\" : \"node1-ping\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -361,15 +277,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8090/teamRel/delete",
+							"raw": "http://{{ip}}:{{port}}/teamRel/delete",
 							"protocol": "http",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{ip}}"
 							],
-							"port": "8090",
+							"port": "{{port}}",
 							"path": [
 								"teamRel",
 								"delete"
@@ -384,13 +297,39 @@
 			"name": "users",
 			"item": [
 				{
+					"name": "get information users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{root}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://{{ip}}:{{port}}/user/info",
+							"protocol": "http",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"user",
+								"info"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "login",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{ \n    \"username\" : \"moeen.tavakoli\",\n    \"password\" : \"your_password\"\n}",
+							"raw": "{ \n    \"username\" : \"\",\n    \"password\" : \"\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -398,12 +337,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8090/user/login",
+							"raw": "http://{{ip}}:{{port}}/user/login",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"{{ip}}"
 							],
-							"port": "8090",
+							"port": "{{port}}",
 							"path": [
 								"user",
 								"login"
@@ -419,13 +358,13 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "{{monitoringAdmin}}",
+								"value": "{{root}}",
 								"type": "default"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"username\" : \"moeen.tavakoli\",\n    \"password\" : \"your_password\",\n    \"phoneNumber\" : \"09100000000\",\n    \"role\" : \"CONTACT\"\n}   ",
+							"raw": "{\n    \"username\" : \"moeen.tavakoli\",\n    \"password\" : \"12345\",\n    \"phoneNumber\" : \"09100000000\",\n    \"role\" : \"CONTACT || MONITORING_ADMIN || MONIA_ADMIN\"\n}   ",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -433,15 +372,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8090/user/create",
+							"raw": "http://{{ip}}:{{port}}/user/create",
 							"protocol": "http",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{ip}}"
 							],
-							"port": "8090",
+							"port": "{{port}}",
 							"path": [
 								"user",
 								"create"
@@ -457,13 +393,13 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "{{monitoringAdmin}}",
+								"value": "{{monia}}",
 								"type": "default"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"password\" : \"sample_password\"\n}",
+							"raw": "{\n    \"password\" : \"\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -471,19 +407,16 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8090/user/password/moeen.tavakoli",
+							"raw": "http://{{ip}}:{{port}}/user/password/UUID_USER",
 							"protocol": "http",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{ip}}"
 							],
-							"port": "8090",
+							"port": "{{port}}",
 							"path": [
 								"user",
 								"password",
-								"moeen.tavakoli"
+								"UUID_USER"
 							]
 						}
 					},
@@ -496,7 +429,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "{{monitoringAdmin}}",
+								"value": "{{monitoring}}",
 								"type": "default"
 							}
 						],
@@ -510,19 +443,16 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8090/user/phone/moeen.tavakoli",
+							"raw": "http://{{ip}}:{{port}}/user/phone/UUID_USER",
 							"protocol": "http",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{ip}}"
 							],
-							"port": "8090",
+							"port": "{{port}}",
 							"path": [
 								"user",
 								"phone",
-								"moeen.tavakoli"
+								"UUID_USER"
 							]
 						}
 					},
@@ -535,13 +465,13 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "{{monitoringAdmin}}",
+								"value": "{{monia}}",
 								"type": "default"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"newUsername\" : \"new.moein.tavakoli\"\n}",
+							"raw": "{\n    \"newUsername\" : \"\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -549,19 +479,16 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8090/user/username/moeen.tavakoli",
+							"raw": "http://{{ip}}:{{port}}/user/username/UUID_USER",
 							"protocol": "http",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{ip}}"
 							],
-							"port": "8090",
+							"port": "{{port}}",
 							"path": [
 								"user",
 								"username",
-								"moeen.tavakoli"
+								"UUID_USER"
 							]
 						}
 					},
@@ -574,24 +501,52 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "{{monitoringAdmin}}",
+								"value": "{{root}}",
 								"type": "default"
 							}
 						],
 						"url": {
-							"raw": "http://127.0.0.1:8090/user/delete/moeen.tavakoli",
+							"raw": "http://{{ip}}:{{port}}/user/delete/UUID_USER",
 							"protocol": "http",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{ip}}"
 							],
-							"port": "8090",
+							"port": "{{port}}",
 							"path": [
 								"user",
 								"delete",
-								"moeen.tavakoli"
+								"UUID_USER"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "job",
+			"item": [
+				{
+					"name": "get all jobs",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{monitoring}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://{{ip}}:{{port}}/job/info",
+							"protocol": "http",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"job",
+								"info"
 							]
 						}
 					},
