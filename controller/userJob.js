@@ -12,9 +12,9 @@ async function assignUserToJob(req, res) {
     res.send('assign user to target successfuly');
   }
   catch (error) {
-    if (error.code == 'P2002') return res.status(400).json({ code: error.code, message: 'user with this jobName is already have realation !!!' });
-    if (error.code == 'P2003') return res.status(400).json({ code: error.code, message: 'userID or teamName not found !!!' });
-    res.send(error);
+    if (error.code == 'P2002') return res.status(400).json({success : false, code: error.code, message: 'user with this jobName is already have realation !!!' });
+    if (error.code == 'P2003') return res.status(400).json({success : false, code: error.code, message: 'userID not found !!!' });
+    res.status(400).json({success : false ,error : error.message || error});
   }
 }
 

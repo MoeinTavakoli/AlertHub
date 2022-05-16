@@ -33,9 +33,9 @@ async function insertUserToTeam(req, res) {
   }
   catch (error) {
     if (error.code == 'P2002') return res.status(400).json({success : false ,  code: error.code, message: 'this userID is already exist in this team !' });
-    if (error.code == 'P2003') return res.status(400).json({success : false ,  code: error.code, message: 'user deleted or teamName not found !!!' });
+    if (error.code == 'P2003') return res.status(400).json({success : false ,  code: error.code, message: 'teamName not found !!!' });
     if (error.code == 'P404') return res.status(400).json({success : false ,  code: error.code, message : error.message });
-    return res.status(400).json({success : false ,  error });
+    return res.status(400).json({success : false ,  error : error.message || error });
     
   }
 }
