@@ -76,10 +76,6 @@ model teamJobs {
   @@id([teamName, jobName])
 }
 
-enum enum_method {
-  PING
-  HTTP_REQUEST
-}
 
 enum enum_Users_role {
   ROOT
