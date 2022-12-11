@@ -5,7 +5,7 @@
 ### Deploy a node
 
 1. clone the repo \
-   `git clone -b develop https://gitlab.partdp.ir/network/monia/new-monia/monia.git` 
+   `git clone -b develop https://github.com/MoeinTavakoli/monia-alertManager.git` 
 
 2. install npm packages \
    `npm i` 
