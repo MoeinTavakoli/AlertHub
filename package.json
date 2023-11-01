@@ -1,5 +1,5 @@
 {
-  "name": "monia",
+  "name": "AlertHub",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -39,13 +39,13 @@
     "1.0.0": [
       {
         "type": "major",
-        "title": "monia -blackbox exporter - prometheus - alertManager",
-        "description": "this release is implemented by proemtheus and blackbox exporter and alertManager and send webhoock to monia to send alert to contacts"
+        "title": "AlertHub - blackbox exporter - prometheus - alertManager",
+        "description": "this release is implemented by proemtheus and blackbox exporter and alertManager and send webhook to  to send alert to contacts"
       }
     ]
   },
   "repository": {
     "type": "git",
-    "url": "https://gitlab.partdp.ir/network/lms/monia/new-monia/alertmanager/monia.git"
+    "url": "https://github.com/MoeinTavakoli/AlertHub.git"
   }
 }
