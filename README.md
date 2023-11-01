@@ -57,8 +57,8 @@
    this is format url connection postgres `postgres://YourUserName:YourPassword@YourHostname:5432/YourDatabaseName` \
    `SMS_APIKEY` is ApiKey that generate in dashboard kavenegrar \
    `SMS_NUMBER` is your sms number that is exist in your dashboard kavenegar \
-   `ROCKETCHAT_GP_ALERT_TOKEN` is your token to access in alert bot rocket chat \
-   `ROCKETCHAT_GP_ERROR_TOKEN` is your token to access in error bot rocket chat \
+   `SLACK_GP_ALERT_TOKEN` is your token to access in alert bot slack \
+   `SLACK_GP_ERROR_TOKEN` is your token to access in error bot slack \
    `ROCKETCHAT_URL` is the url server rocketChat \
    `JWT_SECRET` is your secret key for generate token (take care to keep it safe !!!) \
    `ROOT_PASSWORD` is for root password that you
