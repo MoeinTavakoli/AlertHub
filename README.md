@@ -1,10 +1,10 @@
-# Monia lite
+# AlertHub
 
 ## How to deploy
 
-## requirement ( postgres , node js )
+## Requirement ( postgres , node js )
 
-## install postgres
+## Install PostgreSQL
 
 1. Create the file repository configuration: \
    `sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'`
@@ -18,31 +18,31 @@
 4. Install the latest version of PostgreSQL.\
    `sudo apt-get -y install postgresql`
 
-## install node js
+## Install node js
 
-1. install node js\
+1. Install node js\
    `sudo apt install nodejs`
 
-2. install npm \
+2. Install npm \
    `sudo apt install npm`
 
 ### Deploy a node
 
 1. `cd /opt` \
 
-1. clone the repo \
-   `git clone -b release_1.0.0 https://gitlab.partdp.ir/network/lms/monia/new-monia/alertmanager/monia.git`
+1. Clone the repository \
+   `git clone -b release_1.0.0 https://github.com/MoeinTavakoli/AlertHub.git`
 
-3. go to monia directory and copy .env then fill the .env \
-`cd monia && cp .env.example .env` \ 
+3. change directory to AlertHub directory and copy .env then fill the .env \
+`cd AlertHub/ && cp .env.example .env` \ 
 
-2. install npm packages \
+2. Install npm packages \
    `npm i`
 
-3. copy `.env.example` as `.env.` \
+3. Copy `.env.example` as `.env.` \
    `cp .env.example .env`
 
-4. create database in postgres \
+4. Create database in postgres \
 `sudo -u postgres psql`\
 `create DATABASE monia;`\
 `create user monia with encrypted password 'monia';` \
@@ -50,7 +50,7 @@
 `ALTER USER monia CREATEDB;` \
 '\q'
 
-4. fill the .env file \
+4. Fill the .env file \
    `PORT` is your port that you want to server run on this port \
    `HOST` is your hostname like localhost \
    `DATABASE_URL` is url database like \
@@ -63,19 +63,19 @@
    `JWT_SECRET` is your secret key for generate token (take care to keep it safe !!!) \
    `ROOT_PASSWORD` is for root password that you
 
-8. migrate database \
+8. Migrate database \
    `npx prisma migrate dev`
 
-9. seed database (just run once time ) \
+9. Seed database (just run once time ) \
    `npx prisma db seed`
 
-10. edit config postgres \
+10. Edit config postgres \
 `vim /etc/postgresql/14/main/postgresql.conf` \
 uncomment: \
 `listen_addresses= 'localhost'`
 
-11. install pm2 \
+11. Install pm2 \
 `npm install pm2@latest -g`
 
-7. Run monia \
+7. Run server \
     `pm2 start index.js`
