@@ -10,11 +10,11 @@ function defineAccessRoles(req,res,next) {
     case 'MONITORING_ADMIN':
       req.accessRoles = ['CONTACT' , 'MONITORING_ADMIN'];
       break;
-    case 'MONIA_ADMIN':
-      req.accessRoles = ['CONTACT' , 'MONITORING_ADMIN', 'MONIA_ADMIN'];
+    case 'SERVICE_ADMIN':
+      req.accessRoles = ['CONTACT' , 'MONITORING_ADMIN', 'SERVICE_ADMIN'];
       break;
     case 'ROOT':
-      req.accessRoles = ['CONTACT' , 'MONITORING_ADMIN', 'MONIA_ADMIN' , 'ROOT'];
+      req.accessRoles = ['CONTACT' , 'MONITORING_ADMIN', 'SERVICE_ADMIN' , 'ROOT'];
       break;    
     default: 
       return res.status(401).send('permission denied ... ');

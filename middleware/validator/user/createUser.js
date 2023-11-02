@@ -1,4 +1,4 @@
-const roles = ['ROOT', 'MONIA_ADMIN', 'MONITORING_ADMIN', 'CONTACT'];
+const roles = ['ROOT', 'SERVICE_ADMIN', 'MONITORING_ADMIN', 'CONTACT'];
 /**
  * 
  * @param {import('express').Request} req 

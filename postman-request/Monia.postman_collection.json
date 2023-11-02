@@ -364,7 +364,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"username\" : \"moeen.tavakoli\",\n    \"password\" : \"12345\",\n    \"phoneNumber\" : \"09100000000\",\n    \"role\" : \"CONTACT || MONITORING_ADMIN || MONIA_ADMIN\"\n}   ",
+							"raw": "{\n    \"username\" : \"moeen.tavakoli\",\n    \"password\" : \"12345\",\n    \"phoneNumber\" : \"09100000000\",\n    \"role\" : \"CONTACT || MONITORING_ADMIN || SERVICE_ADMIN\"\n}   ",
 							"options": {
 								"raw": {
 									"language": "json"
