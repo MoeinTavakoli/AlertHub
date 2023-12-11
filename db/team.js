@@ -26,14 +26,23 @@ async function createTeam(teamName) {
  * @param {String} teamName 
  * @returns 
  */
-async function insertUserToTeam(username, teamName) {
+async function insertUserToTeam(userID, teamName) {
   // eslint-disable-next-line no-useless-catch
   try {
+    const result = await prisma.users.count({
+      where :{
+        userID , 
+        isDeleted : false
+      }
+    });
+    
+    if(result == 0) throw Error('user not found   !');
+    
     return await prisma.teamUsers.create({
       data: {
-        username,
+        userID,
         teamName
-      }
+      },
     });
   }
   catch (error) {
@@ -49,12 +58,12 @@ async function insertUserToTeam(username, teamName) {
  * @param {String} teamName 
  * @returns 
  */
-async function removeUserFromTeam(username, teamName) {
+async function removeUserFromTeam(userID, teamName) {
   // eslint-disable-next-line no-useless-catch
   try {
     return await prisma.teamUsers.deleteMany({
       where: {
-        username,
+        userID,
         teamName
       }
     });
@@ -80,7 +89,8 @@ async function getAllPhoneNumberUserByTeam(teamName) {
       select: {
         user: {
           select: {
-            phoneNumber: true
+            phoneNumber: true,
+            isDeleted: false
           }
         }
       }
@@ -92,7 +102,23 @@ async function getAllPhoneNumberUserByTeam(teamName) {
 
 }
 
-
+/**
+ * 
+ * @returns all teams
+ */
+async function getAllTeam(){
+  // eslint-disable-next-line no-useless-catch
+  try {
+    return await prisma.teams.findMany({
+      select : {
+        teamName : true
+      }
+    });
+  }
+  catch (error) {
+    throw error;
+  }
+}
 
 
 
@@ -103,5 +129,6 @@ module.exports = {
   createTeam,
   insertUserToTeam,
   removeUserFromTeam,
-  getAllPhoneNumberUserByTeam
+  getAllPhoneNumberUserByTeam,
+  getAllTeam
 };

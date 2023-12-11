@@ -1,24 +1,25 @@
-const { Router } = require('express');
-const app = Router();
+const express = require('express');
+const app = express();
 
 
-// middleware
+// midlleware
+const schemaValidator = require('../middleware/validator/user');
 const auth = require('../middleware/auth');
-const validator = require('../middleware/validator/user');
+const checkPermission = require('../middleware/checkPermission');
+const defineAccessRoles = require('../middleware/accessRoles');
 // 
 
 
 // controller
-const controller = require('../controller/contact');
+const controller = require('../controller/user');
 // 
+app.get('/info' ,auth ,defineAccessRoles,  controller.getAllUsers);
+app.post('/login', schemaValidator.login, controller.login);
+app.post('/create', schemaValidator.createUser, auth, checkPermission, controller.createUser);
+app.delete('/delete/:userID', auth, checkPermission, controller.deleteUser);
+app.put('/phone/:userID', schemaValidator.updatePhone, auth, checkPermission, controller.updatePhoneNumber);
+app.put('/password/:userID', schemaValidator.updatePassword, auth, checkPermission, controller.updatePassword);
+app.put('/username/:userID', schemaValidator.updateUsername, auth, checkPermission, controller.updateUsername);
 
-
-
-
-// routes
-app.post('/signup', validator.signup, controller.signup);
-app.post('/login', validator.login, controller.login);
-app.put('/phone', validator.UpdatePhoneNumber, auth, controller.changePhoneNumber);
-// 
 
 module.exports = app;

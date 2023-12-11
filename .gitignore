@@ -1,3 +1,6 @@
 /node_modules
 .env
 .prettierrc.json
+package-lock.json
+package-lock.json
+/.vscode

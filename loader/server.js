@@ -3,35 +3,27 @@ const app = express();
 
 const bodyParser = require('body-parser');
 
-const { httpServer } = require('../config');
+require('../db/_connection');   
 
 // middleware bodyParser
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 //
 
-app.use('/api', require('../router'));
-
 app.use('/webhook', require('../router/webhook'));
 
-app.use('/user', require('../router/user'));
-
-app.use('/monia-admin', require('../router/moniaAdmin'));
-
-app.use('/target', require('../router/target'));
-
-app.use('/target/user', require('../router/targetContact'));
+app.use('/userRel', require('../router/userJob'));
 
 app.use('/team', require('../router/team'));
 
-app.use('/target/team', require('../router/teamTarget'));
+app.use('/teamRel', require('../router/teamJob'));
 
-app.use('/root', require('../router/root'));
+app.use('/user' , require('../router/user'));
 
-app.use('/monitoring-admin', require('../router/monitoringAdmin'));
+app.use('/job' , require('../router/job'));
 
-module.exports = () => {
-  app.listen(httpServer.port, () => {
-    return console.log(`server running on http://127.0.0.1:${httpServer.port}`);
-  });
-};
+app.use('*' , (req,res)=>{
+  res.status(404).send('not found !!!');
+});
+
+module.exports = app;
