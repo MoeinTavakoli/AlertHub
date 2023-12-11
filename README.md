@@ -44,10 +44,10 @@
 
 4. Create database in postgres \
 `sudo -u postgres psql`\
-`create DATABASE monia;`\
-`create user monia with encrypted password 'monia';` \
-`grant all privileges on database monia to monia;` \
-`ALTER USER monia CREATEDB;` \
+`create DATABASE alrerthub;`\
+`create user alrerthub with encrypted password 'alrerthub';` \
+`grant all privileges on database alrerthub to alrerthub;` \
+`ALTER USER alrerthub CREATEDB;` \
 '\q'
 
 4. Fill the .env file \

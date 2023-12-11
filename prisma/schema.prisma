@@ -79,7 +79,7 @@ model teamJobs {
 
 enum enum_Users_role {
   ROOT
-  MONIA_ADMIN
+  SERVICE_ADMIN
   MONITORING_ADMIN
   CONTACT
 }
