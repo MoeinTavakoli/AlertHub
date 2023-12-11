@@ -5,7 +5,7 @@ const app = express();
 const webhookService = require('../service/webhook');
 
 
-// app.post('/', webhookService);
+app.post('/', webhookService);
 
 
 module.exports = app;

@@ -10,7 +10,7 @@
 */
 -- AlterEnum
 BEGIN;
-CREATE TYPE "enum_Users_role_new" AS ENUM ('ROOT', 'MONIA_ADMIN', 'MONITORING_ADMIN', 'CONTACT');
+CREATE TYPE "enum_Users_role_new" AS ENUM ('ROOT', 'SERVICE_ADMIN', 'MONITORING_ADMIN', 'CONTACT');
 ALTER TABLE "users" ALTER COLUMN "role" TYPE "enum_Users_role_new" USING ("role"::text::"enum_Users_role_new");
 ALTER TYPE "enum_Users_role" RENAME TO "enum_Users_role_old";
 ALTER TYPE "enum_Users_role_new" RENAME TO "enum_Users_role";

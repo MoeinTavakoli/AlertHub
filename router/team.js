@@ -4,7 +4,7 @@ const app = express();
 
 // midlleware
 const verifyToken = require('../middleware/auth');
-const IsAdmin = require('../middleware/checkAdmin');
+const IsAdmin = require('../middleware/isAdmin');
 const validator = require('../middleware/validator/team');
 // 
 
@@ -13,10 +13,10 @@ const controller = require('../controller/team');
 // 
 
 
-app.post('/', validator.createTeam, verifyToken, IsAdmin, controller.createTeam);
-app.put('/user', validator.addUserToTeam, verifyToken, IsAdmin, controller.insertUserToTeam);
-app.delete('/user', validator.removeUserFromTeam, verifyToken, IsAdmin, controller.removeUserFromTeam);
-
+app.post('/create', validator.createTeam, verifyToken, IsAdmin,  controller.createTeam);
+app.put('/user/add', validator.addUserToTeam, verifyToken, IsAdmin, controller.insertUserToTeam);
+app.delete('/user/remove', validator.removeUserFromTeam, verifyToken, IsAdmin, controller.removeUserFromTeam);
+app.get('/info', verifyToken, IsAdmin , controller.getAllTeam );
 
 
 module.exports = app;

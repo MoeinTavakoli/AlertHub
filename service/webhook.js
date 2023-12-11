@@ -1,16 +1,17 @@
-const { addTargetWithError } = require('../db/target');
+const { addJob } = require('../db/job');
 const { insertAlertLog } = require('../db/alertLogs');
-const { getPhoneNumberContacts } = require('../db/targetContact');
-const { getAllPhoneNumberUserByTeam } = require('../db/teamTarget');
+const { getPhoneNumberContacts } = require('../db/userJob');
+const { getAllPhoneNumberUserByTeam } = require('../db/teamJob');
 const sms = require('../utils/sms');
 const removeUrlCharachter = require('../utils/removeURL');
+const rocketchat = require('../utils/rocketchat');
+
 /**
  * 
  * @param {import('express').Request} req 
- * @param {import('express').Response} res 
  */
 async function webhook(req) {
-
+  
   try {
     const alerts = req.body.alerts;
     for (const alert of alerts) {
@@ -20,13 +21,12 @@ async function webhook(req) {
       const activeAt = alert.startsAt;
       const value = alert.labels.value || -1;
 
+      await Promise.allSettled([addJob(job), insertAlertLog(job, instance, activeAt, value)]);
 
-      await Promise.allSettled([addTargetWithError(instance), insertAlertLog(job, instance , activeAt , value)]);
 
+      const userPhoneNumber = await getPhoneNumberContacts(job);
 
-      const userPhoneNumber = await getPhoneNumberContacts(instance);
-
-      const teamUserPhoneNumber = await getAllPhoneNumberUserByTeam(instance);
+      const teamUserPhoneNumber = await getAllPhoneNumberUserByTeam(job);
 
       const phoneNumbers = Array.from(new Set(userPhoneNumber.concat(teamUserPhoneNumber)));
 
@@ -36,11 +36,12 @@ async function webhook(req) {
       value  : ${value} 
       status : ${status}`;
 
+
       sms.send(message, phoneNumbers);
     }
   }
   catch (error) {
-    console.log(error);
+    rocketchat.sendError(error);
   }
 }
 

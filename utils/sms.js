@@ -17,7 +17,7 @@ class sms {
      * @param {array<string>} receptors
      */
   send(message, receptors) {
-    if (isHoliday() && receptors.length) {
+    if (isHoliday() && receptors && receptors.length) {
       api.Send(
         {
           message,
@@ -26,7 +26,6 @@ class sms {
         },
         (response, status) => {
           if (status != 200) {
-            console.log(`status kavenegar : ${status}`);
             rocketchat.sendError((`failed to send sms \n
                    status kavenegar : ${status}\n
                    message : ${message} `));
