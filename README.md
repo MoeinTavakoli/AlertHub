@@ -32,18 +32,18 @@
    `cd /opt`
 
 2. Clone the repository \
-   `git clone -b release_1.0.0 https://github.com/MoeinTavakoli/AlertHub.git`
+   `git clone https://github.com/MoeinTavakoli/AlertHub.git`
 
 3. change directory to AlertHub directory and copy .env then fill the .env \
 `cd AlertHub/ && cp .env.example .env` \ 
 
-4. Install npm packages \
+1. Install npm packages \
    `npm i`
 
-5. Copy `.env.example` as `.env.` \
+2. Copy `.env.example` as `.env.` \
    `cp .env.example .env`
 
-6. Create database in postgres \
+3. Create database in postgres \
 `sudo -u postgres psql`\
 `create DATABASE alrerthub;`\
 `create user alrerthub with encrypted password 'alrerthub';` \
@@ -51,7 +51,7 @@
 `ALTER USER alrerthub CREATEDB;` \
 '\q'
 
-7. Fill the .env file \
+1. Fill the .env file \
    `PORT` is your port that you want to server run on this port \
    `HOST` is your hostname like localhost \
    `DATABASE_URL` is url database like \
@@ -64,19 +64,19 @@
    `JWT_SECRET` is your secret key for generate token (take care to keep it safe !!!) \
    `ROOT_PASSWORD` is for root password that you
 
-8. Migrate database \
+2. Migrate database \
    `npx prisma migrate dev`
 
-9. Seed database (just run once time ) \
+3. Seed database (just run once time ) \
    `npx prisma db seed`
 
-10. Edit config postgres \
+4.  Edit config postgres \
 `vim /etc/postgresql/14/main/postgresql.conf` \
 uncomment: \
 `listen_addresses= 'localhost'`
 
-11. Install pm2 \
+1.  Install pm2 \
 `npm install pm2@latest -g`
 
-12. Run server \
+1.  Run server \
     `pm2 start index.js`
