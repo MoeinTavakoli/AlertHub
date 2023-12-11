@@ -30,19 +30,19 @@
 
 1. `cd /opt` \
 
-1. Clone the repository \
+2. Clone the repository \
    `git clone -b release_1.0.0 https://github.com/MoeinTavakoli/AlertHub.git`
 
 3. change directory to AlertHub directory and copy .env then fill the .env \
 `cd AlertHub/ && cp .env.example .env` \ 
 
-2. Install npm packages \
+4. Install npm packages \
    `npm i`
 
-3. Copy `.env.example` as `.env.` \
+5. Copy `.env.example` as `.env.` \
    `cp .env.example .env`
 
-4. Create database in postgres \
+6. Create database in postgres \
 `sudo -u postgres psql`\
 `create DATABASE alrerthub;`\
 `create user alrerthub with encrypted password 'alrerthub';` \
@@ -50,7 +50,7 @@
 `ALTER USER alrerthub CREATEDB;` \
 '\q'
 
-4. Fill the .env file \
+7. Fill the .env file \
    `PORT` is your port that you want to server run on this port \
    `HOST` is your hostname like localhost \
    `DATABASE_URL` is url database like \
@@ -77,5 +77,5 @@ uncomment: \
 11. Install pm2 \
 `npm install pm2@latest -g`
 
-7. Run server \
+12. Run server \
     `pm2 start index.js`
