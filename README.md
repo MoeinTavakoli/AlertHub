@@ -28,7 +28,8 @@
 
 ### Deploy a node
 
-1. `cd /opt` \
+1. Change directory to /opt \
+   `cd /opt`
 
 2. Clone the repository \
    `git clone -b release_1.0.0 https://github.com/MoeinTavakoli/AlertHub.git`
